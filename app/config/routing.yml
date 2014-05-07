@@ -1,0 +1,7 @@
+ldi_project_hub:
+    resource: "@LDIProjectHubBundle/Resources/config/routing.yml"
+    prefix:   /
+
+LDIProjectHubBundle_user:
+        resource: "@LDIProjectHubBundle/Resources/config/routing/user.php"
+        prefix:   /user

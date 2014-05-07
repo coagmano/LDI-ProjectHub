@@ -1,0 +1,3 @@
+ldi_project_hub_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: LDIProjectHubBundle:Default:index }
