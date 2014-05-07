@@ -8,13 +8,19 @@ This document contains information on how to download, install, and start
 using Symfony. For a more detailed explanation, see the [Installation][1]
 chapter of the Symfony Documentation.
 
-1) Installing the Standard Edition
+1) Downloading the repository on Git
 ----------------------------------
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+MAC
+  First open Terminal and navigate to the directory 'htdocs' [HDD]/Applications/XAMPP/xamppfiles/htdocs
+  Then use the command
+    
+    git clone git@github.com:coagmano/LDI-ProjectHub.git ./
 
-### Use Composer (*recommended*)
+  To clone the repository into the directory
+
+2) Installing Composer and Symfony
+----------------------------------
 
 As Symfony uses [Composer][2] to manage its dependencies, the recommended way
 to create a new project is to use it.
@@ -24,9 +30,9 @@ http://getcomposer.org/ or just run the following command:
 
     curl -s http://getcomposer.org/installer | php
 
-Then, use the `create-project` command to generate a new Symfony application:
+Then, use 
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+    php composer.phar install
 
 Composer will install Symfony and all its dependencies under the
 `path/to/install` directory.
@@ -42,7 +48,7 @@ following command:
 
     php composer.phar install
 
-2) Checking your System Configuration
+3) Checking your System Configuration
 -------------------------------------
 
 Before starting coding, make sure that your local system is properly
@@ -61,7 +67,7 @@ Access the `config.php` script from a browser:
 
 If you get any warnings or recommendations, fix them before moving on.
 
-3) Browsing the Demo Application
+4) Browsing the Demo Application
 --------------------------------
 
 Congratulations! You're now ready to use Symfony.
@@ -76,7 +82,7 @@ To see a real-live Symfony page in action, access the following page:
 
     web/app_dev.php/demo/hello/Fabien
 
-4) Getting started with Symfony
+5) Getting started with Symfony
 -------------------------------
 
 This distribution is meant to be the starting point for your Symfony
