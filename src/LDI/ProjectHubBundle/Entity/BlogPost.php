@@ -48,11 +48,12 @@ class BlogPost
      */
     protected $projects;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="blogPosts")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="blogPosts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $users;
+    protected $createdBy;
 
     public function __construct()
     {

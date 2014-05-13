@@ -53,6 +53,7 @@ class User
 
     /**
      * @var string
+     * AKA Bio
      *
      * @ORM\Column(name="blurb", type="text")
      */
@@ -70,10 +71,6 @@ class User
      */
     private $tags;
 
-    /**
-     * @var array
-     */
-    private $skills;
 
     /**
      * @var string
@@ -295,28 +292,6 @@ class User
         return $this->phone;
     }
 
-    /**
-     * Set skills
-     *
-     * @param array $skills
-     * @return User
-     */
-    public function setSkills($skills)
-    {
-        $this->skills = $skills;
-
-        return $this;
-    }
-
-    /**
-     * Get skills
-     *
-     * @return array 
-     */
-    public function getSkills()
-    {
-        return $this->skills;
-    }
 
     /**
      * Set profilePic

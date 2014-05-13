@@ -85,9 +85,22 @@ class Project
     private $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="User", inversedBy="projects")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $createdBy;
+
+    /**
      * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="project"))
      */
     private $blogPosts;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="location", type="string", length=255)
+     */
+    private $location;
 
     public function __construct()
     {
