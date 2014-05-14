@@ -38,22 +38,22 @@ class BlogPost
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePosted", type="datetime")
+     * @ORM\Column(name="postedTimestamp", type="datetime")
      */
-    private $datePosted;
+    private $postedTimestamp;
 
     /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="blogPosts")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
-    protected $projects;
+    protected $project;
 
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="blogPosts")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="blogPosts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $createdBy;
+    protected $postedBy;
 
     public function __construct()
     {
@@ -118,25 +118,71 @@ class BlogPost
     }
 
     /**
-     * Set datePosted
+     * Set postedTimestamp
      *
-     * @param \DateTime $datePosted
+     * @param \DateTime $postedTimestamp
      * @return BlogPost
      */
-    public function setDatePosted($datePosted)
+    public function setPostedTimestamp($postedTimestamp)
     {
-        $this->datePosted = $datePosted;
+        $this->postedTimestamp = $postedTimestamp;
 
         return $this;
     }
 
     /**
-     * Get datePosted
+     * Get postedTimestamp
      *
      * @return \DateTime 
      */
-    public function getDatePosted()
+    public function getPostedTimestamp()
     {
-        return $this->datePosted;
+        return $this->postedTimestamp;
+    }
+
+    /**
+     * Set project
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Project $project
+     * @return BlogPost
+     */
+    public function setProject(\LDI\ProjectHubBundle\Entity\Project $project = null)
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return \LDI\ProjectHubBundle\Entity\Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Set postedBy
+     *
+     * @param \LDI\ProjectHubBundle\Entity\User $postedBy
+     * @return BlogPost
+     */
+    public function setPostedBy(\LDI\ProjectHubBundle\Entity\User $postedBy = null)
+    {
+        $this->postedBy = $postedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get postedBy
+     *
+     * @return \LDI\ProjectHubBundle\Entity\User 
+     */
+    public function getPostedBy()
+    {
+        return $this->postedBy;
     }
 }

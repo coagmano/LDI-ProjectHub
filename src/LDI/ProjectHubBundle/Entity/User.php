@@ -77,25 +77,43 @@ class User
      *
      * @ORM\Column(type="blob")
      */
-    private $profilePic;
+    private $profilePicUrl;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Project")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="createdBy")
+     */
+    private $createdProjects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Project", mappedBy="collaborators")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
-    private $projects;
+    private $joinedProjects;
 
     /**
-     * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="user"))
+     * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="postedBy"))
      */
     private $blogPosts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="postedBy"))
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DiscussionPost", mappedBy="postedBy"))
+     */
+    private $discussionPosts;
 
 
 
     public function __construct()
     {
-        $this->projects = new ArrayCollection();
+        $this->createdProjects = new ArrayCollection();
+        $this->joinedProjects = new ArrayCollection();
         $this->blogPosts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->discussionPosts = new ArrayCollection();
     }
 
     /**
@@ -106,144 +124,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     * @return User
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string 
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     * @return User
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string 
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
     }
 
     /**
@@ -270,49 +150,213 @@ class User
     }
 
     /**
-     * Set phone
+     * Set tags
      *
-     * @param string $phone
+     * @param array $tags
      * @return User
      */
-    public function setPhone($phone)
+    public function setTags($tags)
     {
-        $this->phone = $phone;
+        $this->tags = $tags;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get tags
      *
-     * @return string 
+     * @return array 
      */
-    public function getPhone()
+    public function getTags()
     {
-        return $this->phone;
+        return $this->tags;
     }
 
-
     /**
-     * Set profilePic
+     * Set profilePicUrl
      *
-     * @param string $profilePic
+     * @param string $profilePicUrl
      * @return User
      */
-    public function setProfilePic($profilePic)
+    public function setProfilePicUrl($profilePicUrl)
     {
-        $this->profilePic = $profilePic;
+        $this->profilePicUrl = $profilePicUrl;
 
         return $this;
     }
 
     /**
-     * Get profilePic
+     * Get profilePicUrl
      *
      * @return string 
      */
-    public function getProfilePic()
+    public function getProfilePicUrl()
     {
-        return $this->profilePic;
+        return $this->profilePicUrl;
+    }
+
+    /**
+     * Add createdProjects
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Project $createdProjects
+     * @return User
+     */
+    public function addCreatedProject(\LDI\ProjectHubBundle\Entity\Project $createdProjects)
+    {
+        $this->createdProjects[] = $createdProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdProjects
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Project $createdProjects
+     */
+    public function removeCreatedProject(\LDI\ProjectHubBundle\Entity\Project $createdProjects)
+    {
+        $this->createdProjects->removeElement($createdProjects);
+    }
+
+    /**
+     * Get createdProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedProjects()
+    {
+        return $this->createdProjects;
+    }
+
+    /**
+     * Add joinedProjects
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Project $joinedProjects
+     * @return User
+     */
+    public function addJoinedProject(\LDI\ProjectHubBundle\Entity\Project $joinedProjects)
+    {
+        $this->joinedProjects[] = $joinedProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove joinedProjects
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Project $joinedProjects
+     */
+    public function removeJoinedProject(\LDI\ProjectHubBundle\Entity\Project $joinedProjects)
+    {
+        $this->joinedProjects->removeElement($joinedProjects);
+    }
+
+    /**
+     * Get joinedProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJoinedProjects()
+    {
+        return $this->joinedProjects;
+    }
+
+    /**
+     * Add blogPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\BlogPost $blogPosts
+     * @return User
+     */
+    public function addBlogPost(\LDI\ProjectHubBundle\Entity\BlogPost $blogPosts)
+    {
+        $this->blogPosts[] = $blogPosts;
+
+        return $this;
+    }
+
+    /**
+     * Remove blogPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\BlogPost $blogPosts
+     */
+    public function removeBlogPost(\LDI\ProjectHubBundle\Entity\BlogPost $blogPosts)
+    {
+        $this->blogPosts->removeElement($blogPosts);
+    }
+
+    /**
+     * Get blogPosts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBlogPosts()
+    {
+        return $this->blogPosts;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Comment $comments
+     * @return User
+     */
+    public function addComment(\LDI\ProjectHubBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Comment $comments
+     */
+    public function removeComment(\LDI\ProjectHubBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Add discussionPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\DiscussionPost $discussionPosts
+     * @return User
+     */
+    public function addDiscussionPost(\LDI\ProjectHubBundle\Entity\DiscussionPost $discussionPosts)
+    {
+        $this->discussionPosts[] = $discussionPosts;
+
+        return $this;
+    }
+
+    /**
+     * Remove discussionPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\DiscussionPost $discussionPosts
+     */
+    public function removeDiscussionPost(\LDI\ProjectHubBundle\Entity\DiscussionPost $discussionPosts)
+    {
+        $this->discussionPosts->removeElement($discussionPosts);
+    }
+
+    /**
+     * Get discussionPosts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDiscussionPosts()
+    {
+        return $this->discussionPosts;
     }
 }

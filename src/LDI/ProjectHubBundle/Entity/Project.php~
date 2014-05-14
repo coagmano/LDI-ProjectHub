@@ -1,0 +1,133 @@
+<?php
+
+namespace LDI\ProjectHubBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Project
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="LDI\ProjectHubBundle\Entity\ProjectRepository")
+ */
+class Project
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="tags", type="simple_array")
+     */
+    private $tags;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="featureImageUrl", type="string")
+     */
+    private $featureImageUrl;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="status", type="string", length=255)
+     *
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdTimestamp", type="datetime")
+     */
+    private $createdTimestamp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="videoUrl", type="string", length=255)
+     */
+    private $videoUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fileShareUrl", type="string", length=255)
+     */
+    private $fileShareUrl;
+
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="joinedProjects")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $collaborators;
+
+    /**
+     * @var User
+     * 
+     * @ORM\ManytoOne(targetEntity="User", inversedBy="createdProjects")
+     */
+    private $createdBy;
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="project"))
+     */
+    private $blogPosts;
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="discussionPost", mappedBy="project")
+     */
+    private $discussionPosts;
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="project")
+     */
+    private $comments;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="location", type="string", length=255)
+     */
+    private $location;
+
+    public function __construct()
+    {
+        $this->collaborators = new ArrayCollection();
+        $this->blogPosts = new ArrayCollection();
+        $this->discussionPosts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
+}

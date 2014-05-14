@@ -3,6 +3,7 @@
 namespace LDI\ProjectHubBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Project
@@ -45,14 +46,15 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="featureImage", type="blob")
+     * @ORM\Column(name="featureImageUrl", type="string")
      */
-    private $featureImage;
+    private $featureImageUrl;
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="status", type="string", length=255)
+     *
      */
     private $status;
 
@@ -79,21 +81,40 @@ class Project
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="User")
+     * @var ArrayCollection
+     * 
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="joinedProjects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $users;
+    private $collaborators;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", inversedBy="projects")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var User
+     * 
+     * @ORM\ManytoOne(targetEntity="User", inversedBy="createdProjects")
      */
-    protected $createdBy;
+    private $createdBy;
 
     /**
+     * @var ArrayCollection
+     * 
      * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="project"))
      */
     private $blogPosts;
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="discussionPost", mappedBy="project")
+     */
+    private $discussionPosts;
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="project")
+     */
+    private $comments;
 
     /**
      * @var string
@@ -104,8 +125,10 @@ class Project
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->collaborators = new ArrayCollection();
         $this->blogPosts = new ArrayCollection();
+        $this->discussionPosts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -188,26 +211,26 @@ class Project
     }
 
     /**
-     * Set featureImage
+     * Set featureImageUrl
      *
-     * @param string $featureImage
+     * @param string $featureImageUrl
      * @return Project
      */
-    public function setFeatureImage($featureImage)
+    public function setFeatureImageUrl($featureImageUrl)
     {
-        $this->featureImage = $featureImage;
+        $this->featureImageUrl = $featureImageUrl;
 
         return $this;
     }
 
     /**
-     * Get featureImage
+     * Get featureImageUrl
      *
      * @return string 
      */
-    public function getFeatureImage()
+    public function getFeatureImageUrl()
     {
-        return $this->featureImage;
+        return $this->featureImageUrl;
     }
 
     /**
@@ -300,5 +323,183 @@ class Project
     public function getFileShareUrl()
     {
         return $this->fileShareUrl;
+    }
+
+    /**
+     * Set location
+     *
+     * @param string $location
+     * @return Project
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string 
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Add collaborators
+     *
+     * @param \LDI\ProjectHubBundle\Entity\User $collaborators
+     * @return Project
+     */
+    public function addCollaborator(\LDI\ProjectHubBundle\Entity\User $collaborators)
+    {
+        $this->collaborators[] = $collaborators;
+
+        return $this;
+    }
+
+    /**
+     * Remove collaborators
+     *
+     * @param \LDI\ProjectHubBundle\Entity\User $collaborators
+     */
+    public function removeCollaborator(\LDI\ProjectHubBundle\Entity\User $collaborators)
+    {
+        $this->collaborators->removeElement($collaborators);
+    }
+
+    /**
+     * Get collaborators
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCollaborators()
+    {
+        return $this->collaborators;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \LDI\ProjectHubBundle\Entity\User $createdBy
+     * @return Project
+     */
+    public function setCreatedBy(\LDI\ProjectHubBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \LDI\ProjectHubBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Add blogPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\BlogPost $blogPosts
+     * @return Project
+     */
+    public function addBlogPost(\LDI\ProjectHubBundle\Entity\BlogPost $blogPosts)
+    {
+        $this->blogPosts[] = $blogPosts;
+
+        return $this;
+    }
+
+    /**
+     * Remove blogPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\BlogPost $blogPosts
+     */
+    public function removeBlogPost(\LDI\ProjectHubBundle\Entity\BlogPost $blogPosts)
+    {
+        $this->blogPosts->removeElement($blogPosts);
+    }
+
+    /**
+     * Get blogPosts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBlogPosts()
+    {
+        return $this->blogPosts;
+    }
+
+    /**
+     * Add discussionPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\discussionPost $discussionPosts
+     * @return Project
+     */
+    public function addDiscussionPost(\LDI\ProjectHubBundle\Entity\discussionPost $discussionPosts)
+    {
+        $this->discussionPosts[] = $discussionPosts;
+
+        return $this;
+    }
+
+    /**
+     * Remove discussionPosts
+     *
+     * @param \LDI\ProjectHubBundle\Entity\discussionPost $discussionPosts
+     */
+    public function removeDiscussionPost(\LDI\ProjectHubBundle\Entity\discussionPost $discussionPosts)
+    {
+        $this->discussionPosts->removeElement($discussionPosts);
+    }
+
+    /**
+     * Get discussionPosts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDiscussionPosts()
+    {
+        return $this->discussionPosts;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Comment $comments
+     * @return Project
+     */
+    public function addComment(\LDI\ProjectHubBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \LDI\ProjectHubBundle\Entity\Comment $comments
+     */
+    public function removeComment(\LDI\ProjectHubBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
