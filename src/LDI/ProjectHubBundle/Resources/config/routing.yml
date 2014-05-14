@@ -3,5 +3,5 @@ ldi_project_hub_homepage:
     defaults: { _controller: LDIProjectHubBundle:Default:index }
 
 ldi_project_hub_new:
-    pattern: /test/
+    pattern: /
     defaults: { _controller: LDIProjectHubBundle:user:create }
