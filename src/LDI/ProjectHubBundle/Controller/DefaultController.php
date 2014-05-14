@@ -9,6 +9,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+    	$projects = $User->getProjects();
         return $this->render('LDIProjectHubBundle:Default:index.html.twig');
     }
 
