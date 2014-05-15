@@ -1,3 +1,7 @@
 ldi_project_hub_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: LDIProjectHubBundle:Default:index }
+
+ldi_project_hub_new:
+    pattern: /test/
+    defaults: { _controller: LDIProjectHubBundle:user:create }
