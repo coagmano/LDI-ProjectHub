@@ -2,13 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+	{% block head %}
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link type="text/css" rel="stylesheet" href="css/style.css" media="screen" /> 
-	<link rel="stylesheet" type="text/css" href="css/featureBox.css" />
+	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/LDIProjectHub/css/style.css') }}" media="screen" /> 
+	{#<link rel="stylesheet" type="text/css" href="css/featureBox.css" />#}
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
 
-	<title>  LDI ProjectHub </title>	<!-- Title input -->
+	<title>{% block title %}{% endblock %}</title>	<!-- Title input -->
 
+	{% endblock %}
 </head>
 
 
@@ -16,7 +18,19 @@
 
 <!-- 	Navegation Bar  -->
 
-<?php include 'navbar.html';?>
+<div class="navbarBackground"></div>	
+<div class="container">		<!-- This container will put every contant in the page in middle, 1200px width. -->
+
+	<div class="navbar">
+	  <ul class="left"> 
+		<li><a href="#">LDI ProjectHub</a></li> 
+		<li><a href="#">LDI Blog</a></li> 
+		<li><a href="#">CareerHub</a></li> 
+	  </ul> 
+	  <ul class="right">
+	  	<li><a href="#">Login</a></li>
+	  </ul>
+	</div>
 
 
 
@@ -24,18 +38,19 @@
 
 <div class="header">
 	<div class="title">
-		<img src="images/logo.png" class="logo" alt="logo" />
+		<img src="{{ asset('bundles/LDIProjectHub/images/logo.png') }}" class="logo" alt="logo" />
 		<p> Create<span class="italic"> &nbsp your project </span><br /> &nbsp&nbsp&nbsp&nbsp&nbsp
 			Create<span class="italic"> &nbsp your success </span></p>
 	</div>
 
 
 
-<!-- Feature Project -->
+{#<!-- Feature Project -->
 
 	<div class="feature">		
 		<?php include 'featureBox.html';?>
 	</div>
+#}
 </div>
 
 
@@ -64,7 +79,7 @@
 	</div>
 
 
-
+{#}
 <!-- Projects Display -->
 
 <?php include 'projectDisplay.html';?>
@@ -76,6 +91,8 @@
 <!-- Footer -->
 
 <?php include 'footer.html';?>
+
+#}
 
 </body>
 
