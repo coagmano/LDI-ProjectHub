@@ -10,8 +10,9 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render('LDIProjectHubBundle:Default:index.html.twig');
-    }
 
+    }
+    
     public function projectAction($id)
     {
         
