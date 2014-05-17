@@ -1,12 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	{% block head %}
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/LDIProjectHub/css/style.css') }}" media="screen" /> 
 	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/LDIProjectHub/css/featureBox.css') }}" />
 	<link rel="stylesheet" href="{{ asset('bundles/LDIProjectHub/css/bootstrap.css') }}">
+	<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
 
 	<title>{% block title %}{% endblock %}</title>	<!-- Title input -->
@@ -25,8 +26,26 @@
 	<div class="navbar">
 	  <ul class="left"> 
 		<li><a href="#">LDI ProjectHub</a></li> 
-		<li><a href="#">LDI Blog</a></li> 
-		<li><a href="#">CareerHub</a></li> 
+		<li><a href="#">LDI CareerHub</a></li> 
+		<li><a href="#">  </a></li> 
+		<li><a href="#"> | </a></li> 
+		<li><a href="#">Discover</a></li> 
+		<li><a href="#">Create</a></li> 
+		<li><a href="#"> | </a></li> 
+		<li><a href="#">
+			<div class="bootstrap"><div class="row">
+			  <div class="col-lg-6">
+			    <div class="input-group">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+			        </button>
+			      </span>
+			      <input type="text" class="form-control">
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			</div><!-- /.row --></div>
+		</a></li> 
 	  </ul> 
 	  <ul class="right">
 	  	<li><a href="#">Register</a></li>
@@ -93,7 +112,7 @@
 
 						<div class="panel" title="Panel 1">
 							<div class="wrapper">
-								<img src="{{ asset('bundles/LDIProjectHub/images/tempphoto-1.jpg') }}" alt="temp" />
+								<img src="{{ asset('bundles/LDIProjectHub/images/tempphoto-2.png') }}" alt="temp" />
 								<div class="photo-meta-data">
 									Lorem ipsum dolor sit amet<br />
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, ad.</span>
@@ -102,7 +121,7 @@
 						</div>
 						<div class="panel" title="Panel 2">
 							<div class="wrapper">
-								<img src="{{ asset('bundles/LDIProjectHub/images/tempphoto-2.png') }}" alt="temp" />
+								<img src="{{ asset('bundles/LDIProjectHub/images/tempphoto-1.jpg') }}" alt="temp" />
 								<div class="photo-meta-data">
 									Lorem ipsum dolor sit amet.<br />
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, ipsum!</span>
@@ -139,30 +158,58 @@
 
 
 <!-- Category and View  -->
-
-<div id="breadcrumb">
-	<ul class="crumbs">
-		<li class="first"><a href="#" style="z-index:9;"><span></span>Blog Home</a></li>
-		<li><a href="#" style="z-index:8;">Archives</a></li>
-		<li><a href="#" style="z-index:7;">2011 Writing</a></li>
-		<li><a href="#" style="z-index:6;">Tips for jQuery Development in HTML5</a></li>
-	</ul>
-</div>
-
 <div class="container">	
 	<div class="content">
+
+		<p class="ProjectStages"> Project Stages : </p>
+
+		<div class="breadcrumb">
+			<a href="#" class="active first">Aspiration</a>
+			<a href="#" class="second">Incubating </a>
+			<a href="#" class="third">Developing</a>
+			<a href="#" class="forth">Mature</a>
+		</div>
+
+		<!-- Prefixfree -->
+		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript">
+		</script>
+
+
+		<!-- Category -->
+		<div class="bootstrap cate">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Category</button>
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#">Category 1</a></li>
+			    <li><a href="#">Category 2</a></li>
+			    <li><a href="#">Category 3</a></li>
+			    <li><a href="#">Category 4</a></li>
+			  </ul>
+			</div>
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Required Skills</button>
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><a href="#">Skill 1</a></li>
+			    <li><a href="#">Skill 2</a></li>
+			    <li><a href="#">Skill 3</a></li>
+			    <li><a href="#">Skill 4</a></li>
+			  </ul>
+			</div>
+		</div>
 		<div class="category">
-			<ul class="left">
-				<li><a href="#">categroy 1</a></li>
-				<li><a href="#">categroy 2</a></li>
-				<li><a href="#">categroy 3</a></li>
-				<li><a href="#">categroy 4</a></li>
-			</ul>
-			<ul class="right"> 
+			<ul class="view"> 
 				<li>View By : </li>
 				<li>
 					<select name ="viewBy">
-					  <option value="something">something</option>
+					  <option value="something">Something</option>
 					  <option value="something">something</option>
 					  <option value="something">something</option>
 					  <option value="something">something</option>
@@ -180,43 +227,57 @@
 		<tr>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 1</h2>
-					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!</p>
-					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />	<!-- image -->
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>	<!-- title -->
+					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!</p> <!-- description -->
+					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p> <!-- tags -->
+					<div class="bootstrap"><div class="progress"> 
+						<!-- project status, change aria-valuenow = "$precentage" and style="width: $precentage %" -->
+					  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+					  	<!-- Change class name and text -->
+					    <span class="AspirationLabel">Aspiration(0%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 <!-- Numb. of collaborator -->
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> <!-- Looking for groupmate -->
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> <!-- Likes -->
 					</p>
 				</div>
 			</td>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 2</h2>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>
 					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit voluptatibus ea aut rem repellendus iure accusantium reiciendis eaque non ullam.</p>
 					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<div class="bootstrap"><div class="progress">
+					  <div class="progress-bar incubating" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+					    <span class="IncubatingLabel">Incubating(25%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> 
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> 
 					</p>
 				</div>
 			</td>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 3</h2>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>
 					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, praesentium inventore molestias nobis eum doloremque eaque a provident vero aperiam.</p>
 					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<div class="bootstrap"><div class="progress">
+					  <div class="progress-bar developing" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+					    <span class="DevelopingLabel">Developing(75%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> 
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> 
 					</p>
 				</div>
 			</td>
@@ -224,50 +285,103 @@
 		<tr>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 1</h2>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>
 					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, accusamus necessitatibus dignissimos libero laboriosam sapiente veniam culpa architecto a eius.</p>
 					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<div class="bootstrap"><div class="progress">
+					  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+					    <span>Mature(100%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> 
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> 
 					</p>
 				</div>
 			</td>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 2</h2>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>
 					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, eaque magnam aperiam placeat repudiandae repellendus incidunt ipsa eligendi nemo nesciunt.</p>
 					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<div class="bootstrap"><div class="progress">
+					  <div class="progress-bar developing" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+					    <span class="DevelopingLabel">Developing(75%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> 
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> 
 					</p>
 				</div>
 			</td>
 			<td>
 				<div class="box">
-					<img src="#" alt="" />
-					<h2 class="projectTitle">Title 3</h2>
+					<img src="{{ asset('bundles/LDIProjectHub//images/emptyProject.jpg')}}" alt="" />
+					<h2 class="projectTitle">Lorem ipsum dolor sit amet</h2>
 					<p class="descrption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, obcaecati, asperiores at corporis beatae dolor explicabo alias suscipit libero laboriosam.</p>
 					<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>
-					<div class="percetage"><div class="percetageDone"></div></div>
+					<div class="bootstrap"><div class="progress">
+					   <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+					    <span>Mature(100%)</span>
+					  </div>
+					</div></div>
 					<p class="status">
-						<span class="left">Project</span>
-						<span class="middle">Status</span>
-						<span class="right">Here</span>
+						<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3 
+						<span class="middle"><span class="glyphicon glyphicon-search"></span> 2</span> 
+						<span class="right"><span class="glyphicon glyphicon-thumbs-up"></span> 75</span> 
 					</p>
 				</div>
 			</td>
 		</tr>
 	</table>
+</div>	
+
+<div class="bootstrap loadmore"><button type="button" class="btn btn-primary">Load more</button></div>
+
+
+</div> <!-- end of contant -->
+</div> <!-- end of container -->
+
+<div class="footer">
+	<div class="left">
+		<p class="LDItitle">The Leadership, Development & Innovation program </p>
+		<ul>
+			<li><a href="#">Discover</a></li>
+			<li> | </li>
+			<li><a href="#">Create</a></li>
+			<li> | </li>
+			<li><a href="#">Register</a></li>
+		</ul>
+		<ul>
+			<li><a href="#">LDI ProjectHub</a></li>
+			<li> | </li>
+			<li><a href="#">LDI CareerHub</a></li>
+			<li> | </li>
+			<li><a href="#">QUT </a></li>
+		</ul>
+		<p class="copyright"> Copyright 2014 QUT LDI Program. All Rights Reserved.
+	</div>
+	<div class="footerSearch">
+		<p>Search: </p>
+		<div class="bootstrap"><div class="row">
+		  <div class="col-lg-6">
+		    <div class="input-group">
+		      <input type="text" class="form-control">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Go!</button>
+		      </span>
+		    </div><!-- /input-group -->
+		  </div><!-- /.col-lg-6 -->
+		</div></div><!-- /.row -->
+	</div>
 </div>
-</div>
+
+
 </body>
 
 </html>

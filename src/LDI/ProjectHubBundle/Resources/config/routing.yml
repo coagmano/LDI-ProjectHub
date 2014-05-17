@@ -12,4 +12,4 @@ ldi_project_hub_controller_routes:
 # thus these routes will only activate if not present in the controller.
 ldi_project_hub_homepage:
     pattern:  /
-    defaults: { _controller: LDIProjectHubBundle:Project:index }
+    defaults: { _controller: LDIProjectHubBundle:Default:index }
