@@ -1,7 +1,0 @@
-parameters:
-#    ldi_project_hub.example.class: LDI\ProjectHubBundle\Example
-
-services:
-#    ldi_project_hub.example:
-#        class: %ldi_project_hub.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

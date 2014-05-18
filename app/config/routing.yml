@@ -1,3 +1,0 @@
-ldi_project_hub:
-    resource: "@LDIProjectHubBundle/Resources/config/routing.yml"
-    prefix:   /
