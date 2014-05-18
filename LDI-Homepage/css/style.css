@@ -1,0 +1,216 @@
+/*
+	UTILITY STYLES
+*/	
+body,html {
+	position: relative;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	background-image: url("../images/bg.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: #f2e9f3;
+	background-position: 0 55px;
+	z-index: -1;
+	width: 100%;
+}
+a, a:visited { 
+	color: #729dff; 
+	text-decoration: none; 
+}
+a:hover { 
+	color: #f7941d; 
+} 
+
+.container {
+	width: 1030px;
+	margin: 0 auto;
+}
+
+
+
+/*
+	Navegation bar
+*/	
+.navbarBackground{
+	height: 55px;
+	width: 100%;
+	background-color: #42346a; 
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+.navbar ul { 
+	margin: 0; 
+	padding-top: 20px; 
+	list-style-type: none; 
+	} 
+.navbar ul li {  
+	display: inline; 
+	} 
+.navbar ul li a { 
+	text-decoration: none; 
+	padding: .2em 1em; 
+	color: #fff; 
+	} 
+.navbar ul li a:hover { 
+	color: #e6e6e6; 
+	} 
+.left{
+	position: absolute;
+	}	
+.right {
+	margin-right: 20px;
+	float: right;
+	}
+.navbar .right a{
+	border-radius: 4px;
+	padding: 10px 20px;
+	background-color: #f7941d;
+}
+
+
+
+
+/*
+	LDI title
+*/	
+.header {
+	height: 800px;
+}
+
+.title {
+	position: relative;
+	height: 300px;
+	width: 100%;
+	overflow: hidden;
+	}
+.logo {
+	position: relative;
+	top: 70px;
+	width: 220px;
+	left:170px;
+	}
+.title p {
+	position: relative;
+	left: 430px;
+	top:-100px;
+	}	
+.title p{
+	color: #fff;
+	font-size: 45px;
+	line-height: 71px;
+	margin: 0 0 60px;
+	letter-spacing: 0px;
+	text-shadow: 0.5px 1px 0 #000;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	}
+.title .italic{
+	font-style: italic;
+	font-size: 35px;
+}
+
+
+
+
+/*
+	Category select
+*/	
+.category {
+	margin-top: 100px;
+	height: 50px;
+	}
+.category ul li {  
+	display: inline; 
+	} 
+.category ul li a { 
+	text-decoration: none; 
+	padding: .2em 1em; 
+	} 
+.category ul li a:hover { 
+	color: #f7941d; 
+} 
+.category .right {
+	padding-right: 30px;
+	color: #646262
+}
+.category .right select {
+	width: 200px;
+	height: 25px;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	display: inline-block;
+	padding: 4px 6px;
+	margin: 0 0 5px 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555555;
+	vertical-align: middle;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
+
+
+/*
+	Project Display
+*/	
+.box {
+	background-color: #fff;
+	width: 310px;
+	height: 360px;
+	margin: 10px 10px 0 0;
+	padding: 5px;
+	border: 1px solid #c2c2c2;
+	}
+.box img {
+	width: 295px;
+	height: 195px;
+	}
+.box .projectTitle {
+	font-size: 16px;
+	font-weight: bold;
+	height: 15px;
+	}
+.box .descrption {
+	height: 35px;
+	overflow: hidden;
+	}
+.box .descrption, .box .status {
+	font-size: 13px;
+	font-weight: lighter;
+	color: #646262;
+}
+.box .percetage {
+	height: 17px;
+	background-color: #d7bedc;
+	}
+.box .percetageDone {
+	height: 17px;
+	width: 75%;
+	background-color: #a778b4;
+	}
+.box .tags a {
+	font-size: 13px;
+	margin-right: 10px;
+	line-height: 1px;
+}
+.box .middle {
+	margin-left: 120px;
+	}
+.box .right {
+	text-align: right;
+}
+
+
+
+
+/*
+	Footer
+*/	
+.footer {
+	height: 100px;
+}
+

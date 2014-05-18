@@ -1,0 +1,8 @@
+NOTES:
+
+1. Create your project/ Create your success - is weird.
+2. feature box might need visual upgrade around it (background)
+3. What is really in category and view by, also need to display by skills
+4. Search function. both projects and students
+5. the project display boxes need visual upgrade
+6. Need a footer
