@@ -1,0 +1,78 @@
+
+					  				  
+/*
+	UTILITY STYLES
+*/				  				  
+					  				  
+#page-wrap .floatLeft 									{ float: left; margin-right: 10px;}
+#page-wrap .floatRight									{ float: right; }
+#page-wrap .clear 										{ clear: both; }
+#page-wrap a											{ outline: none; }
+
+
+/*
+	PAGE STRUCTURE
+*/
+#page-wrap 									{ 	width: 900px; position: relative; min-height: 500px;
+											 	font-family: Arial, Helvetica, sans-serif; font-size: 10px;
+												margin: 30px auto 0 auto;
+												/*overflow: hidden;
+												-webkit-box-shadow: #131313 0px 2px 10px;
+												-moz-box-shadow: #131313 0px 3px 10px;
+												box-shadow: #131313 0px 3px 10px;	*/
+												/*border-radius: 10px;*/
+												border-style: solid;
+												border-width: 5px 5px 5px 5px;
+												-moz-border-image: url("../images/border.png") 50 50 100 50   stretch;
+												-webkit-border-image: url("../images/border.png") 50 50 100 50 stretch;
+												-o-border-image: url("../images/border.png") 50 50 100 50 stretch;
+												border-image: url("../images/border.png") 50 50 100 50 fill stretch;
+												top: -130px;}
+
+
+/*
+	TYPOGRAPHY
+*/
+#page-wrap ul												{ list-style: square inside; }
+#page-wrapa, #page-wrap a:visited							{ color: #729dff; text-decoration: none; }
+#page-wrap .feature a:hover, #page-wrap .feature a:active	{ color: white; }
+#page-wrap blockquote										{ padding: 0 20px; margin-left: 20px; border-left: 20px solid #ccc; font-size: 14px; 
+									  						  font-family: Georgia, serif; font-style: italic; margin-top: 10px;}
+
+/*
+	SLIDER
+*/
+#page-wrap .slider-wrap								{ /*border-radius: 10px;*/
+														margin: 0px auto;
+														padding: 0px;
+														list-style: none;
+														position: relative;
+														width: 900px;
+														height: 500px;
+														overflow: hidden;	 }			
+#page-wrap .stripViewer .panelContainer 
+#page-wrap .panel ul								{ text-align: left; margin: 0 15px 0 30px; }
+#page-wrap .stripViewer								{ position: relative; overflow: hidden; width: 900px; height: 500px; }
+#page-wrap .stripViewer .panelContainer				{ position: relative; left: 0; top: 0; }
+#page-wrap .stripViewer .panelContainer .panel		{ float: left; height: 100%; position: relative; width: 900px; }
+#page-wrap .stripNavL, .stripNavR, .stripNav		{ display: none; }
+#page-wrap .nav-thumb 								{ border: 1px solid black; margin-right: 5px; }
+#movers-row div										{ float: right; }
+#movers-row div a.cross-link 						{ float: right; }
+#page-wrap .wrapper img								{ width: 900px; height: 500px; position: relative;}
+#page-wrap .photo-meta-data							{ background: url(../images/transpBlack.png); padding: 10px; height: 30px!important; 
+													  margin-top: -50px; position: relative; z-index: 9999; color: white; font-size: 13px; }
+#page-wrap .photo-meta-data span 					{ font-size: 15px; }
+#page-wrap .cross-link								{ display: block; width: 16px;
+													  height: 16px;
+													  border-radius: 8px; 
+													  background-color: #ff7a19; 
+													  margin: 5px 5px 0 5px ;
+													  position: relative;  z-index: 9999; 
+													  top: -30px ;}
+#page-wrap .active-thumb 							{ background-color: #ff7a19; width: 90px; height: 100px;}
+
+
+
+
+
