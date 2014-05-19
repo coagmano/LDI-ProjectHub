@@ -3,7 +3,8 @@
 THINGS THAT NEED TO BE DONE
 
 	1. project stages breadcrumb 
-	2. load more
+	2. load more (now it's limited to 15 top result)
+	4. search fillers
 	3. Log in
 
  -->
@@ -133,66 +134,23 @@ THINGS THAT NEED TO BE DONE
 		</div>
 
 
-<!-- 	 This section should be auto generated using SQL, this is a demo HTML table  --> 
+
+<!-- Display Projects -->
+
 <?php 
 	// Set up search fillers
-	$status = "Developing";
+	$status = "Aspiration";
 	$category = "none";
 	$skill = "none";
 	$sort = "none";
-	include 'functions/projectDisplay.php';		// Fetch from database
+	include 'functions/fetchProjects.php';		// Fetch from database
 
-	$percentage = progress($status);			
+	$percentage = progress($status);			// this is for the progress bar 
 
-	if(checkCount($result)){					// If there is result
-		
-		echo "<div class='displayProjects'>
-				<table class='projects'>
-					<tr>";
-
-		$colum = 1;
-		while ($row = mysql_fetch_assoc($result)) {
-
-			if($colum==1){echo "<tr>";}	// a new row
-
-			echo 	"<td>
-						<div class='box'>";
-							//	Image
-			echo			"<img src='images/{$row["featureImageUrl"]}' alt='{$row["featureImageUrl"]}' />	";
-							//  Title
-			echo			'<h2 class="projectTitle">'.$row["title"].'</h2>';	
-							//  Description 
-			echo			'<p class="descrption">'.$row["description"].'</p>';
-							//  Tags
-			echo			'<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>';
-							//  Progress bar (bootstrap)
-			echo			"<div class='bootstrap'><div class='progress'>
-							 <div class='progress-bar {$status}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
-							    <span class='{$status}Label'>{$status}({$percentage}%)</span>
-							  </div>
-							</div></div>";
-							//  Status
-			echo			'<p class="status">';
-								//  Number of collaborators
-			echo				'<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3';
-								//  Number of groupmates looking for
-			echo				"<span class='middle'><span class='glyphicon glyphicon-search'></span> 2</span>";
-								//  Number of likes
-			echo				"<span class='right'><span class='glyphicon glyphicon-thumbs-up'></span> {$row["likes"]}</span>
-							</p>
-						</div>
-					</td>";
-
-			// Display 3 <td> per row
-			if($colum!=3){$colum++;} else{$colum=1; echo "</tr>";}
-		}
-	}			
+	include 'functions/projectDisplay.php';		// Display projects	
  ?>
 
-	</table>
-</div>	
 
-<div class="bootstrap loadmore"><button type="button" class="btn btn-primary">Load more</button></div>
 
 
 </div> <!-- end of contant -->

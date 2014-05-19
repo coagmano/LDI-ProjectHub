@@ -386,6 +386,11 @@ a:hover {
 	background: #ff7a19;
 	background: linear-gradient(#ff7a19, #fa8631);
 }
+.box .Mature {
+	background-image: none;
+	background: #8ab23f;
+	background: linear-gradient(#8ab23f, #8dbe31);
+}
 .box .progress-bar span {
 	color: white;
 	text-align: center;

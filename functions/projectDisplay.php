@@ -1,73 +1,57 @@
 <?php
+	if(checkCount($result)){					// If there is result
+		
+		echo "<div class='displayProjects'>
+				<table class='projects'>
+					<tr>";
 
-// figure what fillers are set
-if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
-if($category = "none" && $skill = "none"){$result = noCate_noSkill($status,$sort);}
-else if($category = "none"){$result = noCate($skill,$status,$sort);}
-else if($skill = "none"){$result = noSkill($category,$status,$sort);}
-else {$result = allFillers($category,$skill,$status,$sort);}
+		$colum = 1;
+		while ($row = mysql_fetch_assoc($result)) {
 
-// Both category and skill fillers not set
-function noCate_noSkill($status,$sort) {
-	$sql = "SELECT *
-			FROM Project
-			WHERE status = '$status'
-			ORDER BY $sort ";
+			if($colum==1){echo "<tr>";}	// a new row
 
-	$result = mysql_query($sql);
-	return $result;
-}
+			echo 	"<td>
+						<div class='box'>";
+							//	Image
+			echo			"<img src='images/{$row["featureImageUrl"]}' alt='{$row["featureImageUrl"]}' />	";
+							//  Title
+			echo			'<h2 class="projectTitle">'.$row["title"].'</h2>';	
+							//  Description 
+			echo			'<p class="descrption">'.$row["description"].'</p>';
+							//  Tags
+			echo			'<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>';
+							//  Progress bar (bootstrap)
+			echo			"<div class='bootstrap'><div class='progress'>
+							 <div class='progress-bar {$status}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
+							    <span class='{$status}Label'>{$status}({$percentage}%)</span>
+							  </div>
+							</div></div>";
+							//  Status
+			echo			'<p class="status">';
+								//  Number of collaborators
+			echo				'<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3';
+								//  Number of groupmates looking for
+			echo				"<span class='middle'><span class='glyphicon glyphicon-search'></span> 2</span>";
+								//  Number of likes
+			echo				"<span class='right'><span class='glyphicon glyphicon-thumbs-up'></span> {$row["likes"]}</span>
+							</p>
+						</div>
+					</td>";
 
-// Category filler not set
-function noCate($skill,$status,$sort) {
-	$sql = "SELECT *
-			FROM Project
-			WHERE status = '$status'
-			AND category = '$category'
-			ORDER BY $sort ";
+			// Display 3 <td> per row
+			if($colum!=3){$colum++;} else{$colum=1; echo "</tr>";}
 
-	$result = mysql_query($sql);
-	return $result;
-}
+		}	// End of while
 
-// Skill filler not set
-function noSkill($category,$status,$sort) {
-	$sql = "SELECT *
-			FROM Project
-			WHERE status = '$status'
-			AND skill = '$skill'
-			ORDER BY $sort ";
+		echo'	</table>
+			</div>	';
 
-	$result = mysql_query($sql);
-	return $result;
-}
-
-// All fillers set
-function allFillers($category,$skill,$status,$sort) {
-	$sql = "SELECT *
-			FROM Project
-			WHERE status = '$status'
-			AND category = '$category'
-			AND skill = '$skill'
-			ORDER BY $sort ";
-
-	$result = mysql_query($sql);
-	return $result;
-}
-
-
-//check if there is an result
-function checkCount($result){
-	$count = mysql_num_rows($result);
-	if ($count != 0) { return true;}
-	else {return false;}
-}
-
-
-// progress bar text to perstange 
-function progress($status){
-	if($status=="Aspiration"){return 0;}
-	else if($status=="Incubating"){return 25;}
-	else if($status=="Developing"){return 75;}
-	else if($status=="Mature"){return 100;}
-}
+			// Load more button (just a empty button atm)
+		echo'	<div class="bootstrap loadmore"><button type="button" class="btn btn-primary">Load more</button></div>';
+	}
+	else { 	// if there isn't a result, display message no result
+		echo "</table>
+			</div>	
+			<h1><center> <br/> <br/> Sorrry :( There is no project at the moment. <br /> Why not <a href='#'>Adding some </a> ?</center></h1>";
+	}	
+?>
