@@ -1,13 +1,18 @@
 <?php
-	session_start();
+	
 
-	$link = mysql_connect('localhost', 'root', ''); //connect to the server
+	$dbHost = "localhost";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$dbName = "ldi-projecthub";
+
+	$link = mysql_connect($dbHost, $dbUsername, $dbPassword); //connect to the server
 	if (!$link)
 	{
 		header ("Location: error.php");
 	}
-	if (!mysql_select_db('ldi-projecthub', $link)) //select the MySQL database
+	if (!mysql_select_db($dbName, $link)) //select the MySQL database
 	{
 		header ("Location: error.php");
 	}
-?>
+?>	
