@@ -7,7 +7,7 @@ require_once("includes/include.php");
 
 
 
-// if(isset($User) && $User->loggedIn) 
+// if(isset($User) && $user->isLoggedIn) 
 // { 
 // 	header("Location: index.php"); 
 // 	die(); 
@@ -66,7 +66,7 @@ if(!empty($_POST))
 					//Construct a new user object
 					//Transfer some db data to the session object
 					$user = new User();
-					$user->loggedIn				= true;
+					$user->isLoggedIn				= true;
 					$user->isAdmin				= $userdetails["is_admin"];
 					$user->email 				= $email;
 					$user->userId 				= $userdetails["id"];

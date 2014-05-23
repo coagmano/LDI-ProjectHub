@@ -30,8 +30,19 @@
 			</div><!-- /.row --></div>
 		</a></li> 
 	  </ul> 
-	  <ul class="right">
+<?php
+	if ($user->isLoggedIn) {
+		echo <<<EOD
+	 <ul class="right">
+	  	<li><a href="logout.php">Log out</a></li>
+	  </ul>
+EOD;
+	} else {
+	 echo <<<EOD
+	 <ul class="right">
 	  	<li><a href="#">Register</a></li>
 	  </ul>
+EOD;
+	} ?>
 	</div>
 </div>

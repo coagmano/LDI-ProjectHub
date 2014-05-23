@@ -76,15 +76,15 @@ function destorySession($name)
 		{
 			$_SESSION[$name] = NULL;
 			unset($_SESSION[$name]);
-			$loggedInUser = NULL;
+			$user = NULL;
 		}
 	}
-	else if($loggedInUser->remember_me == 1) {
+	else if($user->remember_me == 1) {
 		if(isset($_COOKIE[$name]))
 		{
-			$db->sql_query("DELETE FROM ".$db_table_prefix."sessions WHERE session_id = '".$loggedInUser->remember_me_sessid."'");
+			$db->sql_query("DELETE FROM ".$db_table_prefix."sessions WHERE session_id = '".$user->remember_me_sessid."'");
 			setcookie($name, "", time() - parseLength($remember_me_length));
-			$loggedInUser = NULL;
+			$user = NULL;
 		}
 	} 
 }
@@ -95,10 +95,10 @@ function destorySession($name)
 
 function updateSessionObj()
 {
-	global $loggedInUser,$db,$db_table_prefix;
+	global $user,$db,$db_table_prefix;
 
-	$newObj = serialize($loggedInUser);
-	$db->sql_query("UPDATE ".$db_table_prefix."sessions SET session_data = '".$newObj."' WHERE session_id = '".$loggedInUser->remember_me_sessid."'");
+	$newObj = serialize($user);
+	$db->sql_query("UPDATE ".$db_table_prefix."sessions SET session_data = '".$newObj."' WHERE session_id = '".$user->remember_me_sessid."'");
 }
 
 // Remember-Me Hack v0.03

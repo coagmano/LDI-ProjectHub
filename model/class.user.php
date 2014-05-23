@@ -15,7 +15,7 @@ class User {
 	public $blurb = NULL;
 	public $profilePicUrl = NULL;
 	public $tags = array();
-	public $loggedIn = FALSE;
+	public $isLoggedIn = FALSE;
 	public $isAdmin = FALSE;
 	public $remember_me = NULL;
 	public $remember_me_sessid = NULL;

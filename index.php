@@ -28,7 +28,7 @@ THINGS THAT NEED TO BE DONE
 
 			<!-- log in from  -->
 			<?php
-			if ($user->loggedIn == true) {
+			if ($user->isLoggedIn) {
 				echo <<<EOD
 				<div class="bootstrap">
 				<form class="form-horizontal loginForm" role="form" action="login.php" method="post">
