@@ -3,12 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 19, 2014 at 06:25 AM
+-- Generation Time: May 23, 2014 at 01:10 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "+10:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `BlogPost`
+-- Table structure for table `BlogPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost` (
+CREATE TABLE IF NOT EXISTS `BlogPosts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `BlogPost` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Comment`
+-- Table structure for table `Comments`
 --
 
-CREATE TABLE IF NOT EXISTS `Comment` (
+CREATE TABLE IF NOT EXISTS `Comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `project_id` int(11) DEFAULT NULL,
@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `Comment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DiscussionPost`
+-- Table structure for table `DiscussionPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `DiscussionPost` (
+CREATE TABLE IF NOT EXISTS `DiscussionPosts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) DEFAULT NULL,
   `message` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE IF NOT EXISTS `DiscussionPost` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Project`
+-- Table structure for table `Projects`
 --
 
-CREATE TABLE IF NOT EXISTS `Project` (
+CREATE TABLE IF NOT EXISTS `Projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -97,10 +97,10 @@ CREATE TABLE IF NOT EXISTS `Project` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 --
--- Dumping data for table `Project`
+-- Dumping data for table `Projects`
 --
 
-INSERT INTO `Project` (`id`, `title`, `description`, `category`, `skills`, `featureImageUrl`, `status`, `likes`, `createdTimestamp`, `videoUrl`, `fileShareUrl`, `location`, `createdBy_id`) VALUES
+INSERT INTO `Projects` (`id`, `title`, `description`, `category`, `skills`, `featureImageUrl`, `status`, `likes`, `createdTimestamp`, `videoUrl`, `fileShareUrl`, `location`, `createdBy_id`) VALUES
 (1, 'lorem ipsum', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Developing', 70, '0000-00-00 00:00:00', '', '', '', 1),
 (2, 'lorem ipsum', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Developing', 73, '0000-00-00 00:00:00', '', '', '', 1),
 (3, 'lorem ipsum', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Developing', 72, '0000-00-00 00:00:00', '', '', '', 1),
@@ -155,61 +155,80 @@ CREATE TABLE IF NOT EXISTS `project_user` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Table structure for table `sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` int(11) NOT NULL,
+  `session_data` text COLLATE utf8_unicode_ci NOT NULL,
+  `session_start` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
   `blurb` longtext COLLATE utf8_unicode_ci NOT NULL,
   `tags` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:simple_array)',
-  `profilePicUrl` longblob NOT NULL,
+  `profilePicUrl` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL,
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `User` (`id`, `blurb`, `tags`, `profilePicUrl`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `blurb`, `tags`, `profilePicUrl`, `active`, `is_admin`, `created_timestamp`) VALUES
+(1, 'Jimi', 'Bursaw', 'jimi@ldi.org.au', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 1, 1, '2014-05-23 10:27:41');
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `BlogPost`
+-- Constraints for table `BlogPosts`
 --
-ALTER TABLE `BlogPost`
-  ADD CONSTRAINT `FK_4BC03615166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `Project` (`id`),
+ALTER TABLE `BlogPosts`
+  ADD CONSTRAINT `FK_4BC03615166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   ADD CONSTRAINT `FK_4BC03615A76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Constraints for table `Comment`
+-- Constraints for table `Comments`
 --
-ALTER TABLE `Comment`
-  ADD CONSTRAINT `FK_5BC96BF0166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `Project` (`id`),
+ALTER TABLE `Comments`
+  ADD CONSTRAINT `FK_5BC96BF0166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   ADD CONSTRAINT `FK_5BC96BF0A76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Constraints for table `DiscussionPost`
+-- Constraints for table `DiscussionPosts`
 --
-ALTER TABLE `DiscussionPost`
-  ADD CONSTRAINT `FK_7BC93423166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `Project` (`id`),
+ALTER TABLE `DiscussionPosts`
+  ADD CONSTRAINT `FK_7BC93423166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   ADD CONSTRAINT `FK_7BC93423B3920A8B` FOREIGN KEY (`postedBy_id`) REFERENCES `User` (`id`);
 
 --
--- Constraints for table `Project`
+-- Constraints for table `Projects`
 --
-ALTER TABLE `Project`
+ALTER TABLE `Projects`
   ADD CONSTRAINT `FK_E00EE9723174800F` FOREIGN KEY (`createdBy_id`) REFERENCES `User` (`id`);
 
 --
 -- Constraints for table `project_user`
 --
 ALTER TABLE `project_user`
-  ADD CONSTRAINT `FK_B4021E51166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `Project` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_B4021E51A76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_B4021E51166D1F9C` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_B4021E51A76ED395` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

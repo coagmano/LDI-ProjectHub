@@ -1,5 +1,8 @@
 <?php
 
+//Set default length of cookie life
+$remember_me_length = "1wk";
+
 function sanitise($str)
 {
 	return strtolower(strip_tags(trim(($str))));
@@ -66,9 +69,9 @@ function generateHash($plainText, $salt = null)
 // <http://rememberme4uc.sourceforge.net/>
 function destorySession($name)
 {
-	global $remember_me_length,$loggedInUser,$db,$db_table_prefix;
+	global $remember_me_length,$user;
 		
-	   if($loggedInUser->remember_me == 0) { 
+	   if($user->remember_me == 0) { 
 		if(isset($_SESSION[$name]))
 		{
 			$_SESSION[$name] = NULL;

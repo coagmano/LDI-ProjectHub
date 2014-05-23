@@ -39,7 +39,7 @@ THINGS THAT NEED TO BE DONE
 		  	</div>
 EOD;
 			} else {
-				include 'templates/_loginform.html';
+				include 'includes/_loginform.html';
 			} ?>
 			<img src="images/01d.png" class="titlePicture" alt="titlePicture" />	<!-- LDI cartoon pic -->
 		</div> <!-- /bootstrap -->

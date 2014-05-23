@@ -57,7 +57,7 @@ class User {
 	
 	
 	//Logout
-	function userLogOut()
+	function logOut()
 	{
 		destorySession("user");
 	}
