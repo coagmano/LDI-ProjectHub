@@ -14,11 +14,6 @@
 		<li><a href="#">Create</a></li> 
 		<li> | </li> 
 	  </ul> 
-		
-
-	  <ul class="right">
-	  	<li><a href="#">Register</a></li>
-	  </ul>
 
 
 	  <!-- Search button by bootstrap -->
@@ -34,8 +29,6 @@
 			    </div><!-- /input-group -->
 			  </div><!-- /.col-lg-6 -->
 			</div><!-- /.row --></div>
-<<<<<<< HEAD
-=======
 		</a></li> 
 	  </ul> 
 <?php
@@ -52,6 +45,5 @@ EOD;
 	  </ul>
 EOD;
 	} ?>
->>>>>>> FETCH_HEAD
 	</div>
 </div>

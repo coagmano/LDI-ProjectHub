@@ -12,14 +12,10 @@ THINGS THAT NEED TO BE DONE
 
 <?php
 	$pageTitle = "LDI ProjectHub";
-<<<<<<< HEAD
 	$style = "homepage";
-	include 'includes/include.php';
-=======
 	require('includes/include.php');
 	include 'includes/header.php';
 	include 'includes/navbar.php';
->>>>>>> FETCH_HEAD
 ?>
 
 
