@@ -40,7 +40,7 @@ EOD;
 	} else {
 	 echo <<<EOD
 	 <ul class="right">
-	  	<li><a href="#">Register</a></li>
+	  	<li><a href="register.php">Register</a></li>
 	  </ul>
 EOD;
 	} ?>

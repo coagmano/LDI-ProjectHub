@@ -8,12 +8,12 @@ function sanitise($str)
 	return strtolower(strip_tags(trim(($str))));
 }
 
-function isValidemail($email)
+function isValidEmail($email)
 {
 	return preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",trim($email));
 }
 
-function UserExists($email) 
+function userExists($email) 
 {
 	$e = mysql_escape_string(sanitise($email));
 	$sql = "SELECT active FROM users

@@ -7,7 +7,7 @@ require_once("includes/include.php");
 
 
 
-// if(isset($User) && $user->isLoggedIn) 
+// if ($user->isLoggedIn) 
 // { 
 // 	header("Location: index.php"); 
 // 	die(); 
@@ -15,6 +15,8 @@ require_once("includes/include.php");
 
 if(!empty($_POST)) 
 {
+
+
 	$errors = array();
 	$email = trim($_POST["email"]);
 	$password = trim($_POST["password"]);
@@ -35,7 +37,7 @@ if(!empty($_POST))
 	if(count($errors) == 0)
 	{
 		//A security note here, never tell the user which credential was incorrect
-		if(!UserExists($email))
+		if(!userExists($email))
 		{
 			$errors[] = "Email or password incorrect, please try again.";
 		}
@@ -66,7 +68,7 @@ if(!empty($_POST))
 					//Construct a new user object
 					//Transfer some db data to the session object
 					$user = new User();
-					$user->isLoggedIn				= true;
+					$user->isLoggedIn			= true;
 					$user->isAdmin				= $userdetails["is_admin"];
 					$user->email 				= $email;
 					$user->userId 				= $userdetails["id"];

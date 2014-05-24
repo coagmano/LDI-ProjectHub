@@ -1,9 +1,4 @@
 <?php
-/*
-	Adapted from UserPie Version: 1.0
-	http://userpie.com
-	
-*/
 
 class User {
 
@@ -42,7 +37,7 @@ class User {
 	//Update a users email
 	public function updateemail($email)
 	{
-		
+			
 		$this->email = $email;
 		if($this->remember_me == 1)
 		updateSessionObj();
@@ -53,6 +48,78 @@ class User {
 				id = '".$db->sql_escape($this->userId)."'";
 		
 		return ($db->sql_query($sql));
+	}
+
+	public function getFromDatabaseById()
+	{
+		//do things
+	}
+
+	public function getFromDatabaseByEmail($email)
+	{
+		$userdetails = fetchUserDetails($email);
+		$user->isAdmin			= $userdetails["is_admin"];
+		$user->email 			= $email;
+		$user->userId 			= $userdetails["id"];
+		$user->hashPass 		= $userdetails["password"];
+		$user->firstName 		= $userdetails["first_name"];
+		$user->lastName 		= $userdetails["last_name"];
+		$user->profilePicUrl 	= $userdetails["profilePicUrl"];
+		$user->blurb 			= $userdetails["blurb"];
+		$user->tags 			= $userdetails["tags"];
+		$user->signupTimeStamp	= $userdetails["created_timestamp"];
+	}
+
+	/**
+	 * Saves all attributes to database
+	 * @return bool True on success
+	 * @return string Description of error
+	 */
+	public function saveToDatabase()
+	{
+
+		if (userExists($this->email)) 
+		{
+			$sql = "UPDATE users
+			       SET 
+		       	   first_name = '".$this->firstName."',
+		       	   last_name = '".$this->lastName."',
+		       	   email = '".$this->email."',
+		       	   password = '".$this->hashPass."',
+		       	   blurb = '".$this->blurb."',
+		       	   tags = '".implode(",", $this->tags)."',
+		       	   profilePicUrl = '">$this->profilePicUrl."'
+				   WHERE
+				    id = '".$this->userId."'";
+		    $type = "UPDATE";
+		} 
+		else 
+		{
+			$sql = "INSERT INTO users (first_name, last_name, email, password, blurb, tags, profilePicUrl, created_timestamp)
+			       VALUES (
+	       		   '".$this->firstName."',
+       			   '".$this->lastName."',
+       			   '".$this->email."',
+       			   '".$this->hashPass."',
+       			   '".$this->blurb."',
+       			   '".implode(",", $this->tags)."'
+       			   '".$this->profilePicUrl."',
+			       '".$this->signupTimeStamp."'
+			       )";
+			$type = "INSERT";
+		}
+
+		if (mysql_query($sql))
+		{
+			if ($type == "INSERT") {$this->userId = mysql_insert_id();}
+			return true;
+
+		} 
+		else
+		{
+			$result = mysql_error();
+			return $result;
+		}
 	}
 	
 	
