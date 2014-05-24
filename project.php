@@ -1,8 +1,11 @@
 <?php
 	$pageTitle = "LDI ProjectHub";
 	$style = "project";
-	include 'includes/include.php';
+	require('includes/include.php');
+	include 'includes/header.php';
+	include 'includes/navbar.php';
 ?>
+
 <div class="container">	
 	<div class="content">
 <a name="top"></a>
