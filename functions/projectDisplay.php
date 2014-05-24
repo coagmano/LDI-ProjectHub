@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/projectDisplay.css" /> 
+
 <?php
 	if(checkCount($result)){					// If there is result
 		
@@ -17,7 +19,7 @@
 							//  Title
 			echo			'<h2 class="projectTitle">'.$row["title"].'</h2>';	
 							//  Description 
-			echo			'<p class="descrption">'.$row["description"].'</p>';
+			echo			'<p class="descrption">'.$row["summary"].'</p>';
 							//  Tags
 			echo			'<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>';
 							//  Progress bar (bootstrap)

@@ -9,13 +9,19 @@
 	  <ul class="left"> 
 		<li><a href="#">LDI ProjectHub</a></li> 
 		<li><a href="#">LDI CareerHub</a></li> 
-		<li><a href="#">  </a></li> 
-		<li><a href="#"> | </a></li> 
+		<li> | </li> 
 		<li><a href="#">Discover</a></li> 
 		<li><a href="#">Create</a></li> 
-		<li><a href="#"> | </a></li> 
-		<li><a href="#">
-			<!-- Search button by bootstrap -->
+		<li> | </li> 
+	  </ul> 
+		
+
+	  <ul class="right">
+	  	<li><a href="#">Register</a></li>
+	  </ul>
+
+
+	  <!-- Search button by bootstrap -->
 			<div class="bootstrap"><div class="row">
 			  <div class="col-lg-6">
 			    <div class="input-group">
@@ -28,10 +34,24 @@
 			    </div><!-- /input-group -->
 			  </div><!-- /.col-lg-6 -->
 			</div><!-- /.row --></div>
+<<<<<<< HEAD
+=======
 		</a></li> 
 	  </ul> 
-	  <ul class="right">
+<?php
+	if ($user->isLoggedIn) {
+		echo <<<EOD
+	 <ul class="right">
+	  	<li><a href="logout.php">Log out</a></li>
+	  </ul>
+EOD;
+	} else {
+	 echo <<<EOD
+	 <ul class="right">
 	  	<li><a href="#">Register</a></li>
 	  </ul>
+EOD;
+	} ?>
+>>>>>>> FETCH_HEAD
 	</div>
 </div>

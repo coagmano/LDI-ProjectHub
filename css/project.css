@@ -1,0 +1,379 @@
+/*
+	Project title & summary
+*/	
+.projectTitle {
+	margin: 50px auto 0 auto;
+	text-align: center;
+	width: 800px;
+}
+.projectTitle h1{
+	font-family: CFJackStory !important;
+	text-align: center;
+	color: #333333;
+	font-size: 40px !important;
+	line-height: 36px;
+}
+.projectTitle small {
+/*	font-family: Populaire !important;*/
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300 !important;
+	font-size: 20px !important;
+}
+
+
+/*
+	Page Layout
+*/	
+.project {
+	margin: 50px auto 0 auto;
+	padding-bottom: 50px;
+	background-color: #fff;
+	width: 975px;
+	border-width: 20px;
+	-moz-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	-webkit-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	-o-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	border-image: url("../images/border_thick.png") 174 167 151 128 fill stretch;
+}
+.project:before,
+.project:after {
+  content:"";
+  display:table;
+}
+.project:after {
+  clear:both;
+}
+.project {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+.project .left {
+	width: 590px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.project .rightPanel {
+	width: 320px;
+}
+
+
+
+/*
+	Project content (left panel)
+*/	
+.bootstrap .nav:after {
+	clear:left !important;
+}
+.videoPic img{
+	width: 100%;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.projectContent {
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+	color: #4c4c4c;
+	font-size: 17px;
+	line-height: 30px;
+}
+.block {
+	background: url(../images/hr.jpg) no-repeat left bottom;
+	padding-bottom: 62px;
+	margin-bottom: 40px
+}
+
+
+/*
+	Looking for (left panel)
+*/
+.lookingFor {
+	width: -moz-calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    width: calc(100% - 40px);
+	border: 10px solid #f5f5f5;
+	padding: 10px;
+}
+.lookingFor h3 {
+	margin-top: 5px !important;
+}
+.lookingFor .tags {
+	font-size: 15px;
+}
+.lookingFor a {
+	margin-left: 10px;
+	font-size: 17px;
+	text-decoration: none !important;
+}
+.lookingFor a:hover .label {
+	background-color: #FFA54F;
+}
+.lookingFor {
+	padding-bottom: 50px;
+	margin-bottom: 30px;
+}
+
+
+
+/*
+	blog post (left panel)
+*/
+.blogPostTitle {
+	margin-bottom: 40px;
+}
+.blogPost h3 {
+	font-size: 33px;
+	color: #035084;
+	margin-bottom: 30px;
+	font-family: Populaire;
+	letter-spacing: 2px;
+}
+.blogPost p {
+	margin-top: -10px;
+	margin-bottom: 50px;
+}
+.blogPost {
+	border-top: 1px solid #d9d9de;
+	padding-top: 0;
+}
+
+
+
+/*
+	comments (left panel)
+*/
+.CommentsBlock {
+	background: none;
+	margin-bottom: 0 !important;
+	padding-bottom: 20px !important;
+}
+.post {
+	padding: 10px 20px 60px 20px;
+	margin-bottom: 30px;
+	background-color: #f7fafa;
+	width: -moz-calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    width: calc(100% - 40px);
+}
+textarea {
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	max-width: 500px;
+	padding: 5px 15px;
+	margin-bottom: 20px;
+	font-size: 14px;
+}
+textarea:focus {
+	outline: 0;
+	border: 1px solid #388E8E;
+}
+.commentsBox {
+	padding: 20px 10px;
+	border-bottom: 1px solid #d9d9de;
+}
+.owner {
+	background-color: #fefdec;
+}
+.yellowBorder {
+	border-bottom: 1px solid #fad77c;
+}
+.commentsBox:before,
+.commentsBox:after {
+  content:"";
+  display:table;
+}
+.commentsBox:after {
+  clear:both;
+}
+.commentsBox {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+.commentsContainer {
+	width: -moz-calc(100% - 90px);
+    width: -webkit-calc(100% - 90px);
+    width: calc(100% - 90px); 
+}
+.photo {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.photo img {
+	min-width: 70px;
+	min-height: 70px;
+	width: 70px;
+
+}
+.team {
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 10px !important;
+}
+.nameDate {
+	font-size: 16px;
+	font-weight: 700
+}
+.date {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 13px;
+	color: #999;
+	font-weight: 500;
+}
+.comments {
+	font-size: 15px;
+}
+
+/*
+	project status (right panel)
+*/	
+.stages {
+	font-size: 40px;
+	margin-top: 15px;
+	font-weight: 700;
+}
+.aspiration {
+	color: #3c0059;
+}
+.incubatin {
+	color: #f4b81a;
+}
+.developing {
+	color: #ff7a19;
+}
+.mature {
+	color: #8ab23f;
+}
+.status {
+	margin-top: 20px;
+	margin-right: 10px;
+	background-color: #f6fafb;
+	padding: 15px 0 15px 25px;
+	border-radius: 5px;
+	/*text-align: right;*/
+	width: 120px;
+}
+.statusTitle {
+	font-size: 18px;
+}
+.number {
+	margin-top: -5px;
+	padding-left: 10px;
+	font-size: 45px;
+	font-weight: 700;
+}
+.statusText {
+	color: #999
+}
+
+
+/*
+	buttons (right panel)
+*/
+.like {
+	padding: 13px 0 13px 0 !important;
+	margin-top: 35px !important;
+	margin-left: 40px !important;
+	width: 90px !important;
+	font-size: 17px !important;
+}
+.like .glyphicon-thumbs-up {
+	font-size: 25px;
+}
+.bubble {
+	margin-top: 40px;
+	margin-right: 80px;
+	position: relative;
+	width: 80px;
+	height: 70px;
+	padding: 0px;
+	background: transparent;
+	border: 1px solid #999;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.bubble span {
+	display: inline-block;
+	padding: 13px 23px;
+	font-size: 30px;
+}
+.bubble:after {
+	content: "";
+	position: absolute;
+	top: 25px;
+	left: -13px;
+	border-style: solid;
+	border-width: 10px 13px 10px 0;
+	border-color: transparent #999;
+	display: block;
+	width: 0;
+	z-index: 1;
+}
+.longBtn {
+	margin-top: 30px !important;
+	width: 300px;
+	height: 50px !important;
+	background-color: #0f66a0!important;
+	color: #fff !important;
+	font-size: 18px !important;
+}
+.longBtn:hover {
+	background-color: #035084 !important;
+}
+.ask {
+	margin-bottom: 40px !important;
+}
+
+
+/*
+	collaboraters (right panel)
+*/
+.peopleBorder {
+	margin-top: 30px;
+	background-color: #f5f5f5;
+	padding: 10px;
+	width: 280px;
+}
+.peopleBorder a {
+	color: #000;
+}
+.people {
+	background-color: #fff;
+	padding: 10px;
+	border: 1px solid #fff;
+}
+.peopleBorder a:hover .people{
+	border: 1px solid #999;
+}
+.peopleBorder a:hover .name {
+	color: #ff7a19;
+}
+.profileImg {
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	overflow: hidden;
+}
+.profileImg img {
+	min-width: 90px;
+	min-height: 90px;
+	width: 90px;
+}
+.peopleInfo {
+	margin-left: 10px;
+	width: 150px;
+	height: 90px;
+}
+.peopleInfo .peopleInfos {
+	margin-top: 15px;
+}
+.position {
+	color: #999;
+	font-size: 14px;
+	font-weight: 300;
+}
+.name {
+	font-size: 16px;
+	font-weight: 700;
+}
