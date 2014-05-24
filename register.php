@@ -53,7 +53,7 @@ if(!empty($_POST))
 		$user->blurb 				= $_POST["blurb"];
 		$user->profilePicUrl 		= $_POST["profilePicUrl"];
 		$user->isLoggedIn 			= true;
-		$user->signupTimeStamp 	= time();
+		$user->signupTimeStamp 		= time();
 
 		$user->tags 				= array_map('trim',explode(",",$_POST["tags"]));
 		
@@ -76,7 +76,8 @@ if(!empty($_POST))
 	include 'includes/header.php';
 	include 'includes/navbar.php';
 ?>
-
+<div class="container">	
+	<div class="content">
         <div id="success">
         
            <p><?php echo $message ?></p>
@@ -88,54 +89,55 @@ if(!empty($_POST))
            
         </div>
 
-            <div id="regbox">
-                <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                
-                <p>
-                    <label>First Name:</label>
-                    <input type="text" name="firstName" />
-                </p>
-                <p>
-                    <label>Last Name:</label>
-                    <input type="text" name="lastName" />
-                </p>
+        <div id="regbox">
+            <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+            
+            <p>
+                <label>First Name:</label>
+                <input type="text" name="firstName" />
+            </p>
+            <p>
+                <label>Last Name:</label>
+                <input type="text" name="lastName" />
+            </p>
 
-                <p>
-                    <label>About you:</label>
-                    <input type="text" name="blurb" />
-                </p>
+            <p>
+                <label>Email:</label>
+                <input type="email" name="email" />
+            </p>
 
-                <p>
-                    <label>Profile Photo:</label>
-                    <input type="text" name="profilePicUrl" />
-                </p>
+            <p>
+                <label>About you:</label>
+                <input type="text" name="blurb" />
+            </p>
+            <p>
+                <label>Your skills and interests:</label>
+                <input type="text" name="blurb" />
+            </p>
 
-                <p>
-                    <label>Email:</label>
-                    <input type="email" name="email" />
-                </p>
-                
-                <p>
-                    <label>Password:</label>
-                    <input type="password" name="password" />
-                </p>
-                
-                <p>
-                    <label>Re-type Password:</label>
-                    <input type="password" name="passwordc" />
-                </p>
-                <p>
-                    <label>Email:</label>
-                    <input type="text" name="email" />
-                </p>
-                <p>
-                    <input type="submit" name="Register" value="Register" />
-                </p>
+            <p>
+                <label>Profile Photo:</label>
+                <input type="text" name="profilePicUrl" />
+            </p>
+            
+            <p>
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </p>
+            
+            <p>
+                <label>Re-type Password:</label>
+                <input type="password" name="passwordc" />
+            </p>
+            <p>
+                <input type="submit" name="Register" value="Register" />
+            </p>
 
-            	</form>
+        	</form>
     
-      </div>           
-      </div>
+      	</div>           
+  	</div>
+</div>
 
 
  <?php
