@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ldi-projecthub`
 --
-DROP DATABASE `ldi-projecthub`;
 CREATE DATABASE IF NOT EXISTS `ldi-projecthub` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `ldi-projecthub`;
 
