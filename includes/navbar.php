@@ -9,13 +9,14 @@
 	  <ul class="left"> 
 		<li><a href="#">LDI ProjectHub</a></li> 
 		<li><a href="#">LDI CareerHub</a></li> 
-		<li><a href="#">  </a></li> 
-		<li><a href="#"> | </a></li> 
+		<li> | </li> 
 		<li><a href="#">Discover</a></li> 
 		<li><a href="#">Create</a></li> 
-		<li><a href="#"> | </a></li> 
-		<li><a href="#">
-			<!-- Search button by bootstrap -->
+		<li> | </li> 
+	  </ul> 
+
+
+	  <!-- Search button by bootstrap -->
 			<div class="bootstrap"><div class="row">
 			  <div class="col-lg-6">
 			    <div class="input-group">

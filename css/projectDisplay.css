@@ -1,0 +1,101 @@
+
+/*
+	Project Display
+*/	
+.displayProjects{
+	display: block;
+	margin: 0 auto;
+	width: 1000px;
+}
+.box {
+	background-color: #fff;
+	width: 310px;
+	height: 360px;
+	margin: 10px 10px 0 0;
+	padding: 5px;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	-moz-border-image: url("../images/border.png") 50 50 80 50   stretch;
+	-webkit-border-image: url("../images/border.png") 50 50 80 50 stretch;
+	-o-border-image: url("../images/border.png") 50 50 80 50 stretch;
+	border-image: url("../images/border.png") 50 50 80 50 fill stretch;
+	}
+.box img {
+	width: 310px;
+	height: 195px;
+	}
+.box .projectTitle {
+	font-family: 'CFJackStory', sans-serif;
+	margin-top: 0;
+	font-size: 17px;
+	font-weight: bold;
+	height: 12px;
+	}
+.box .descrption {
+	margin-bottom: -10px;
+	height: 55px;
+	overflow: hidden;
+	}
+.box .descrption,.box .status {
+	font-size: 13px;
+	font-weight: lighter;
+	color: #646262;
+}
+.box .progress {
+	margin-top: -10px;
+}
+.box .Incubating {
+	background-image: none;
+	background: #f4b81a;
+	background: linear-gradient(#f4b81a, #f7c02e);
+}
+.box .Developing {
+	background-image: none;
+	background: #ff7a19;
+	background: linear-gradient(#ff7a19, #fa8631);
+}
+.box .Mature {
+	background-image: none;
+	background: #8ab23f;
+	background: linear-gradient(#8ab23f, #8dbe31);
+}
+.box .progress-bar span {
+	color: white;
+	text-align: center;
+}
+.box .AspirationLabel {
+	color: #3c0059 !important;
+	margin-left: 115px;
+}
+.box .IncubatingLabel{
+	color: #f4b81a !important;
+	margin-left: 115px;
+}
+.box .DevelopingLabel{
+	margin-left: 85px;
+}
+.box .status {
+	margin-top: -15px;
+}
+.box .tags a {
+	margin-top: -10px;
+	font-size: 13px;
+	margin-right: 10px;
+	line-height: 1px;
+}
+.box .middle {
+	margin-left: 120px;
+	}
+.box .right {
+	text-align: right;
+}
+
+.loadmore {
+	margin: 70px 0;
+	text-align: center;
+
+}
+.loadmore button {
+	width: 80%;
+	font-size: 17px !important;
+}

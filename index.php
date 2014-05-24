@@ -12,6 +12,7 @@ THINGS THAT NEED TO BE DONE
 
 <?php
 	$pageTitle = "LDI ProjectHub";
+	$style = "homepage";
 	require('includes/include.php');
 	include 'includes/header.php';
 	include 'includes/navbar.php';
