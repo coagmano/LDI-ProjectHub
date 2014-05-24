@@ -5,6 +5,10 @@
  */
 require_once('includes/include.php');
 
+// Set page settings
+$pageTitle = "Register - ProjectHub";
+$style = "homepage";
+
 
 if ($user->isLoggedIn){ header("Location: index.php"); die(); }
 
@@ -57,17 +61,16 @@ if(!empty($_POST))
 
 		$user->tags 				= array_map('trim',explode(",",$_POST["tags"]));
 		
-		var_dump($user);
 		// Persist new User to database
 		$result = $user->saveToDatabase();
-		if(!$result) 
+		if($result) 
 		{ 
-			var_dump($result);
-			$errors[] = $result; 
+			$message .= "Account created successfully";
+
 		}
 		else
 		{
-			$message = "Account created successfully";
+			$message .= $result;
 			//header('Location: dashboard.php');
 		}
 	}
@@ -112,7 +115,7 @@ if(!empty($_POST))
             </p>
             <p>
                 <label>Your skills and interests:</label>
-                <input type="text" name="blurb" />
+                <input type="text" name="tags" />
             </p>
 
             <p>
@@ -140,6 +143,6 @@ if(!empty($_POST))
 </div>
 
 
- <?php
- include('includes/footer.php');
- ?>
+<?php
+include('includes/footer.php');
+?>

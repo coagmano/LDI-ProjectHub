@@ -4,6 +4,8 @@
 
 	session_start(); //Start the session here and include this on all sessioned pages.
 	
+	$hiddenMessage = ""; // Initialise hidden message for display in footer.
+
 	require_once('dbconnect.php');
 	require_once("functions/funcs.user.php");
 

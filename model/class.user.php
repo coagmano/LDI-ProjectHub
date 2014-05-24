@@ -77,48 +77,55 @@ class User {
 	 */
 	public function saveToDatabase()
 	{
-
+		global $hiddenMessage;
 		if (userExists($this->email)) 
 		{
-			$sql = "UPDATE users
-			       SET 
-		       	   first_name = '".$this->firstName."',
-		       	   last_name = '".$this->lastName."',
-		       	   email = '".$this->email."',
-		       	   password = '".$this->hashPass."',
-		       	   blurb = '".$this->blurb."',
-		       	   tags = '".implode(",", $this->tags)."',
-		       	   profilePicUrl = '">$this->profilePicUrl."'
-				   WHERE
-				    id = '".$this->userId."'";
+			$sql = 
+			   'UPDATE users
+		    	SET 
+				first_name ="'.mysql_real_escape_string($this->firstName).'",
+				last_name ="'.mysql_real_escape_string($this->lastName).'",
+				email = "'.mysql_real_escape_string($this->email).'",
+				password ="'.mysql_real_escape_string($this->hashPass).'",
+				blurb = "'.mysql_real_escape_string($this->blurb).'",
+				tags ="'.mysql_real_escape_string(implode(",", $this->tags)).'",
+				profilePicUrl = "'.mysql_real_escape_string($this->profilePicUrl).'"
+		   		WHERE
+			    email = "'.$this->email.'"';
 		    $type = "UPDATE";
+		    $hiddenMessage .= $sql."<br>";
 		} 
 		else 
 		{
-			$sql = "INSERT INTO users (first_name, last_name, email, password, blurb, tags, profilePicUrl, created_timestamp)
-			       VALUES (
-	       		   '".$this->firstName."',
-       			   '".$this->lastName."',
-       			   '".$this->email."',
-       			   '".$this->hashPass."',
-       			   '".$this->blurb."',
-       			   '".implode(",", $this->tags)."'
-       			   '".$this->profilePicUrl."',
-			       '".$this->signupTimeStamp."'
-			       )";
+			$sql = 
+				'INSERT INTO users (first_name, last_name, email, password, blurb, tags, profilePicUrl, created_timestamp)
+		    	VALUES (
+       		    "'.mysql_real_escape_string($this->firstName).'",
+   			    "'.mysql_real_escape_string($this->lastName).'",
+   			    "'.mysql_real_escape_string($this->email).'",
+   			    "'.mysql_real_escape_string($this->hashPass).'",
+   			    "'.mysql_real_escape_string($this->blurb).'",
+   			    "'.mysql_real_escape_string(implode(",", $this->tags)).'",
+   			    "'.mysql_real_escape_string($this->profilePicUrl).'",
+		        "'.mysql_real_escape_string($this->signupTimeStamp).'"
+		        )';
 			$type = "INSERT";
+			$hiddenMessage .= $sql."<br>";
 		}
 
-		if (mysql_query($sql))
-		{
-			if ($type == "INSERT") {$this->userId = mysql_insert_id();}
-			return true;
+		$result = mysql_query($sql) ;//or die(mysql_error());
 
+		if ($result)
+		{
+			if ($type == "INSERT") {
+				$this->userId = mysql_insert_id();
+			}
+			return true;
 		} 
 		else
 		{
-			$result = mysql_error();
-			return $result;
+			$error = mysql_error();
+			return $error;
 		}
 	}
 	
