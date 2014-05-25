@@ -20,7 +20,7 @@ if(!empty($_POST))
 	$errors = array();
 	$email = trim($_POST["email"]);
 	$password = trim($_POST["password"]);
-	$remember_choice = trim($_POST["remember_me"]);
+	// $remember_choice = trim($_POST["remember_me"]);
 
 
 	//Perform some validation
@@ -78,18 +78,18 @@ if(!empty($_POST))
 					$user->profilePicUrl 		= $userdetails["profilePicUrl"];
 					$user->blurb 				= $userdetails["blurb"];
 					$user->tags 				= $userdetails["tags"];
-					$user->remember_me 			= $remember_choice;
+					// $user->remember_me 			= $remember_choice;
 					$user->remember_me_sessid 	= generateHash(uniqid(rand(), true));
 	
 					
 					$_SESSION["user"] = $user;
 					
-					if ($user->remember_me == 1) 
-					{
-						$sql = "INSERT INTO sessions VALUES('".$user->remember_me_sessid."', '".serialize($user)."', '".time()."')";
-						$result = mysql_query($sql) or die("Error initialising session in database.".mysql_error());
-						setcookie("user_session", $user->remember_me_sessid, time()+parseLength($remember_me_length));
-					}
+					// if ($user->remember_me == 1) 
+					// {
+					// 	$sql = "INSERT INTO sessions VALUES('".$user->remember_me_sessid."', '".serialize($user)."', '".time()."')";
+					// 	$result = mysql_query($sql) or die("Error initialising session in database.".mysql_error());
+					// 	setcookie("user_session", $user->remember_me_sessid, time()+parseLength($remember_me_length));
+					// }
 					
 					//Redirect to user account page
 					header("Location: index.php");

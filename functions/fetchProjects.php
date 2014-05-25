@@ -1,16 +1,16 @@
 <?php
 
-// figure what fillers are set
+// figure what filters are set
 if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
 if($category = "none" && $skill = "none"){$result = noCate_noSkill($status,$sort);}
 else if($category = "none"){$result = noCate($skill,$status,$sort);}
 else if($skill = "none"){$result = noSkill($category,$status,$sort);}
-else {$result = allFillers($category,$skill,$status,$sort);}
+else {$result = allFilters($category,$skill,$status,$sort);}
 
-// Both category and skill fillers not set
+// Both category and skill filters not set
 function noCate_noSkill($status,$sort) {
 	$sql = "SELECT * 
-			FROM Project  
+			FROM Projects  
 			WHERE status = '$status' 
 			ORDER BY $sort 
 			LIMIT 15 ";
@@ -22,7 +22,7 @@ function noCate_noSkill($status,$sort) {
 // Category filler not set
 function noCate($skill,$status,$sort) {
 	$sql = "SELECT *
-			FROM Project 
+			FROM Projects
 			WHERE status = '$status'
 			AND category = '$category'
 			ORDER BY $sort
@@ -35,7 +35,7 @@ function noCate($skill,$status,$sort) {
 // Skill filler not set
 function noSkill($category,$status,$sort) {
 	$sql = "SELECT *
-			FROM Project 
+			FROM Projects 
 			WHERE status = '$status'
 			AND skill = '$skill'
 			ORDER BY $sort
@@ -45,10 +45,10 @@ function noSkill($category,$status,$sort) {
 	return $result;
 }
 
-// All fillers set
-function allFillers($category,$skill,$status,$sort) {
+// All filters set
+function allFilters($category,$skill,$status,$sort) {
 	$sql = "SELECT *
-			FROM Project 
+			FROM Projects 
 			WHERE status = '$status'
 			AND category = '$category'
 			AND skill = '$skill'

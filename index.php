@@ -18,11 +18,17 @@ THINGS THAT NEED TO BE DONE
 	include 'includes/navbar.php';
 ?>
 
+ <script>
 
+// function afterLogin(){
+//   document.getElementById('header').style.height="700px";
+//   document.getElementById('page-wrap').style.top="-400px";
+// }
+ </script>
 
 <!-- LDI Title -->
 
-<div class="header">
+<div id="header">
 	<div class="container">	
 		<div class="title">
 			<p class="ldi">LDI</p><p class="ph">Project Hub</p>
@@ -30,20 +36,19 @@ THINGS THAT NEED TO BE DONE
 			<!-- log in from  -->
 			<?php
 			if ($user->isLoggedIn) {
-				echo <<<EOD
-				<div class="bootstrap">
-				<form class="form-horizontal loginForm" role="form" action="login.php" method="post">
-				  <div class="form-group">
-				  	<p> You have successfully logged in! </p>
-			  	</div>
-		  	</form>
-		  	</div>
-EOD;
+				// echo "<script>afterLogin();</script>";
 			} else {
-				include 'includes/_loginform.html';
+				echo <<<EOD
+				<form class="login" action="login.php" method="POST">
+					<div class="inputBox"><input name="email" type="text" placeholder="Email" onclick="this.value='';"  onblur="this.value=!this.value?'Email':this.value;" value="Email" /></div>
+					<div class="inputBox"><input name="password" type="password" placeholder="Password" onclick="this.value='';" /></div>
+					<div class="inputBox"><button type="submit" class="button"><span style="float:left;">Sign in</span> <span class="bootstrap"><span class="glyphicon glyphicon-chevron-right right"></span></span></button></div>
+				</form>
+EOD;
 			} ?>
-			<img src="images/01d.png" class="titlePicture" alt="titlePicture" />	<!-- LDI cartoon pic -->
-		</div> <!-- /bootstrap -->
+			<!-- <img src="images/01d.png" class="titlePicture" alt="titlePicture" /> -->	<!-- LDI cartoon pic -->
+		
+		</div> <!-- /title -->
 
 
 
@@ -124,7 +129,7 @@ EOD;
 <!-- Display Projects -->
 
 <?php 
-	// Set up search fillers
+	// Set up search filters
 	$status = "Aspiration";
 	$category = "none";
 	$skill = "none";
@@ -135,8 +140,6 @@ EOD;
 
 	include 'functions/projectDisplay.php';		// Display projects	
  ?>
-
-
 
 
 </div> <!-- end of contant -->
