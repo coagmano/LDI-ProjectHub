@@ -34,7 +34,9 @@
 	</div>
 </div>
 
-
+<!--
+	<?php echo $hiddenMessage; ?>
+-->
 </body>
 
 </html>

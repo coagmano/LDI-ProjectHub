@@ -1,9 +1,14 @@
 <?php
 /**
- * Register.php
+ * @src /register.php
  * User registration page
+ * @author Fred Stark
  */
 require_once('includes/include.php');
+
+// Set page settings
+$pageTitle = "Register - ProjectHub";
+$style = "homepage";
 
 
 if ($user->isLoggedIn){ header("Location: index.php"); die(); }
@@ -14,10 +19,6 @@ $message = "";
 // Process registration if forms posted
 if(!empty($_POST))
 {
-	//Sanitise entire POST array
-	$_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-	$errors = array();
 	$email = trim($_POST["email"]);
 	$password = trim($_POST["password"]);
 	$confirm_pass = trim($_POST["passwordc"]);
@@ -57,18 +58,18 @@ if(!empty($_POST))
 
 		$user->tags 				= array_map('trim',explode(",",$_POST["tags"]));
 		
-		var_dump($user);
 		// Persist new User to database
 		$result = $user->saveToDatabase();
-		if(!$result) 
+		if($result) 
 		{ 
-			var_dump($result);
-			$errors[] = $result; 
+			$message .= "Account created successfully";
+			//header('Location: dashboard.php');
+
 		}
 		else
 		{
-			$message = "Account created successfully";
-			//header('Location: dashboard.php');
+			$message .= $result;
+			
 		}
 	}
 }
@@ -108,11 +109,11 @@ if(!empty($_POST))
 
             <p>
                 <label>About you:</label>
-                <input type="text" name="blurb" />
+                <textarea name="blurb" id="blurb"></textarea>
             </p>
             <p>
                 <label>Your skills and interests:</label>
-                <input type="text" name="blurb" />
+                <input type="text" name="tags" />
             </p>
 
             <p>
@@ -138,8 +139,12 @@ if(!empty($_POST))
       	</div>           
   	</div>
 </div>
+<script>
+    $(function() {
+        $('#blurb').editable({inlineMode: false, width: 800})
+    });
+</script>
 
-
- <?php
- include('includes/footer.php');
- ?>
+<?php
+include('includes/footer.php');
+?>

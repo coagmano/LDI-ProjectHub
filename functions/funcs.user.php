@@ -15,8 +15,9 @@ function isValidEmail($email)
 
 function userExists($email) 
 {
+	global $hiddenMessage;
 	$e = mysql_escape_string(sanitise($email));
-	$sql = "SELECT active FROM users
+	$sql = "SELECT id FROM users
 			WHERE
 			email = '".$e."'
 			LIMIT 1";
@@ -24,6 +25,8 @@ function userExists($email)
 	$result = mysql_query($sql);
 	$row = mysql_fetch_array($result);
 
+	//$hiddenMessage .= $row;
+	//$hiddenMessage .= $row[0]."<br>/n";
 	if($row[0] > 0) 
 	{
 		return true;

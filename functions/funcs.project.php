@@ -1,11 +1,37 @@
 <?php
+/**
+ * src /functions/funcs.project.php
+ * 
+ */
 
-// figure what filters are set
-if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
-if($category = "none" && $skill = "none"){$result = noCate_noSkill($status,$sort);}
-else if($category = "none"){$result = noCate($skill,$status,$sort);}
-else if($skill = "none"){$result = noSkill($category,$status,$sort);}
-else {$result = allFilters($category,$skill,$status,$sort);}
+function projectExists($id)
+{
+	global $hiddenMessage;
+	$i = mysql_escape_string(sanitise($id));
+	$sql = "SELECT id FROM Projects
+			WHERE
+			id = '".$i."'
+			LIMIT 1";
+	
+	$result = mysql_query($sql);
+	$row = mysql_fetch_array($result);
+
+	//$hiddenMessage .= $row;
+	//$hiddenMessage .= $row[0]."<br>/n";
+	if($row[0] > 0) 
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+/********************************
+ * Start project display block 	*
+ * @author Yancie				*
+ ********************************/
 
 // Both category and skill filters not set
 function noCate_noSkill($status,$sort) {
@@ -22,7 +48,7 @@ function noCate_noSkill($status,$sort) {
 // Category filler not set
 function noCate($skill,$status,$sort) {
 	$sql = "SELECT *
-			FROM Projects
+			FROM Projects 
 			WHERE status = '$status'
 			AND category = '$category'
 			ORDER BY $sort
@@ -75,3 +101,8 @@ function progress($status){
 	else if($status=="Developing"){return 75;}
 	else if($status=="Mature"){return 100;}
 }
+/*****************************
+ * End project display block *
+ *****************************/
+
+?>

@@ -134,11 +134,35 @@ EOD;
 	$category = "none";
 	$skill = "none";
 	$sort = "none";
-	include 'functions/fetchProjects.php';		// Fetch from database
-
+	
+	// Figure what fillers are set then fetch from databse using below functions
+	if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
+	if($category = "none" && $skill = "none")
+		{
+			$result = noCate_noSkill($status,$sort);
+		}
+	else if($category = "none")
+		{
+			$result = noCate($skill,$status,$sort);
+		}
+	else if($skill = "none")
+		{
+			$result = noSkill($category,$status,$sort);
+		}
+	else 
+		{
+			$result = allFillers($category,$skill,$status,$sort);
+		}
 	$percentage = progress($status);			// this is for the progress bar 
 
-	include 'functions/projectDisplay.php';		// Display projects	
+	if(checkCount($result)) // If there is result
+	{
+		include 'includes/projectDisplay.php';		// Display projects	
+	}
+	else 
+	{ 	// if there isn't a result, display message no result
+		echo "<h2><center> <br/> <br/> Sorrry :( There is no project at the moment. <br /> Why not <a href='#'>Create your own?</a></center></h2>";
+	}	
  ?>
 
 
