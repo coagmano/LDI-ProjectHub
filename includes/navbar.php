@@ -6,15 +6,10 @@
 <div class="container">		
 
 	<div class="navbar">
-<<<<<<< HEAD
 	  <ul class="left navUl"> 
-=======
-	  <ul class="left"> 
-		<li><a href="./">LDI ProjectHub</a></li> 
->>>>>>> FETCH_HEAD
 		<li><a href="#">LDI CareerHub</a></li> 
 		<li> | </li> 
-		<li><a href="index.php"><span class="bootstrap"><span class="glyphicon glyphicon-home"></span></span></a></li> 
+		<li><a href="./"><span class="bootstrap"><span class="glyphicon glyphicon-home"></span></span></a></li> 
 		<li><a href="#">Discover</a></li> 
 		<li><a href="new-project.php">Create</a></li> 
 		<li> | </li> 
