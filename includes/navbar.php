@@ -7,11 +7,11 @@
 
 	<div class="navbar">
 	  <ul class="left"> 
-		<li><a href="#">LDI ProjectHub</a></li> 
+		<li><a href="./">LDI ProjectHub</a></li> 
 		<li><a href="#">LDI CareerHub</a></li> 
 		<li> | </li> 
 		<li><a href="#">Discover</a></li> 
-		<li><a href="#">Create</a></li> 
+		<li><a href="new-project.php">Create</a></li> 
 		<li> | </li> 
 	  </ul> 
 
