@@ -2,23 +2,23 @@
 
 class User {
 
-	public $email = NULL;
-	public $hashPass = NULL;
-	public $userId = NULL;
-	public $firstName = NULL;
-	public $lastName = NULL;
-	public $blurb = NULL;
-	public $profilePicUrl = NULL;
+	public $email = "";
+	public $hashPass = "";
+	public $userId = "";
+	public $firstName = "";
+	public $lastName = "";
+	public $blurb = "";
+	public $profilePicUrl = "";
 	public $tags = array();
-	public $isLoggedIn = FALSE;
-	public $isAdmin = FALSE;
-	public $remember_me = NULL;
-	public $remember_me_sessid = NULL;
-	public $signupTimeStamp = NULL;
+	public $isLoggedIn = 0;
+	public $isAdmin = 0;
+	public $remember_me = "";
+	public $remember_me_sessid = "";
+	public $signupTimeStamp = 0;
 	
 	
 	//Update a users password
-	public function updatepassword($pass)
+	public function updatepassword(string $pass)
 	{
 		$secure_pass = sha1($pass);
 		
@@ -35,7 +35,7 @@ class User {
 	}
 	
 	//Update a users email
-	public function updateemail($email)
+	public function updateemail(string $email)
 	{
 			
 		$this->email = $email;
@@ -55,7 +55,7 @@ class User {
 		//do things
 	}
 
-	public function getFromDatabaseByEmail($email)
+	public function getFromDatabaseByEmail(string $email)
 	{
 		$userdetails = fetchUserDetails($email);
 		$user->isAdmin			= $userdetails["is_admin"];
