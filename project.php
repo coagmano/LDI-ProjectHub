@@ -17,7 +17,6 @@
 	</h1>
 </div>
 
-
 <div class="project">
 
 	<!-- right panel -->

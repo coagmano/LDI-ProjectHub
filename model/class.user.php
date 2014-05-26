@@ -2,9 +2,10 @@
 
 class User {
 
+
+	public $userId = 0;
 	public $email = "";
 	public $hashPass = "";
-	public $userId = "";
 	public $firstName = "";
 	public $lastName = "";
 	public $blurb = "";
@@ -16,7 +17,22 @@ class User {
 	public $remember_me_sessid = "";
 	public $signupTimeStamp = 0;
 	
-	
+	public function constructFromRow(array $row)
+	{
+		
+		$user->userId 			= $row["id"];
+		$user->email 			= $row["email"];
+		$user->hashPass 		= $row["password"];
+		$user->firstName 		= $row["first_name"];
+		$user->lastName 		= $row["last_name"];
+		$user->profilePicUrl 	= $row["profilePicUrl"];
+		$user->blurb 			= $row["blurb"];
+		$user->tags 			= explode(",", $row["tags"]);
+		$user->isAdmin			= $row["is_admin"];
+		$user->signupTimeStamp	= $row["created_timestamp"];
+	}
+
+
 	//Update a users password
 	public function updatepassword(string $pass)
 	{
@@ -39,24 +55,27 @@ class User {
 	{
 			
 		$this->email = $email;
-		if($this->remember_me == 1)
-		updateSessionObj();
+		if($this->remember_me == 1) 
+		{ 
+			updateSessionObj(); 
+		}
 		
-		$sql = "UPDATE ".$db_table_prefix."users
+		$sql = "UPDATE users
 				SET email = '".$email."'
 				WHERE
-				id = '".$db->sql_escape($this->userId)."'";
+				id = '".mysql_real_escape_string($this->userId)."'";
 		
-		return ($db->sql_query($sql));
+		return (mysql_query($sql) or die('Problem updating database:'.mysql_error()));
 	}
 
-	public function getFromDatabaseById()
+	public function getById($id)
 	{
 		//do things
 	}
 
-	public function getFromDatabaseByEmail(string $email)
-	{
+
+	public function getByEmail($email)
+	{	
 		$userdetails = fetchUserDetails($email);
 		$user->isAdmin			= $userdetails["is_admin"];
 		$user->email 			= $email;

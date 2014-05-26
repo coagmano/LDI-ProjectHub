@@ -85,7 +85,9 @@ function destorySession($name)
 	else if($user->remember_me == 1) {
 		if(isset($_COOKIE[$name]))
 		{
-			$db->sql_query("DELETE FROM ".$db_table_prefix."sessions WHERE session_id = '".$user->remember_me_sessid."'");
+
+			$sql = "DELETE FROM sessions WHERE session_id = '".$user->remember_me_sessid."'";
+			mysql_query($sql);
 			setcookie($name, "", time() - parseLength($remember_me_length));
 			$user = NULL;
 		}
@@ -98,29 +100,38 @@ function destorySession($name)
 
 function updateSessionObj()
 {
-	global $user,$db,$db_table_prefix;
+	global $user;
 
 	$newObj = serialize($user);
-	$db->sql_query("UPDATE ".$db_table_prefix."sessions SET session_data = '".$newObj."' WHERE session_id = '".$user->remember_me_sessid."'");
+	$sql = "UPDATE sessions SET session_data = '".$newObj."' WHERE session_id = '".$user->remember_me_sessid."'";
+	return mysql_query($sql);
 }
 
 // Remember-Me Hack v0.03
 // <http://rememberme4uc.sourceforge.net/>
 
-function parseLength($len) {
-$user_units = strtolower(substr($len, -2));
-$user_time = substr($len, 0, -2);
-$units = array("mi" => 60,
-"hr" => 3600,
-"dy" => 86400,
-"wk" => 604800,
-"mo" => 2592000);
-if(!array_key_exists($user_units, $units))
-die("Invalid unit of time.");
-else if(!is_numeric($user_time))
-die("Invalid length of time.");
-else
-return (int)$user_time*$units[$user_units];
+function parseLength($len) 
+{
+	$user_units = strtolower(substr($len, -2));
+	$user_time = substr($len, 0, -2);
+	$units = array("mi" => 60,
+	"hr" => 3600,
+	"dy" => 86400,
+	"wk" => 604800,
+	"mo" => 2592000);
+	
+	if(!array_key_exists($user_units, $units))
+	{
+		die("Invalid unit of time.");
+	}
+	else if(!is_numeric($user_time))
+	{
+		die("Invalid length of time.");
+	}
+	else
+	{
+		return (int)$user_time*$units[$user_units];
+	}
 }
 
 
