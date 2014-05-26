@@ -1,44 +1,53 @@
 <?php
 	
-		echo "<div class='displayProjects'>
+		echo "<div class='displayProjects test'>
 				<table class='projects'>
 					<tr>";
 		$colum = 1;
 		while ($row = mysql_fetch_assoc($result)) {
+			$miniproject = new Project;
+			$miniproject->constructFromRow($row);
+			$percentage = progress($miniproject->status);	// this is for the progress bar
+			$teamCount = count($miniproject->teamMembers);
+			//var_dump($miniproject);
 
-			if($colum==1){echo "<tr>";}	// a new row
+			if($colum==1){ echo "<tr>"; }	// a new row
 
-			echo 	"<td>
-						<div class='box'>";
-							//	Image
-			echo			"<img src='images/{$row["featureImageUrl"]}' alt='{$row["featureImageUrl"]}' />	";
-							//  Title
-			echo			'<h2 class="projectTitle">'.$row["title"].'</h2>';	
-							//  Description 
-			echo			'<p class="descrption">'.$row["summary"].'</p>';
-							//  Tags
-			echo			'<p class="tags"><a href="#">Category</a><a href="#">Skill</a></p>';
-							//  Progress bar (bootstrap)
-			echo			"<div class='bootstrap'><div class='progress'>
-							 <div class='progress-bar {$status}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
-							    <span class='{$status}Label'>{$status}({$percentage}%)</span>
-							  </div>
-							</div></div>";
-							//  Status
-			echo			'<p class="status">';
-								//  Number of collaborators
-			echo				'<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> 3';
-								//  Number of groupmates looking for
-			echo				"<span class='middle'><span class='glyphicon glyphicon-search'></span> 2</span>";
-								//  Number of likes
-			echo				"<span class='right'><span class='glyphicon glyphicon-thumbs-up'></span> {$row["likes"]}</span>
-							</p>
-						</div>
-					</td>";
-
+			echo <<<EOD
+			<td>
+				<div class='box'>
+					<img src='{$miniproject->featureImageUrl}' alt='{$miniproject->title}' />
+					<h2 class="projectTitle">{$miniproject->title}</h2>
+					<p class="descrption">{$miniproject->summary}</p>
+					<p class="tags"><a href="#">{$miniproject->category}</a>
+EOD;
+		foreach ($miniproject->skills as $skill) 
+		{
+			echo "<a href=\"#\">$skill</a>";
+		}
+		echo <<<EOD
+				</p>
+				<div class='bootstrap'><div class='progress'>
+					 <div class='progress-bar {$miniproject->status}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
+					    <span class='{$miniproject->status}Label'>{$miniproject->status}</span>
+					  </div>
+					</div></div>
+				<p class="status">
+					<span class="bootstrap"><span class="glyphicon glyphicon-user"></span> $teamCount; <!-- No of team members --> 
+					<span class='middle'><span class='glyphicon glyphicon-search'></span> 2</span> <!-- No of people needed -->
+					<span class='right'><span class='glyphicon glyphicon-thumbs-up'></span> {$miniproject->likes}</span> <!-- No of likes -->
+					</p>
+				</div>
+			</td>
+EOD;
+			foreach ($miniproject->teamMembers as $tm) 
+			{
+				echo "<!-- $tm->firstName $tm->lastName -->";
+			}
 			// Display 3 <td> per row
 			if($colum!=3){$colum++;} else{$colum=1; echo "</tr>";}
 
+			unset($miniproject); // Delete the object for cleanliness 
 		}	// End of while
 
 		echo'	</table>

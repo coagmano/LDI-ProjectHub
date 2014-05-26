@@ -46,7 +46,7 @@ if(!empty($_POST))
 			$userdetails = fetchUserDetails($email);
 		
 			//See if the user's account is activation
-			if($userdetails["active"]==0)
+			if($userdetails["active"] == false)
 			{
 				$errors[] = "Your account has not been activated. Please contact one of the LDI mentors";
 			}
@@ -67,29 +67,21 @@ if(!empty($_POST))
 					
 					//Construct a new user object
 					//Transfer some db data to the session object
-					$user = new User();
+					$user = new User;
+					$user->constructFromRow($userdetails);
 					$user->isLoggedIn			= true;
-					$user->isAdmin				= $userdetails["is_admin"];
-					$user->email 				= $email;
-					$user->userId 				= $userdetails["id"];
-					$user->hashPass 			= $userdetails["password"];
-					$user->firstName 			= $userdetails["first_name"];
-					$user->lastName 			= $userdetails["last_name"];
-					$user->profilePicUrl 		= $userdetails["profilePicUrl"];
-					$user->blurb 				= $userdetails["blurb"];
-					$user->tags 				= $userdetails["tags"];
-					// $user->remember_me 			= $remember_choice;
+					$user->remember_me 			= $remember_choice;
 					$user->remember_me_sessid 	= generateHash(uniqid(rand(), true));
 	
 					
 					$_SESSION["user"] = $user;
 					
-					// if ($user->remember_me == 1) 
-					// {
-					// 	$sql = "INSERT INTO sessions VALUES('".$user->remember_me_sessid."', '".serialize($user)."', '".time()."')";
-					// 	$result = mysql_query($sql) or die("Error initialising session in database.".mysql_error());
-					// 	setcookie("user_session", $user->remember_me_sessid, time()+parseLength($remember_me_length));
-					// }
+					if ($user->remember_me == 1) 
+					{
+						$sql = "INSERT INTO sessions VALUES('".$user->remember_me_sessid."', '".serialize($user)."', '".time()."')";
+						mysql_query($sql) or die("Error initialising session in database.".mysql_error());
+						setcookie("user_session", $user->remember_me_sessid, time()+parseLength($remember_me_length));
+					}
 					
 					//Redirect to user account page
 					header("Location: index.php");

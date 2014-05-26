@@ -16,10 +16,70 @@ class Project {
 	public $fileShareUrl;
 	public $location;
 	public $createdBy_id;
+	public $teamMembers;
 
 
-	public function fuction() {
+	public function constructFromRow(array $row)
+	{
+		$this->projectId 		= $row['id'];
+		$this->title 			= $row['title'];
+		$this->summary 			= $row['summary'];
+		$this->description 		= $row['description'];
+		$this->category 		= $row['category'];
+		$this->skills 			= explode(',', $row['skills']);
+		$this->featureImageUrl 	= $row['featureImageUrl'];
+		$this->status 			= $row['status'];
+		$this->likes 			= $row['likes'];
+		$this->createdTimestamp = $row['createdTimestamp'];
+		$this->videoUrl 		= $row['videoUrl'];
+		$this->fileShareUrl 	= $row['fileShareUrl'];
+		$this->location 		= $row['location'];
+		$this->createdBy_id 	= $row['createdBy_id'];
 
+		$this->teamMembers		= $this->getTeamMembers();
+	}
+
+	public function getById(int $id)
+	{
+		$sql = "SELECT *
+				FROM Projects
+				WHERE id = $id
+				LIMIT 1";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_assoc($result);
+		$this->constructFromRow($row);
+	}
+
+	public function getCreatedBy()
+	{
+		$sql = "SELECT u.id
+				FROM users u
+				INNER JOIN Projects p
+				ON p.createdBy_id = u.id";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_assoc($result);
+		
+		$u = new User;
+		$u->getById($row['id']);
+	
+		return $u;
+	}
+
+	public function getTeamMembers()
+	{
+		$tms = array();
+
+		$sql = "SELECT user_id
+				FROM project_user
+				WHERE project_id = $this->projectId";
+		$result = mysql_query($sql) or die(mysql_error());
+		foreach ($row = mysql_fetch_assoc($result) as $r) 
+		{
+			$tm = new User;
+			$tm->getById($r['user_id']);
+			$tms[] = $tm;
+		}
+		return $tms;
 	}
 
 	public function saveToDatabase()

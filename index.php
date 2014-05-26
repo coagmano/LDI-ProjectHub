@@ -153,7 +153,6 @@ EOD;
 		{
 			$result = allFillers($category,$skill,$status,$sort);
 		}
-	$percentage = progress($status);			// this is for the progress bar 
 
 	if(checkCount($result)) // If there is result
 	{
