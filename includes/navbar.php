@@ -21,18 +21,18 @@
 		</li>
 	  </ul> 
 <?php
-	if ($user->isLoggedIn) {
+if ($user->isLoggedIn) 
+{
 
-		echo <<<EOD
+	echo <<<HTML
 	 <ul class="right navUl">
 	 	<li class="bootstrap li">   
 	 		<span class="dropdown">
 		      <a class="dropdown-toggle dropDown" data-toggle="dropdown" href="#">
 		
 			        <span class="navProfileImg">
-EOD;
-		echo			"<img src='images/profile/". $user->profilePicUrl . "' alt='profilePic' />";
-		echo 		'</span>	
+						<img src="images/profile/{$user->profilePicUrl}" alt="profilePic" />
+		 			</span>	
 					<span class="down"><span class="glyphicon glyphicon-chevron-down"></span>
 
 		      </a>
@@ -46,12 +46,16 @@ EOD;
   			</span>
 	 	</li>
 	  </ul>';
-	} else {
-	 echo <<<EOD
+HTML;	  
+} 
+else 
+{
+	echo <<<HTML
 	 <ul class="right navUl">
 	  	<li class="li"><a class="button" href="register.php">Register</a></li>
 	  </ul>
-EOD;
-	} ?>
+HTML;
+} 
+?>
 	</div>
 </div>

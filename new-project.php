@@ -11,7 +11,7 @@ $pageTitle = "Create your vision - ProjectHub";
 $style = "homepage";
 
 //User must be logged in
-if (!$user->isLoggedIn){ header("Location: index.php"); die(); }
+if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(); }
 
 $errors = array();
 $message = "";
@@ -41,10 +41,10 @@ if(!empty($_POST))
 		$project->category			= $_POST["category"];
 		$project->skills			= array_map('trim',explode(",",$_POST["skills"]));
 		$project->featureImageUrl	= $_POST["featureImageUrl"];
-		$project->status			= "Aspiration";
+		$project->stage			    = "Aspiration";
 		$project->createdTimestamp	= time();
 		$project->videoUrl			= $_POST["videoUrl"];
-		//$project->fileShareUrl		= $_POST["fileShareUrl"];
+		//$project->fileShareUrl	= $_POST["fileShareUrl"];
 		$project->location			= $_POST["location"];
 		$project->createdBy_id		= $user->userId;
 		
@@ -128,8 +128,17 @@ include 'includes/navbar.php';
 </div>
 <script>
     $(function() {
-        $('#summary').editable({inlineMode: false, width: 800})
-        $('#description').editable({inlineMode: false, width: 800})
+        $('#summary').editable({
+            inlineMode: false, 
+            width: 800,  
+            language: 'en_gb',
+             buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
+        });
+        $('#description').editable({
+            inlineMode: false, 
+            width: 800,  
+            language: 'en_gb'
+        });
     });
 </script>
 

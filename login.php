@@ -9,7 +9,7 @@ require_once("includes/include.php");
 
 // if ($user->isLoggedIn) 
 // { 
-// 	header("Location: index.php"); 
+// 	header("Location: http://".$_SERVER['HTTP_HOST']);
 // 	die(); 
 // }
 
@@ -93,7 +93,7 @@ if(!empty($_POST))
 } 
 else
 {
-	header("Location: index.php");
+	header("Location: http://".$_SERVER['HTTP_HOST']);
 	die();
 }
 

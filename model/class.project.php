@@ -10,13 +10,13 @@ class Project {
 	public $category = "";
 	public $skills = array();
 	public $featureImageUrl = "";
-	public $status = "";
+	public $stage = "";
 	public $likes = 0;
 	public $createdTimestamp = 0;
 	public $videoUrl = "";
 	public $fileShareUrl = "";
 	public $location = "";
-	public $createdBy_id = 0;
+	public $createdBy = 0;
 	public $teamMembers = array();
 
 
@@ -29,18 +29,18 @@ class Project {
 		$this->category 		= $row['category'];
 		$this->skills 			= explode(',', $row['skills']);
 		$this->featureImageUrl 	= $row['featureImageUrl'];
-		$this->status 			= $row['status'];
+		$this->stage 			= $row['stage'];
 		$this->likes 			= $row['likes'];
 		$this->createdTimestamp = $row['createdTimestamp'];
 		$this->videoUrl 		= $row['videoUrl'];
 		$this->fileShareUrl 	= $row['fileShareUrl'];
 		$this->location 		= $row['location'];
-		$this->createdBy_id 	= $row['createdBy_id'];
 
+		$this->createdBy 		= $this->getCreatedBy();
 		$this->teamMembers		= $this->getTeamMembers();
 	}
 
-	public function getById(int $id)
+	public function getById($id)
 	{
 		$sql = "SELECT *
 				FROM Projects
@@ -97,7 +97,7 @@ class Project {
 				summary ="'.mysql_real_escape_string($this->summary).'",
 				description = "'.mysql_real_escape_string($this->description).'",
 				category ="'.mysql_real_escape_string($this->category).'",
-				status = "'.mysql_real_escape_string($this->status).'",
+				stage = "'.mysql_real_escape_string($this->stage).'",
 				skills ="'.mysql_real_escape_string(implode(",", $this->skills)).'",
 				featureImageUrl = "'.mysql_real_escape_string($this->featureImageUrl).'",
 				createdTimestamp = "'.mysql_real_escape_string($this->createdTimestamp).'",
@@ -119,7 +119,7 @@ class Project {
 				summary ="'.mysql_real_escape_string($this->summary).'",
 				description = "'.mysql_real_escape_string($this->description).'",
 				category ="'.mysql_real_escape_string($this->category).'",
-				status = "'.mysql_real_escape_string($this->status).'",
+				stage = "'.mysql_real_escape_string($this->stage).'",
 				skills ="'.mysql_real_escape_string(implode(",", $this->skills)).'",
 				featureImageUrl = "'.mysql_real_escape_string($this->featureImageUrl).'",
 				createdTimestamp = "'.mysql_real_escape_string($this->createdTimestamp).'",

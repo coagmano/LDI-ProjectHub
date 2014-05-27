@@ -34,10 +34,10 @@ function projectExists($id)
  ********************************/
 
 // Both category and skill filters not set
-function noCate_noSkill($status,$sort) {
+function noCate_noSkill($stage,$sort) {
 	$sql = "SELECT * 
 			FROM Projects  
-			WHERE status = '$status' 
+			WHERE stage = '$stage' 
 			ORDER BY $sort 
 			LIMIT 15 ";
 
@@ -46,10 +46,10 @@ function noCate_noSkill($status,$sort) {
 }
 
 // Category filler not set
-function noCate($skill,$status,$sort) {
+function noCate($skill,$stage,$sort) {
 	$sql = "SELECT *
 			FROM Projects 
-			WHERE status = '$status'
+			WHERE stage = '$stage'
 			AND category = '$category'
 			ORDER BY $sort
 			LIMIT 15 ";
@@ -59,10 +59,10 @@ function noCate($skill,$status,$sort) {
 }
 
 // Skill filler not set
-function noSkill($category,$status,$sort) {
+function noSkill($category,$stage,$sort) {
 	$sql = "SELECT *
 			FROM Projects 
-			WHERE status = '$status'
+			WHERE stage = '$stage'
 			AND skill = '$skill'
 			ORDER BY $sort
 			LIMIT 15 ";
@@ -72,10 +72,10 @@ function noSkill($category,$status,$sort) {
 }
 
 // All filters set
-function allFilters($category,$skill,$status,$sort) {
+function allFilters($category,$skill,$stage,$sort) {
 	$sql = "SELECT *
 			FROM Projects 
-			WHERE status = '$status'
+			WHERE stage = '$stage'
 			AND category = '$category'
 			AND skill = '$skill'
 			ORDER BY $sort
@@ -95,11 +95,11 @@ function checkCount($result){
 
 
 // progress bar string to perstange 
-function progress($status){
-	if($status=="Aspiration"){return 0;}
-	else if($status=="Incubating"){return 25;}
-	else if($status=="Developing"){return 75;}
-	else if($status=="Mature"){return 100;}
+function progress($stage){
+	if($stage=="Aspiration"){return 0;}
+	else if($stage=="Incubating"){return 25;}
+	else if($stage=="Developing"){return 75;}
+	else if($stage=="Mature"){return 100;}
 }
 /*****************************
  * End project display block *

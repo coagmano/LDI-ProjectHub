@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * src /functions/funcs.user.php
+ * 
+ */
 //Set default length of cookie life
 $remember_me_length = "1wk";
 

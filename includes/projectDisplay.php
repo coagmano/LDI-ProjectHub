@@ -8,28 +8,28 @@ if(checkCount($result)) // If there is result
 	while ($row = mysql_fetch_assoc($result)) {
 		$miniproject = new Project;
 		$miniproject->constructFromRow($row);
-		$percentage = progress($miniproject->status);	// this is for the progress bar
+		$percentage = progress($miniproject->stage);	// this is for the progress bar
 		$teamCount = count($miniproject->teamMembers);
 
 		if($colum==1){ echo "<tr>"; }	// a new row
 
-		echo <<<EOD
+		echo <<<HTML
 		<td>
 			<div class='box'>
 				<img src='{$miniproject->featureImageUrl}' alt='{$miniproject->title}' />
 				<h2 class="projectTitle">{$miniproject->title}</h2>
 				<p class="descrption">{$miniproject->summary}</p>
 				<p class="tags"><a href="#">{$miniproject->category}</a>
-EOD;
+HTML;
 	foreach ($miniproject->skills as $skill) 
 	{
 		echo '<a href="#">$skill</a>';
 	}
-	echo <<<EOD
+	echo <<<HTML
 			</p>
 			<div class='bootstrap'><div class='progress'>
-				 <div class='progress-bar {$miniproject->status}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
-				    <span class='{$miniproject->status}Label'>{$miniproject->status}</span>
+				 <div class='progress-bar {$miniproject->stage}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
+				    <span class='{$miniproject->stage}Label'>{$miniproject->stage}</span>
 				  </div>
 				</div></div>
 			<p class="status">
@@ -39,7 +39,7 @@ EOD;
 				</p>
 			</div>
 		</td>
-EOD;
+HTML;
 		foreach ($miniproject->teamMembers as $tm) 
 		{
 			echo "<!-- $tm->firstName $tm->lastName -->";

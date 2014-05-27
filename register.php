@@ -11,7 +11,11 @@ $pageTitle = "Register - ProjectHub";
 $style = "homepage";
 
 
-if ($user->isLoggedIn){ header("Location: index.php"); die(); }
+if ($user->isLoggedIn)
+{ 
+    header("Location: http://".$_SERVER['HTTP_HOST']); 
+    die(); 
+}
 
 $errors = array();
 $message = "";
@@ -141,7 +145,12 @@ if(!empty($_POST))
 </div>
 <script>
     $(function() {
-        $('#blurb').editable({inlineMode: false, width: 800})
+        $('#blurb').editable({
+        	inlineMode: false, 
+        	width: 800,  
+        	language: 'en_gb',
+        	 buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
+        })
     });
 </script>
 

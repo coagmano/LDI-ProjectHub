@@ -38,13 +38,13 @@ THINGS THAT NEED TO BE DONE
 			if ($user->isLoggedIn) {
 				// echo "<script>afterLogin();</script>";
 			} else {
-				echo <<<EOD
+				echo <<<HTML
 				<form class="login" action="login.php" method="POST">
 					<div class="inputBox"><input name="email" type="text" placeholder="Email" onclick="this.value='';"  onblur="this.value=!this.value?'Email':this.value;" value="Email" /></div>
 					<div class="inputBox"><input name="password" type="password" placeholder="Password" onclick="this.value='';" /></div>
 					<div class="inputBox"><button type="submit" class="button"><span style="float:left;">Sign in</span> <span class="bootstrap"><span class="glyphicon glyphicon-chevron-right right"></span></span></button></div>
 				</form>
-EOD;
+HTML;
 			} ?>
 			<!-- <img src="images/01d.png" class="titlePicture" alt="titlePicture" /> -->	<!-- LDI cartoon pic -->
 		
@@ -130,7 +130,7 @@ EOD;
 
 <?php 
 	// Set up search filters
-	$status = "Aspiration";
+	$stage = "Aspiration";
 	$category = "none";
 	$skill = "none";
 	$sort = "none";
@@ -139,19 +139,19 @@ EOD;
 	if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
 	if($category = "none" && $skill = "none")
 		{
-			$result = noCate_noSkill($status,$sort);
+			$result = noCate_noSkill($stage,$sort);
 		}
 	else if($category = "none")
 		{
-			$result = noCate($skill,$status,$sort);
+			$result = noCate($skill,$stage,$sort);
 		}
 	else if($skill = "none")
 		{
-			$result = noSkill($category,$status,$sort);
+			$result = noSkill($category,$stage,$sort);
 		}
 	else 
 		{
-			$result = allFillers($category,$skill,$status,$sort);
+			$result = allFillers($category,$skill,$stage,$sort);
 		}
 
 	if(checkCount($result)) // If there is result
