@@ -6,10 +6,7 @@
 //Set default length of cookie life
 $remember_me_length = "1wk";
 
-function sanitise($str)
-{
-	return strtolower(strip_tags(trim(($str))));
-}
+
 
 function isValidEmail($email)
 {

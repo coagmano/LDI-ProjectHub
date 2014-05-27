@@ -89,7 +89,7 @@ class User {
 		$this->tags 			= explode(',', $userdetails["tags"]);
 		$this->signupTimeStamp	= $userdetails["created_timestamp"];
 
-
+		return $this;
 	}
 
 
@@ -113,6 +113,8 @@ class User {
 		$this->blurb 			= $userdetails["blurb"];
 		$this->tags 			= explode(',', $userdetails["tags"]);
 		$this->signupTimeStamp	= $userdetails["created_timestamp"];
+
+		return $this;
 	}
 
 	/**
@@ -169,7 +171,7 @@ class User {
 		} 
 		else
 		{
-			$error = mysql_error();
+			$error = "Error saving User to database: ".mysql_error();
 			return $error;
 		}
 	}

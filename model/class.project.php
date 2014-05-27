@@ -16,9 +16,12 @@ class Project {
 	public $videoUrl = "";
 	public $fileShareUrl = "";
 	public $location = "";
+	
 	public /*.User.*/ $createdBy = NULL;
-	public $teamMembers = array();
 	public $roles = array();
+	public $teamMembers = array();
+	public $blogPosts = array();
+	public $comments = array();
 
 
 	public function constructFromRow(array $row)
@@ -40,17 +43,24 @@ class Project {
 		$this->likes 			= $this->countLikes();
 		$this->createdBy 		= $this->getCreatedBy();
 		$this->roles			= $this->getRoles(); // Roles contain team members
+		$this->teamMembers 		= $this->getTeamMembersFromRoles();
+		$this->blogPosts		= $this->getBlogposts();
+		$this->comments			= $this->getComments();
+
 	}
 
 	public function getById($id)
 	{
+		$i = mysql_real_escape_string(sanitise($id));
 		$sql = "SELECT *
 				FROM Projects
-				WHERE id = $id
+				WHERE id = $i
 				LIMIT 1";
 		$result = mysql_query($sql);
 		$row = mysql_fetch_assoc($result);
 		$this->constructFromRow($row);
+
+		return $this;
 	}
 
 	public function getCreatedBy()
@@ -106,6 +116,55 @@ class Project {
 		return $rs;
 	}
 
+	private function getTeamMembersFromRoles()
+	{
+		$tms = array();
+		foreach ($this->roles as $role) 
+		{
+			if (isset($role->filledBy)) { $tms[] = $role->filledBy; }
+		}
+		return $tms;
+	}
+
+	public function getBlogPosts()
+	{
+		global $hiddenMessage;
+		$bps = array();
+
+		$sql = "SELECT *
+				FROM BlogPosts
+				WHERE project_id = $this->projectId";
+		$result = mysql_query($sql) or die(mysql_error());
+		
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+			//var_dump($row);
+			$bp = new BlogPost();
+			$bp->constructFromRow($row);
+			$bps[] = $bp;
+		}
+		return $bps;
+	}
+
+	public function getComments()
+	{
+		global $hiddenMessage;
+		$cs = array();
+
+		$sql = "SELECT *
+				FROM Comments
+				WHERE project_id = $this->projectId";
+		$result = mysql_query($sql) or die(mysql_error());
+		
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+			$c = new Comment();
+			$c->constructFromRow($row);
+			$cs[] = $c;
+		}
+		return $cs;
+	}
+
 	public function countLikes()
 	{
 		global $hiddenMessage;
@@ -124,7 +183,6 @@ class Project {
 		foreach ($this->roles as $role) 
 		{
 			if (isset($role->filledBy)) { $i++; }
-			echo "<br>";
 		}
 
 		return $i;
@@ -137,6 +195,30 @@ class Project {
 		foreach ($this->roles as $role) 
 		{
 			if (is_null($role->filledBy)) { $i++; }
+		}
+
+		return $i;
+	}
+
+	public function countBlogPosts() 
+	{
+		$i = 0;
+
+		foreach ($this->blogPosts as $blog) 
+		{
+			if (isset($blog)) { $i++; }
+		}
+
+		return $i;
+	}
+
+	public function countComments() 
+	{
+		$i = 0;
+
+		foreach ($this->comments as $comment) 
+		{
+			if (isset($comment)) { $i++; }
 		}
 
 		return $i;
@@ -199,7 +281,7 @@ class Project {
 		} 
 		else
 		{
-			$error = mysql_error();
+			$error = "Error saving Project to database: ".mysql_error();
 			return $error;
 		}
 	}

@@ -9,21 +9,21 @@ if(checkCount($result)) // If there is result
 		$miniproject = new Project;
 		$miniproject->constructFromRow($row);
 		$percentage = progress($miniproject->stage);	// this is for the progress bar
-		$teamCount = count($miniproject->teamMembers);
+		$teamCount = $miniproject->countTeam();
 
 		if($colum==1){ echo "<tr>"; }	// a new row
 
 		echo <<<HTML
 		<td>
 			<div class='box'>
-				<img src='{$miniproject->featureImageUrl}' alt='{$miniproject->title}' />
-				<h2 class="projectTitle">{$miniproject->title}</h2>
+				<a href="project.php?id={$miniproject->projectId}"><img src="{$miniproject->featureImageUrl}" alt="{$miniproject->title}" />
+				<h2 class="projectTitle">{$miniproject->title}</h2></a>
 				<p class="descrption">{$miniproject->summary}</p>
 				<p class="tags"><a href="#">{$miniproject->category}</a>
 HTML;
 	foreach ($miniproject->skills as $skill) 
 	{
-		echo '<a href="#">$skill</a>';
+		echo '<a href="#">'.$skill.'</a>';
 	}
 	echo <<<HTML
 			</p>
@@ -40,10 +40,6 @@ HTML;
 			</div>
 		</td>
 HTML;
-		foreach ($miniproject->teamMembers as $tm) 
-		{
-			echo "<!-- $tm->firstName $tm->lastName -->";
-		}
 		// Display 3 <td> per row
 		if($colum!=3){$colum++;} else{$colum=1; echo "</tr>";}
 

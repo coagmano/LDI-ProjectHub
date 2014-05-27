@@ -11,11 +11,11 @@ if(empty($_GET))
 	die();
 }
 
-$project = new Project();
+$project = new Project(); 
 $project->getById($_GET['id']);
 $teamCount = $project->countTeam();
 $emptyRolesCount = $project->countEmptyRoles();
-$blogPostCount = 4;
+$blogPostCount = $project->countBlogPosts();
 $commentCount = 6;
 
 
@@ -185,35 +185,14 @@ foreach ($project->blogPosts as $blogPost)
 {
 	echo <<<HTML
 						<div class="blogPost">
-							<h3>$blogPost->postedAt</h3>
-							<h4>$blogPost->title</h4>
+							<h3>$blogPost->title</h3>
+							<h4>$blogPost->timeElapsed</h4>
 							$blogPost->content
 						</div>
 HTML;
 }
-						<div class="blogPost">
-							<h3>5 Days ago</h3>
-							<h4>New exciting update!</h4>
-							<p>
-							consectetur adipisicing elit. Assumenda, eum vitae pariatur quae amet nisi dolorem cupiditate reiciendis quibusdam repellat esse voluptatem dicta repellendus id officiis corrupti dolore repudiandae in ex modi consequatur rem non odit. Deserunt, labore optio beatae aliquam autem aliquid tenetur! Unde, quam facilis tempora itaque. Assumenda aspernatur inventore consequuntur quo. Ipsum, distinctio, nobis, quo, provident illum officiis iusto earum non itaque quos est unde repellat voluptatibus recusandae voluptas laboriosam dolor assumenda placeat neque doloribus necessitatibus enim voluptate minus maxime nisi eligendi obcaecati tempore. Reprehenderit, quidem, esse, dolore totam commodi aut itaque repudiandae ratione quod officiis vero.
-							</p>
-						</div>
-						<div class="blogPost">
-							<h3>22 Days ago</h3>
-							<h4>Yo! dude</h4>
-							<p>
-							Merry Christmas Happy Brithday NEW YEARRRRRRAAAAAA!<br/>
-							</p>
-						</div>
-						<div class="blogPost">
-							<h3>February 14</h3>
-							<h4>Lorem ipsum dolor sit amet</h4>
-							<p>
-							consectetur adipisicing elit. Assumenda, eum vitae pariatur quae amet nisi dolorem cupiditate reiciendis quibusdam repellat esse voluptatem dicta repellendus id officiis corrupti dolore repudiandae in ex modi consequatur rem non odit. Deserunt, labore optio beatae aliquam autem aliquid tenetur! Unde, quam facilis tempora itaque. Assumenda aspernatur inventore consequuntur quo. Ipsum, distinctio, nobis, quo, provident illum officiis iusto earum non itaque quos est unde repellat voluptatibus recusandae voluptas laboriosam dolor assumenda placeat neque doloribus necessitatibus enim voluptate minus maxime nisi eligendi obcaecati tempore. Reprehenderit, quidem, esse, dolore totam commodi aut itaque repudiandae ratione quod officiis vero.
-							</p>
-						</div>
-						
-					</div>
+echo <<<HTML
+					</div> <!-- End blog posts -->
 					
 					<!-- Comments -->
 					<div class="block CommentsBlock"><a name="comments"></a>
@@ -229,6 +208,45 @@ HTML;
 							</form>
 						</div>
 						<!-- comments -->
+HTML;
+foreach ($project->comments as $comment) 
+{
+	$commentClass = "";
+	$commentTeam = "";
+	if ($comment->postedBy == $project->createdBy) 
+	{
+		$commentClass = "owner yellowBorder";
+		$commentTeam = '<span class="label label-warning team">Team</span>';
+	} else {
+		foreach ($project->roles as $role) 
+		{
+			if (isset($role->filledBy) && $comment->postedBy == $role->filledBy) 
+			{
+				$commentClass = "owner yellowBorder";
+				$commentTeam = '<span class="label label-warning team">Team</span>';
+			}
+		}
+	
+	
+	}
+	
+	echo <<<HTML
+						<div class="commentsBox {$commentClass}">
+							<div class="right commentsContainer">
+								<div class="nameDate bootstrap">
+									{$commentTeam}{$comment->postedBy->firstName} {$comment->postedBy->lastName} <span class="date">{$comment->timeElapsed}</span>
+								</div>
+								<div class="comments">
+									$comment->content
+								</div>
+							</div>
+							<div class="photo">
+								<img src="{$comment->postedBy->profilePicUrl}" alt="profile picture" />
+							</div>
+						</div>
+HTML;
+}
+echo <<<HTML
 						<div class="commentsBox">
 							<div class="right commentsContainer">
 								<div class="nameDate">

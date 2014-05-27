@@ -168,11 +168,13 @@ textarea:focus {
 .commentsBox {
 	padding: 20px 10px;
 	border-bottom: 1px solid #d9d9de;
+	margin-top: -1px;
 }
 .owner {
 	background-color: #fefdec;
 }
 .yellowBorder {
+	border-top: 1px solid #fad77c;
 	border-bottom: 1px solid #fad77c;
 }
 .commentsBox:before,
