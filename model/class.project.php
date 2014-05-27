@@ -68,17 +68,18 @@ class Project {
 
 	public function getTeamMembers()
 	{
+		global $hiddenMessage;
 		$tms = array();
 
 		$sql = "SELECT user_id
 				FROM project_user
 				WHERE project_id = $this->projectId";
 		$result = mysql_query($sql) or die(mysql_error());
-		var_dump($this);
-		foreach ($row = mysql_fetch_assoc($result) as $r) 
+		
+		while ($row = mysql_fetch_assoc($result)) 
 		{
-			$tm = new User;
-			$tm->getById($r['user_id']);
+			$tm = new User();
+			$tm->getById($row['user_id']);
 			$tms[] = $tm;
 		}
 		return $tms;

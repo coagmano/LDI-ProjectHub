@@ -70,23 +70,51 @@ class User {
 
 	public function getById($id)
 	{
-		//do things
+		$i = mysql_escape_string(sanitise($id));
+		$sql = "SELECT * FROM users
+				WHERE
+				id = ".$i."
+				LIMIT
+				1";
+		$result = mysql_query($sql);
+		$userdetails = mysql_fetch_assoc($result);
+
+		$this->userId 			= $id;
+		$this->isAdmin			= $userdetails["is_admin"];
+		$this->email 			= $userdetails["email"];
+		$this->hashPass 		= $userdetails["password"];
+		$this->firstName 		= $userdetails["first_name"];
+		$this->lastName 		= $userdetails["last_name"];
+		$this->profilePicUrl 	= $userdetails["profilePicUrl"];
+		$this->blurb 			= $userdetails["blurb"];
+		$this->tags 			= explode(',', $userdetails["tags"]);
+		$this->signupTimeStamp	= $userdetails["created_timestamp"];
+
+
 	}
 
 
 	public function getByEmail($email)
 	{	
-		$userdetails = fetchUserDetails($email);
-		$user->isAdmin			= $userdetails["is_admin"];
-		$user->email 			= $email;
-		$user->userId 			= $userdetails["id"];
-		$user->hashPass 		= $userdetails["password"];
-		$user->firstName 		= $userdetails["first_name"];
-		$user->lastName 		= $userdetails["last_name"];
-		$user->profilePicUrl 	= $userdetails["profilePicUrl"];
-		$user->blurb 			= $userdetails["blurb"];
-		$user->tags 			= $userdetails["tags"];
-		$user->signupTimeStamp	= $userdetails["created_timestamp"];
+		$e = mysql_escape_string(sanitise($email));
+		$sql = "SELECT * FROM users
+				WHERE
+				email = '".$e."'
+				LIMIT
+				1";
+		$result = mysql_query($sql);
+		$userdetails = mysql_fetch_assoc($result);
+
+		$this->isAdmin			= $userdetails["is_admin"];
+		$this->email 			= $email;
+		$this->userId 			= $userdetails["id"];
+		$this->hashPass 		= $userdetails["password"];
+		$this->firstName 		= $userdetails["first_name"];
+		$this->lastName 		= $userdetails["last_name"];
+		$this->profilePicUrl 	= $userdetails["profilePicUrl"];
+		$this->blurb 			= $userdetails["blurb"];
+		$this->tags 			= explode(',', $userdetails["tags"]);
+		$this->signupTimeStamp	= $userdetails["created_timestamp"];
 	}
 
 	/**
