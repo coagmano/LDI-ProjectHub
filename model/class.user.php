@@ -20,16 +20,16 @@ class User {
 	public function constructFromRow(array $row)
 	{
 		
-		$user->userId 			= $row["id"];
-		$user->email 			= $row["email"];
-		$user->hashPass 		= $row["password"];
-		$user->firstName 		= $row["first_name"];
-		$user->lastName 		= $row["last_name"];
-		$user->profilePicUrl 	= $row["profilePicUrl"];
-		$user->blurb 			= $row["blurb"];
-		$user->tags 			= explode(",", $row["tags"]);
-		$user->isAdmin			= $row["is_admin"];
-		$user->signupTimeStamp	= $row["created_timestamp"];
+		$this->userId 			= $row["id"];
+		$this->email 			= $row["email"];
+		$this->hashPass 		= $row["password"];
+		$this->firstName 		= $row["first_name"];
+		$this->lastName 		= $row["last_name"];
+		$this->profilePicUrl 	= $row["profilePicUrl"];
+		$this->blurb 			= $row["blurb"];
+		$this->tags 			= explode(",", $row["tags"]);
+		$this->isAdmin			= $row["is_admin"];
+		$this->signupTimeStamp	= $row["created_timestamp"];
 	}
 
 
@@ -65,18 +65,17 @@ class User {
 				WHERE
 				id = '".mysql_real_escape_string($this->userId)."'";
 		
-		return (mysql_query($sql) or die('Problem updating database:'.mysql_error()));
+		return (mysql_query($sql) or die("Problem updating database: ".mysql_error()));
 	}
 
 	public function getById($id)
 	{
 		$i = mysql_escape_string(sanitise($id));
-		$sql = "SELECT * FROM users
-				WHERE
-				id = ".$i."
-				LIMIT
-				1";
-		$result = mysql_query($sql);
+		$sql = "SELECT * 
+				FROM users
+				WHERE id = ".$i."
+				LIMIT 1";
+		$result = mysql_query($sql) or die("database error in User->getById()".mysql_error());
 		$userdetails = mysql_fetch_assoc($result);
 
 		$this->userId 			= $id;
@@ -97,11 +96,10 @@ class User {
 	public function getByEmail($email)
 	{	
 		$e = mysql_escape_string(sanitise($email));
-		$sql = "SELECT * FROM users
-				WHERE
-				email = '".$e."'
-				LIMIT
-				1";
+		$sql = "SELECT * 
+				FROM users
+				WHERE email = '".$e."'
+				LIMIT 1";
 		$result = mysql_query($sql);
 		$userdetails = mysql_fetch_assoc($result);
 

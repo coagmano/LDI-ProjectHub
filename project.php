@@ -13,7 +13,11 @@ if(empty($_GET))
 
 $project = new Project();
 $project->getById($_GET['id']);
-$teamCount = count($project->teamMembers);
+$teamCount = $project->countTeam();
+$emptyRolesCount = $project->countEmptyRoles();
+$blogPostCount = 4;
+$commentCount = 6;
+
 
 ?>
 <div class="container">
@@ -34,7 +38,7 @@ $teamCount = count($project->teamMembers);
 				
 				<div class="status right">
 					<div class="statusTitle">Looking for</div>
-					<div class="number"> 2 </div>
+					<div class="number"> <?php echo $emptyRolesCount; ?> </div>
 					<div class="statusText">members </div>
 				</div>
 				<div class="status">
@@ -78,25 +82,29 @@ $teamCount = count($project->teamMembers);
 					</a>
 				</div>
 				<?php 
-				foreach ($project->teamMembers as $teamMember) 
+				foreach ($project->roles as $role) 
 				{
-					echo <<<HTML
+					if ($role->filledBy != NULL)
+					{
+						echo <<<HTML
 					<div class="peopleBorder">
-						<a href="profile.php?id={$teamMember->userId}">
+						<a href="profile.php?id={$role->filledBy->userId}">
 						<div class="people">
 							<div class="peopleInfo right">
 								<div class="peopleInfos">
-									<span class="position">Team Member</span><br/>
-									<span class="name"> {$teamMember->firstName} {$teamMember->lastName} </span>
+									<span class="position">{$role->title}</span><br/>
+									<span class="name"> {$role->filledBy->firstName} {$role->filledBy->lastName} </span>
 								</div>
 							</div>
 							<div class="profileImg">
-								<img src="{$teamMember->profilePicUrl}" alt="" />
+								<img src="{$role->filledBy->profilePicUrl}" alt="" />
 							</div>
 						</div>
 						</a>
 					</div>
 HTML;
+					}
+					
 				} ?>
 			</div> <!-- End right panel -->
 			
@@ -105,9 +113,9 @@ HTML;
 				<div class="bootstrap">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#top">Project</a></li>
-						<li><a href="#look">Looking for <span class="badge">2</span></a></li>
-						<li><a href="#blog">Blog Post <span class="badge">3</span></a></li>
-						<li><a href="#comments">Comments <span class="badge">0</span></a></li>
+						<li><a href="#look">Looking for <span class="badge"><?php echo $emptyRolesCount; ?></span></a></li>
+						<li><a href="#blog">Blog Post <span class="badge"><?php echo $blogPostCount; ?></span></a></li>
+						<li><a href="#comments">Comments <span class="badge"><?php echo $commentCount; ?></span></a></li>
 					</ul>
 				</div>
 				<!-- pic/ video of the project -->

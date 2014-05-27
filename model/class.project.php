@@ -16,8 +16,9 @@ class Project {
 	public $videoUrl = "";
 	public $fileShareUrl = "";
 	public $location = "";
-	public $createdBy = 0;
+	public /*.User.*/ $createdBy = NULL;
 	public $teamMembers = array();
+	public $roles = array();
 
 
 	public function constructFromRow(array $row)
@@ -27,17 +28,18 @@ class Project {
 		$this->summary 			= $row['summary'];
 		$this->description 		= $row['description'];
 		$this->category 		= $row['category'];
-		$this->skills 			= explode(',', $row['skills']);
 		$this->featureImageUrl 	= $row['featureImageUrl'];
 		$this->stage 			= $row['stage'];
-		$this->likes 			= $row['likes'];
 		$this->createdTimestamp = $row['createdTimestamp'];
 		$this->videoUrl 		= $row['videoUrl'];
 		$this->fileShareUrl 	= $row['fileShareUrl'];
 		$this->location 		= $row['location'];
 
+		$this->skills 			= explode(',', $row['skills']);
+
+		$this->likes 			= $this->countLikes();
 		$this->createdBy 		= $this->getCreatedBy();
-		$this->teamMembers		= $this->getTeamMembers();
+		$this->roles			= $this->getRoles(); // Roles contain team members
 	}
 
 	public function getById($id)
@@ -83,6 +85,64 @@ class Project {
 			$tms[] = $tm;
 		}
 		return $tms;
+	}
+
+	public function getRoles()
+	{
+		global $hiddenMessage;
+		$rs = array();
+
+		$sql = "SELECT *
+				FROM project_roles
+				WHERE project_id = $this->projectId";
+		$result = mysql_query($sql) or die(mysql_error());
+		
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+			$r = new Role();
+			$r->constructFromRow($row);
+			$rs[] = $r;
+		}
+		return $rs;
+	}
+
+	public function countLikes()
+	{
+		global $hiddenMessage;
+
+		$sql = "COUNT(*)
+				FROM project_likes
+				WHERE project_id = '$this->projectId'";
+		$result = mysql_query($sql);
+		if (!$result) {
+			$result = 0;
+		}
+		return $result;
+	}
+
+	public function countTeam() 
+	{
+		$i = 1; // Starts at 1 because of project creator
+
+		foreach ($this->roles as $role) 
+		{
+			if (isset($role->filledBy)) { $i++; }
+			echo "<br>";
+		}
+
+		return $i;
+	}
+
+	public function countEmptyRoles() 
+	{
+		$i = 0;
+
+		foreach ($this->roles as $role) 
+		{
+			if (is_null($role->filledBy)) { $i++; }
+		}
+
+		return $i;
 	}
 
 	public function saveToDatabase()

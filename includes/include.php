@@ -2,6 +2,7 @@
 	// All object definitions must be declared before the start of the session
 	require_once("model/class.user.php");
 	require_once("model/class.project.php");
+	require_once("model/class.role.php");
 
 	session_start(); //Start the session here and include this on all sessioned pages.
 	
