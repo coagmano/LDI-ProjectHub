@@ -213,22 +213,11 @@ foreach ($project->comments as $comment)
 {
 	$commentClass = "";
 	$commentTeam = "";
-	if ($comment->postedBy == $project->createdBy) 
+	if ($comment->postedBy == $project->createdBy || in_array($comment->postedBy, $project->teamMembers))
 	{
 		$commentClass = "owner yellowBorder";
 		$commentTeam = '<span class="label label-warning team">Team</span>';
-	} else {
-		foreach ($project->roles as $role) 
-		{
-			if (isset($role->filledBy) && $comment->postedBy == $role->filledBy) 
-			{
-				$commentClass = "owner yellowBorder";
-				$commentTeam = '<span class="label label-warning team">Team</span>';
-			}
-		}
-	
-	
-	}
+	} 
 	
 	echo <<<HTML
 						<div class="commentsBox {$commentClass}">
@@ -247,75 +236,6 @@ foreach ($project->comments as $comment)
 HTML;
 }
 echo <<<HTML
-						<div class="commentsBox">
-							<div class="right commentsContainer">
-								<div class="nameDate">
-									Dotty Arleen<span class="date">about 30 minutes ago</span>
-								</div>
-								<div class="comments">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, in, numquam illum commodi provident soluta minima explicabo repudiandae consequuntur tempora hic impedit? Illum, eius animi consequuntur unde necessitatibus sed provident.
-								</div>
-							</div>
-							<div class="photo">
-								<img src="images/profile/tempProfile4.jpg" alt="profile picture" />
-							</div>
-						</div>
-						
-						<div class="commentsBox yellowBorder">
-							<div class="right commentsContainer">
-								<div class="nameDate">
-									Charlie Sebastian<span class="date">about 8 hours ago</span>
-								</div>
-								<div class="comments">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, in, numquam illum commodi provident soluta minima explicabo repudiandae consequuntur tempora hic impedit? Illum, eius animi consequuntur unde necessitatibus sed provident.
-								</div>
-							</div>
-							<div class="photo">
-								<img src="images/profile/tempProfile5.jpg" alt="profile picture" />
-							</div>
-						</div>
-						<!-- team member comment -->
-						<div class="commentsBox owner yellowBorder">
-							<div class="right commentsContainer">
-								<div class="nameDate bootstrap">
-									<span class="label label-warning team">Team</span>Kayden Gerard<span class="date">about 2 days ago</span>
-								</div>
-								<div class="comments">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, in, numquam illum commodi provident soluta minima explicabo repudiandae consequuntur tempora hic impedit? Illum, eius animi consequuntur unde necessitatibus sed provident.
-								</div>
-							</div>
-							<div class="photo">
-								<img src="images/profile/tempProfile2.jpg" alt="profile picture" />
-							</div>
-						</div>
-						<div class="commentsBox yellowBorder">
-							<div class="right commentsContainer">
-								<div class="nameDate">
-									Dotty Arleen<span class="date">about 28 days ago</span>
-								</div>
-								<div class="comments">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, in, numquam illum commodi provident soluta minima explicabo repudiandae consequuntur tempora hic impedit? Illum, eius animi consequuntur unde necessitatibus sed provident.
-								</div>
-							</div>
-							<div class="photo">
-								<img src="images/profile/tempProfile4.jpg" alt="profile picture" />
-							</div>
-						</div>
-						
-						<!-- team member comment -->
-						<div class="commentsBox owner yellowBorder">
-							<div class="right commentsContainer">
-								<div class="nameDate bootstrap">
-									<span class="label label-warning team">Team</span>Laureen Noelene<span class="date">on March 20</span>
-								</div>
-								<div class="comments">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, in, numquam illum commodi provident soluta minima explicabo repudiandae consequuntur tempora hic impedit? Illum, eius animi consequuntur unde necessitatibus sed provident.
-								</div>
-							</div>
-							<div class="photo">
-								<img src="images/profile/tempProfile1.jpg" alt="profile picture" />
-							</div>
-						</div>
 					</div> <!-- /block -->
 				</div> <!-- /projectContent -->
 			</div> <!-- /left panel -->
