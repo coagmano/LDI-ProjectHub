@@ -74,6 +74,7 @@ class Project {
 				FROM project_user
 				WHERE project_id = $this->projectId";
 		$result = mysql_query($sql) or die(mysql_error());
+		var_dump($this);
 		foreach ($row = mysql_fetch_assoc($result) as $r) 
 		{
 			$tm = new User;
