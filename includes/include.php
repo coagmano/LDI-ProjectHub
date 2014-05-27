@@ -3,6 +3,7 @@
 	require_once("model/class.user.php");
 	require_once("model/class.project.php");
 	require_once("model/class.role.php");
+	require_once("model/class.blogpost.php");
 
 	session_start(); //Start the session here and include this on all sessioned pages.
 	

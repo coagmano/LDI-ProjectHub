@@ -109,15 +109,12 @@ class Project {
 	public function countLikes()
 	{
 		global $hiddenMessage;
-
-		$sql = "COUNT(*)
+		$sql = "SELECT COUNT(*) as likes
 				FROM project_likes
 				WHERE project_id = '$this->projectId'";
 		$result = mysql_query($sql);
-		if (!$result) {
-			$result = 0;
-		}
-		return $result;
+		$row = mysql_fetch_assoc($result);
+		return $row['likes'];
 	}
 
 	public function countTeam() 
