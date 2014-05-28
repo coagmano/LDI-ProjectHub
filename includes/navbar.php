@@ -23,7 +23,6 @@
 <?php
 if ($user->isLoggedIn) 
 {
-
 	echo <<<HTML
 	 <ul class="right navUl">
 	 	<li class="bootstrap li">   
@@ -45,9 +44,9 @@ if ($user->isLoggedIn)
 		      </ul>
   			</span>
 	 	</li>
-	  </ul>';
-HTML;	  
-} 
+	  </ul>
+HTML;
+}
 else 
 {
 	echo <<<HTML

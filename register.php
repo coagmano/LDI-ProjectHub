@@ -8,7 +8,7 @@ require_once('includes/include.php');
 
 // Set page settings
 $pageTitle = "Register - ProjectHub";
-$style = "homepage";
+$style = "project";
 
 
 if ($user->isLoggedIn)
@@ -83,64 +83,67 @@ if(!empty($_POST))
 ?>
 <div class="container">	
 	<div class="content">
+
+        <div class="projectTitle bootstrap">
+            <h1>Join ProjectHub<br/>
+            <small> </small>
+            </h1>
+        </div>
+
         <div id="success">
-        
-           <p><?php echo $message ?></p>
-           
-        </div>
-        <div id="errors">
-        
-           <p><?php foreach ($errors as $error) { echo $error; } ?></p>
-           
+           <?php echo "<p>".$message."</p>"; ?>
+           <?php foreach ($errors as $error) { echo "<p>".$error."</p>"; } ?></p>
         </div>
 
-        <div id="regbox">
-            <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            
-            <p>
-                <label>First Name:</label>
-                <input type="text" name="firstName" />
-            </p>
-            <p>
-                <label>Last Name:</label>
-                <input type="text" name="lastName" />
-            </p>
+        <div class="project">
+            <div id="regbox">
+                <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <small>To become a member of ProjectHub, you must be an LDI member on CareerHub.</small>
+                <p>
+                    <label>First Name:</label>
+                    <input type="text" name="firstName" />
+                </p>
+                <p>
+                    <label>Last Name:</label>
+                    <input type="text" name="lastName" />
+                </p>
 
-            <p>
-                <label>Email:</label>
-                <input type="email" name="email" />
-            </p>
+                <p>
+                    <label>Email:</label>
+                    <input type="email" name="email" />
+                </p>
 
-            <p>
-                <label>About you:</label>
-                <textarea name="blurb" id="blurb"></textarea>
-            </p>
-            <p>
-                <label>Your skills and interests:</label>
-                <input type="text" name="tags" />
-            </p>
+                <p>
+                    <label>About you:</label>
+                    <textarea name="blurb" id="blurb"></textarea>
+                </p>
+                <p>
+                    <label>Your skills and interests:</label>
+                    <input type="text" name="tags" />
+                </p>
 
-            <p>
-                <label>Profile Photo:</label>
-                <input type="text" name="profilePicUrl" />
-            </p>
-            
-            <p>
-                <label>Password:</label>
-                <input type="password" name="password" />
-            </p>
-            
-            <p>
-                <label>Re-type Password:</label>
-                <input type="password" name="passwordc" />
-            </p>
-            <p>
-                <input type="submit" name="Register" value="Register" />
-            </p>
+                <p>
+                    <label>Profile Photo:</label>
+                    <input type="text" name="profilePicUrl" />
+                </p>
+                
+                <p>
+                    <label>Password:</label>
+                    <input type="password" name="password" />
+                </p>
+                
+                <p>
+                    <label>Re-type Password:</label>
+                    <input type="password" name="passwordc" />
+                </p>
+                <p>
+                    <input type="submit" name="Register" value="Register" />
+                </p>
 
-        	</form>
-    
-      	</div>           
+            	</form>
+        
+          	</div>
+        </div>           
   	</div>
 </div>
 <script>
