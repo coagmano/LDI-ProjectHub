@@ -18,6 +18,16 @@ $emptyRolesCount = $project->countEmptyRoles();
 $blogPostCount = $project->countBlogPosts();
 $commentCount = 6;
 
+// Insert spagetti code here
+$userlikesthis = likesActiveProject($user->userId, $project->projectId);
+$hiddenMessage .= $userlikesthis."\n";
+$hiddenMessage .= "user: $user->userId "."\n";
+$hiddenMessage .= "project: $project->projectId "."\n";
+if ($user->isLoggedIn) {
+	$liketext = ($userlikesthis) ? "Liked" : "Like this" ;
+} else {
+	$liketext = "<a href=\"/\">Login to like</a>";
+}
 
 echo <<<HTML
 <div class="container">
@@ -54,7 +64,7 @@ echo <<<HTML
 				<div class="bootstrap">
 					<button type="button" class="btn btn-success like" id="likes">
 					<span class="glyphicon glyphicon-thumbs-up"></span><br/>
-					<span class="likeIt"> I Like This</span>
+					<span class="likeIt">{$liketext}</span>
 					</button>
 					
 					<!-- Other buttons -->
@@ -243,18 +253,37 @@ echo <<<HTML
 	</div>
 </div>  <!-- /content, /container -->
 <script>
-	var likes = parseInt($( "#likeCount" ).html());
-	console.log(likes);
 	$( "#likes" ).click(function() {
-		$.post( "ajax/like.php", { user: "{$user->userId}", project: "{$project->projectId}" })
-			.done(function( data ) {
-				if (data == true) {
-					$( "#likeCount" ).html( likes + 1 );
-				} else {
-					console.log(data);
-				}
-			
-			});
+		var likes = parseInt($( "#likeCount" ).html());
+		var userlikesthis = $( ".likeIt" ).html();
+		if (userlikesthis === "Liked") {
+			console.log("if->Liked");
+			$.post( "ajax/like.php", { task: "unlike", user: "{$user->userId}", project: "{$project->projectId}" })
+				.done(function( data ) {
+					if (data) {
+						$( "#likeCount" ).html( likes - 1 );
+						$( ".likeIt" ).html("Like this");
+						userlikesthis = "Like this";
+						console.log("unliked successfully");
+					} else {
+						console.log("unlike failed");
+					}
+				
+				});
+		} else {
+			console.log("if->Like this");
+			$.post( "ajax/like.php", { task: "like", user: "{$user->userId}", project: "{$project->projectId}" })
+				.done(function( data ) {
+					if (data) {
+						$( "#likeCount" ).html( likes + 1 );
+						$( ".likeIt" ).html("Liked");
+						userlikesthis = "Liked";
+						console.log("Liked successfully");
+					} else {
+						console.log("like failed");
+					}
+				});
+		}
 	});
 	
 	$( "#newcomment" ).editable({

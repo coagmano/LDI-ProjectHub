@@ -52,6 +52,28 @@ function fetchUserDetails($email)
 	return ($row);
 }
 
+function likesActiveProject($u, $p)
+{
+	if (!is_null($u) && !is_null($p)) 
+	{
+		$sql = "SELECT *
+				FROM project_likes
+				WHERE user_id = $u
+				AND project_id = $p";
+		$result = mysql_query($sql) or die(mysql_error());
+		$count = mysql_num_rows($result);
+		$row = mysql_fetch_array($result);
+		if ($count > 0) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
 //@ Thanks to - http://phpsec.org
 function generateHash($plainText, $salt = null)
 {

@@ -47,6 +47,24 @@ function addLike($projectId, $userId)
 	}
 }
 
+function removeLike($projectId, $userId)
+{
+	$p = mysql_escape_string(sanitise($projectId));
+	$u = mysql_escape_string(sanitise($userId));
+
+	$sql = "DELETE FROM project_likes
+			WHERE project_id = $p
+			AND user_id = $u";
+	if(mysql_query($sql) or die(mysql_error())) 
+	{
+		return "true";
+	}
+	else 
+	{
+		return "false";
+	}
+}
+
 /********************************
  * Start project display block 	*
  * @author Yancie				*
