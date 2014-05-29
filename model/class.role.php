@@ -29,6 +29,21 @@ class Role {
 		}
 	}
 
+	public function getById($id)
+	{
+		$i = mysql_real_escape_string(sanitise($id));
+		$sql = "SELECT *
+				FROM project_roles
+				WHERE id = $i";
+		$result = mysql_query($sql) or die("failed to getById: SQL=".$sql." <br>\n Error=".mysql_error());
+		$row = mysql_fetch_assoc($result);
+		$this->constructFromRow($row);
+
+		return $this;
+	}
+
+
+
 	public function getFilledBy()
 	{
 		global $hiddenMessage;

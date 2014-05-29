@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/includes/include.php");
 
-if (!empty($_POST)) 
+if (!empty($_POST) && $user->isLoggedIn)
 {
 	$c = new Comment();
 	$c->projectId 			= $_POST['project'];

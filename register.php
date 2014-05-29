@@ -91,8 +91,13 @@ if(!empty($_POST))
         </div>
 
         <div id="success">
-           <?php echo "<p>".$message."</p>"; ?>
-           <?php foreach ($errors as $error) { echo "<p>".$error."</p>"; } ?></p>
+        <?php 
+            if (isset($message)) { echo "<p class='message'>".$message."</p>"; }
+            if (isset($errors)) {
+                foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
+                unset($_SESSION['errors']);
+            } 
+        ?>
         </div>
 
         <div class="project">

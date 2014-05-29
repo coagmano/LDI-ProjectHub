@@ -46,7 +46,7 @@ if(!empty($_POST))
 		$project->videoUrl			= $_POST["videoUrl"];
 		//$project->fileShareUrl	= $_POST["fileShareUrl"];
 		$project->location			= $_POST["location"];
-		$project->createdBy_id		= $user->userId;
+		$project->createdBy		    = $user;
 		
 		// Persist new project to database
 		$result = $project->saveToDatabase();
@@ -75,8 +75,14 @@ include 'includes/navbar.php';
         </div>
 
         <div id="success">
-           <?php echo "<p>".$message."</p>"; ?>
-           <?php foreach ($errors as $error) { echo "<p>".$error."</p>"; } ?></p>
+        <?php 
+            if (isset($message)) { echo "<p class='message'>".$message."</p>"; }
+            if (isset($errors)) {
+                foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
+                unset($_SESSION['errors']);
+            } 
+        ?>
+            </p>
         </div>
         
         <div class="project">
@@ -123,7 +129,7 @@ include 'includes/navbar.php';
                     </select>
                 </p>
                 <p>
-                    <label><h2>What skills do you need for the proejct?:</h2></label>
+                    <label><h2>What skills do you need for the project?:</h2></label>
                     <input type="text" name="skills" />
                 </p>
                 <p>

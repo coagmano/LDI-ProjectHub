@@ -2,6 +2,7 @@
 $pageTitle = "LDI ProjectHub";
 $style = "project";
 require_once('includes/include.php');
+
 include 'includes/header.php';
 include 'includes/navbar.php';
 
@@ -66,14 +67,27 @@ echo <<<HTML
 					<span class="glyphicon glyphicon-thumbs-up"></span><br/>
 					<span class="likeIt">{$liketext}</span>
 					</button>
-					
+HTML;
+if ($user->isLoggedIn)
+{
+	echo <<<HTML
 					<!-- Other buttons -->
-					<button type="button" class="btn longBtn join">
+					<a href="join-project.php?id={$project->projectId}&action=join"><button type="button" class="btn longBtn join">
 					I want to join
-					</button>
-					<button type="button" class="btn longBtn ask">
+					</button></a>
+					<a href="mailto:{$project->createdBy->email}" target="_blank"><button type="button" class="btn longBtn ask">
 					Contact project leader
-					</button>
+					</button></a>
+HTML;
+} else {
+	echo <<<HTML
+					<!-- Other buttons -->
+					<a href="/"><button type="button" class="btn longBtn login">
+					Login to join project
+					</button></a>
+HTML;
+}
+echo <<<HTML
 				</div>
 				<!-- collaboraters -->
 				<div class="peopleBorder">
@@ -179,7 +193,7 @@ HTML;
 		echo <<<HTML
 							</p>
 							<p>{$role->blurb}</p>
-							<a href="project-apply.php?role={$role->roleId}"><button type="button" class="btn btn-success right">Apply</button></a>
+							<button type="button" id="role-{$role->roleId}" class="btn btn-success right">Apply</button>
 						</div>
 HTML;
 	}
