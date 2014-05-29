@@ -6,7 +6,6 @@ if (!empty($_POST))
 	$c = new Comment();
 	$c->projectId 			= $_POST['project'];
 	$c->content 			= $_POST['content'];
-	$c->timestamp			= time();
 	$c->postedBy			= new User();
 	$c->postedBy->getById($_POST['user']);
 	$c->timeElapsed 		= "Just now";
@@ -32,7 +31,7 @@ HTML;
 	}
 	else
 	{
-		echo $result;
+		echo "false";
 	}
 }
 else

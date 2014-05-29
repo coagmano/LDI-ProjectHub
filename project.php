@@ -260,20 +260,23 @@ echo <<<HTML
 	$( "#newcomment" ).editable({
             inlineMode: false, 
             language: 'en_gb',
-             buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
+            buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline'],
+            editorClass: "newcomment",
         });
 	
-	var newCommentHtml = $( "#newcomment" ).html();
-	console.log(newCommentHtml);
 	$( "#postnewcomment" ).click(function() {
+		
+		var newCommentHtml = $( ".newcomment" ).html();
 
-		$.post( "ajax/comment.php", { user: "{$user->userId}", project: "{$project->projectId}", content: "newCommentHtml" })
+		$.post( "ajax/comment.php", { user: "{$user->userId}", project: "{$project->projectId}", content: newCommentHtml } )
 			.done(function( data ) {
-				if (data == true) {
-					$( ".CommentsBlock").html().append();
+				
+				if (data === false) {
+					$( ".newcomment" ).after( "Sorry, something went wrong" );
 				} else {
-					console.log(data);
+
 				}
+				$( ".post" ).before( data );
 			
 			});
 	});
