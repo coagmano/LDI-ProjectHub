@@ -1,8 +1,9 @@
 <?php
-$pageTitle = "LDI ProjectHub";
 $style = "project";
 require_once('includes/include.php');
-
+$project = new Project(); 
+$project->getById($_GET['id']);
+$pageTitle = "$project->title";
 include 'includes/header.php';
 include 'includes/navbar.php';
 
@@ -12,8 +13,6 @@ if(empty($_GET))
 	die();
 }
 
-$project = new Project(); 
-$project->getById($_GET['id']);
 $teamCount = $project->countTeam();
 $emptyRolesCount = $project->countEmptyRoles();
 $blogPostCount = $project->countBlogPosts();
@@ -40,7 +39,7 @@ echo <<<HTML
 			<small>{$project->summary}</small>
 			</h1>
 		</div>
-		<div class="project">
+		<div class="project boxLayout">
 			<!-- right panel -->
 			<div class="rightPanel right">
 				
@@ -67,27 +66,14 @@ echo <<<HTML
 					<span class="glyphicon glyphicon-thumbs-up"></span><br/>
 					<span class="likeIt">{$liketext}</span>
 					</button>
-HTML;
-if ($user->isLoggedIn)
-{
-	echo <<<HTML
+					
 					<!-- Other buttons -->
-					<a href="join-project.php?id={$project->projectId}&action=join"><button type="button" class="btn longBtn join">
+					<button type="button" class="btn longBtn join">
 					I want to join
-					</button></a>
-					<a href="mailto:{$project->createdBy->email}" target="_blank"><button type="button" class="btn longBtn ask">
+					</button>
+					<button type="button" class="btn longBtn ask">
 					Contact project leader
-					</button></a>
-HTML;
-} else {
-	echo <<<HTML
-					<!-- Other buttons -->
-					<a href="/"><button type="button" class="btn longBtn login">
-					Login to join project
-					</button></a>
-HTML;
-}
-echo <<<HTML
+					</button>
 				</div>
 				<!-- collaboraters -->
 				<div class="peopleBorder">
@@ -193,7 +179,7 @@ HTML;
 		echo <<<HTML
 							</p>
 							<p>{$role->blurb}</p>
-							<button type="button" id="role-{$role->roleId}" class="btn btn-success right">Apply</button>
+							<a href="project-apply.php?role={$role->roleId}"><button type="button" class="btn btn-success right">Apply</button></a>
 						</div>
 HTML;
 	}
@@ -254,7 +240,7 @@ echo <<<HTML
 							<h3>Post a Comment</h3>
 							<form accept-charset="UTF-8" action="" method="post">
 								<textarea data-fieldlength="500" id="newcomment" name="comment"></textarea><br>
-								<div class="bootstrap right">
+								<div class="bootstrap submit right">
 									<button type="button" id="postnewcomment" class="btn btn-success right">Submit</button>
 								</div>
 							</form>

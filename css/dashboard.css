@@ -1,0 +1,120 @@
+.dashboard {
+	width: 800px !important;
+}
+.froala-editor {
+	height: 35px;
+}
+
+/* 
+	nav bar
+*/
+.dashboard-nav {
+	width: 598px;
+	margin: 50px auto 0 auto;
+	background-color: #fff;
+	height: 62px;
+	border-radius: 5px;
+	border: 1px solid #d9d9de;
+}
+.dashboard-nav ul {
+	margin: 0;
+	padding: 0;
+}
+.dashboard-nav ul li {
+	border-right: 1px solid #d9d9de;
+	display: inline-block;
+	height: 62px;
+	margin-left: -4px;
+}
+.dashboard-nav .last {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: none;
+}
+.dashboard-nav .active {
+	background-color: #f4b81a;
+}
+.dashboard-nav .active a{
+	color: white;
+}
+.dashboard-nav .first {
+	margin-left: 0 !important;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.dashboard-nav a {
+	color: #000;
+	padding: 20px 30px;
+	display: inline-block;
+}
+.dashboard-nav li:hover {
+	background-color: #f9d472;
+}
+
+
+/* 
+	files and links
+*/
+.fileLinks .icon{
+	display: inline-block;
+	margin-right: 10px;
+}
+.fileLinks .links a {
+	color: #000;
+}
+.fileLinks .links a:hover {
+	color: #ff7a19;
+}
+
+/* 
+	join request 
+*/
+.request .commentsBox {
+	border: none;
+}
+.request .panel-body {
+	display: inline-block !important;
+}
+.apply {
+	color: #999;
+	font-size: 13px;
+}
+
+
+/* 
+	Post
+*/
+.post {
+	background-color: transparent;
+}
+.posts {
+	border: 1px solid #eee;
+	background-color: #f9fafb;
+	margin-bottom: 20px;
+}
+.nameDate {
+	-webkit-font-smoothing: antialiased;
+	font-size: 17px;
+	padding-bottom: 10px;
+}
+.comments {
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+	color: #4c4c4c;
+	font-size: 15px;
+	line-height: 30px;
+}
+
+
+
+
+
+
+
+/*
+	Edit Project 
+*/
+
+.editProject {
+	width: 700px;
+}

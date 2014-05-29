@@ -24,7 +24,7 @@ body {
 }
 a, a:visited { 
 	color: #729dff; 
-	text-decoration: none; 
+	text-decoration: none !important; 
 }
 a:hover { 
 	color: #f7941d; 
@@ -36,6 +36,24 @@ a:hover {
 .right {
 	float: right;
 }
+.froala-element {
+	background-color: #ffffff !important;	
+	border-color: rgb(117, 117, 121) !important;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+.froala-editor { 
+	border-color: rgb(117, 117, 121) !important;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.froala-editor .bttn-wrapper button {
+	color: rgb(117, 117, 121)!important;
+}
+button:focus {
+	outline: none !important;
+}
+
 
 
 /*
@@ -131,7 +149,111 @@ a:hover {
 }
 
 
+/*
+	Content Layout
+*/	
+.boxLayout {
+	margin: 50px auto 0 auto;
+	padding-bottom: 50px;
+	background-color: #fff;
+	width: 975px;
+	border-width: 20px;
+	-moz-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	-webkit-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	-o-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
+	border-image: url("../images/border_thick.png") 174 167 151 128 fill stretch;
+}
+.boxLayout:before,
+.boxLayout:after {
+  content:"";
+  display:table;
+}
+.boxLayout:after {
+  clear:both;
+}
+.boxLayout {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+.boxLayout .left {
+	width: 590px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.boxLayout .rightPanel {
+	width: 320px;
+}
 
+
+/* 
+	Posting
+*/
+.post {
+	padding: 10px 20px 70px 20px;
+	margin-bottom: 10px;
+	background-color: #f7fafa;
+	width: -moz-calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    width: calc(100% - 40px);
+}
+.post h3 {
+	margin: 0 0 15px;
+}
+.post form {
+	padding: 0 !important;
+}
+.commentsBox {
+	padding: 20px 10px;
+	border-bottom: 1px solid #d9d9de;
+	margin-top: -1px;
+}
+.commentsBox:before,
+.commentsBox:after {
+  content:"";
+  display:table;
+}
+
+.commentsBox:after {
+  clear:both;
+}
+.commentsBox {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+.commentsContainer {
+	width: -moz-calc(100% - 90px);
+    width: -webkit-calc(100% - 90px);
+    width: calc(100% - 90px); 
+}
+.photo {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.photo img {
+	min-width: 70px;
+	min-height: 70px;
+	width: 70px;
+}
+.team {
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 10px !important;
+}
+.nameDate {
+	font-size: 16px;
+	font-weight: 700;
+}
+.date {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 13px;
+	color: #999;
+	font-weight: 500;
+}
+.comments {
+	font-size: 15px;
+}
 
 
 

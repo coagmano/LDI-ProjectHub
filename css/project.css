@@ -24,36 +24,6 @@
 /*
 	Page Layout
 */	
-.project {
-	margin: 50px auto 0 auto;
-	padding-bottom: 50px;
-	background-color: #fff;
-	width: 975px;
-	border-width: 20px;
-	-moz-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
-	-webkit-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
-	-o-border-image: url("../images/border_thick.png") 174 167 151 128 stretch;
-	border-image: url("../images/border_thick.png") 174 167 151 128 fill stretch;
-}
-.project:before,
-.project:after {
-  content:"";
-  display:table;
-}
-.project:after {
-  clear:both;
-}
-.project {
-  zoom:1; /* For IE 6/7 (trigger hasLayout) */
-}
-.project .left {
-	width: 590px;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-.project .rightPanel {
-	width: 320px;
-}
 
 .project form, .project form {
 	display: block;
@@ -132,7 +102,7 @@
 .blogPost h3 {
 	font-size: 33px;
 	color: #035084;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	font-family: Populaire;
 	letter-spacing: 2px;
 }
@@ -143,6 +113,7 @@
 .blogPost {
 	border-top: 1px solid #d9d9de;
 	padding-top: 0;
+	margin-top: 20px;
 }
 
 
@@ -155,22 +126,7 @@
 	margin-bottom: 0;
 	padding-bottom: 20px;
 }
-.post {
-	padding: 10px 20px 10px 20px;
-	margin-bottom: 10px;
-	background-color: #f7fafa;
-	width: -moz-calc(100% - 40px);
-    width: -webkit-calc(100% - 40px);
-    width: calc(100% - 40px);
-}
-.post h3 {
-	margin: 0 0 .3em;
-}
-.post form {
-	padding: 0;
-}
-
-textarea {
+/*textarea {
 	background-color: #ffffff;
 	border: 1px solid #dddddd;
 	max-width: 500px;
@@ -181,65 +137,14 @@ textarea {
 textarea:focus {
 	outline: 0;
 	border: 1px solid #388E8E;
-}
-.commentsBox {
-	padding: 20px 10px;
-	border-bottom: 1px solid #d9d9de;
-	margin-top: -1px;
-}
+}*/
+
 .owner {
 	background-color: #fefdec;
 }
 .yellowBorder {
 	border-top: 1px solid #fad77c;
 	border-bottom: 1px solid #fad77c;
-}
-.commentsBox:before,
-.commentsBox:after {
-  content:"";
-  display:table;
-}
-.commentsBox:after {
-  clear:both;
-}
-.commentsBox {
-  zoom:1; /* For IE 6/7 (trigger hasLayout) */
-}
-.commentsContainer {
-	width: -moz-calc(100% - 90px);
-    width: -webkit-calc(100% - 90px);
-    width: calc(100% - 90px); 
-}
-.photo {
-	display: inline-block;
-	width: 70px;
-	height: 70px;
-	border-radius: 5px;
-	overflow: hidden;
-}
-.photo img {
-	min-width: 70px;
-	min-height: 70px;
-	width: 70px;
-}
-.team {
-	display: inline-block;
-	margin-right: 10px;
-	font-size: 10px !important;
-}
-.nameDate {
-	font-size: 16px;
-	font-weight: 700
-}
-.date {
-	display: inline-block;
-	margin-left: 10px;
-	font-size: 13px;
-	color: #999;
-	font-weight: 500;
-}
-.comments {
-	font-size: 15px;
 }
 
 /*
