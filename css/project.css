@@ -152,17 +152,24 @@
 */
 .CommentsBlock {
 	background: none;
-	margin-bottom: 0 !important;
-	padding-bottom: 20px !important;
+	margin-bottom: 0;
+	padding-bottom: 20px;
 }
 .post {
-	padding: 10px 20px 60px 20px;
-	margin-bottom: 30px;
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 10px;
 	background-color: #f7fafa;
 	width: -moz-calc(100% - 40px);
     width: -webkit-calc(100% - 40px);
     width: calc(100% - 40px);
 }
+.post h3 {
+	margin: 0 0 .3em;
+}
+.post form {
+	padding: 0;
+}
+
 textarea {
 	background-color: #ffffff;
 	border: 1px solid #dddddd;

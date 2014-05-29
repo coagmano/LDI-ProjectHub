@@ -34,6 +34,15 @@ THINGS THAT NEED TO BE DONE
 			<p class="ldi">LDI</p><p class="ph">Project Hub</p>
 
 			<!-- log in from  -->
+			<div id="errors">
+           		
+           		<?php 
+           		if (isset($errors)) {
+           			foreach ($errors as $error) { echo "<p>".$error."</p>"; }
+           			unset($_SESSION['errors']);
+           		}
+           		 ?>
+        	</div>
 			<?php
 			if ($user->isLoggedIn) {
 				// echo "<script>afterLogin();</script>";
@@ -129,14 +138,14 @@ HTML;
 <!-- Display Projects -->
 
 <?php 
-	// Set up search filters
+	// Set up default search filters
 	$stage = "Aspiration";
 	$category = "none";
 	$skill = "none";
 	$sort = "none";
 	
 	// Figure what fillers are set then fetch from databse using below functions
-	if($sort="none"){$sort= "likes";}	// default sort by popularily (likes)
+	if($sort="none"){$sort= "id";}	// default sort by popularily (likes)
 	if($category = "none" && $skill = "none")
 		{
 			$result = noCate_noSkill($stage,$sort);

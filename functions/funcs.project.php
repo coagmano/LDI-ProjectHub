@@ -28,6 +28,25 @@ function projectExists($id)
 	}
 }
 
+function addLike($projectId, $userId)
+{
+	$p = mysql_escape_string(sanitise($projectId));
+	$u = mysql_escape_string(sanitise($userId));
+
+	$sql = "INSERT INTO project_likes
+			SET 
+			project_id = $p,
+			user_id = $u";
+	if(mysql_query($sql) or die(mysql_error())) 
+	{
+		return "true";
+	}
+	else 
+	{
+		return "false";
+	}
+}
+
 /********************************
  * Start project display block 	*
  * @author Yancie				*

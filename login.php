@@ -91,10 +91,8 @@ if(!empty($_POST))
 		}
 	}
 } 
-else
-{
+	$_SESSION['errors'] = $errors;
 	header("Location: http://".$_SERVER['HTTP_HOST']);
 	die();
-}
 
 ?>

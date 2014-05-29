@@ -31,7 +31,7 @@ class Comment {
 			$sql = 
 			   "UPDATE Comments
 		    	SET 
-				content = $this->content,
+				content = \"{$this->content}\",
 		   		WHERE id = ".$this->commentId;
 		    $type = "UPDATE";
 		    $hiddenMessage .= $type." ".$sql."<br>\n";
@@ -41,10 +41,10 @@ class Comment {
 			$sql = 
 				"INSERT INTO Comments 
 				SET 
-				project_id = $this->project_id,
-				user_id = $this->postedBy->userId,
-				content = $this->content,
-				postedTimestamp = ".time();
+				project_id = ".$this->projectId.",
+				user_id = ".$this->postedBy->userId.",
+				content = \"{$this->content}\",
+				postedTimestamp = '".time()."'";
 			$type = "INSERT";
 			$hiddenMessage .= $type." ".$sql."<br>\n";
 		}

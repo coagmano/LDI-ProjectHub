@@ -1,7 +1,7 @@
 <?php
 $pageTitle = "LDI ProjectHub";
 $style = "project";
-require('includes/include.php');
+require_once('includes/include.php');
 include 'includes/header.php';
 include 'includes/navbar.php';
 
@@ -49,10 +49,10 @@ echo <<<HTML
 				
 				<!-- like button -->
 				<div class="bubble right">
-					<span>{$project->likes}</span>
+					<span id="likeCount">{$project->likes}</span>
 				</div>
 				<div class="bootstrap">
-					<button type="button" class="btn btn-success like">
+					<button type="button" class="btn btn-success like" id="likes">
 					<span class="glyphicon glyphicon-thumbs-up"></span><br/>
 					<span class="likeIt"> I Like This</span>
 					</button>
@@ -76,7 +76,7 @@ echo <<<HTML
 							</div>
 						</div>
 						<div class="profileImg">
-							<img src="{$project->createdBy->profilePicUrl}" alt="Project Leader" />
+							<img src="images/profile/{$project->createdBy->profilePicUrl}" alt="Project Leader" />
 						</div>
 					</div>
 					</a>
@@ -98,7 +98,7 @@ foreach ($project->roles as $role)
 								</div>
 							</div>
 							<div class="profileImg">
-								<img src="{$role->filledBy->profilePicUrl}" alt="" />
+								<img src="images/profile/{$role->filledBy->profilePicUrl}" alt="" />
 							</div>
 						</div>
 						</a>
@@ -197,17 +197,6 @@ echo <<<HTML
 					<!-- Comments -->
 					<div class="block CommentsBlock"><a name="comments"></a>
 						<h2>Comments</h2>
-						<!-- Post a Comment -->
-						<div class="post">
-							<h3>Post a Comment</h3>
-							<form accept-charset="UTF-8" action="#" method="post">
-								<textarea cols="70" rows="10" data-fieldlength="500" name="comment"></textarea>
-								<div class="bootstrap right">
-									<button type="submit" class="btn btn-success right">Submit</button>
-								</div>
-							</form>
-						</div>
-						<!-- comments -->
 HTML;
 foreach ($project->comments as $comment) 
 {
@@ -230,19 +219,66 @@ foreach ($project->comments as $comment)
 								</div>
 							</div>
 							<div class="photo">
-								<img src="{$comment->postedBy->profilePicUrl}" alt="profile picture" />
+								<img src="images/profile/{$comment->postedBy->profilePicUrl}" alt="profile picture" />
 							</div>
 						</div>
 HTML;
 }
 echo <<<HTML
-					</div> <!-- /block -->
+					<!-- Post a Comment -->
+						<div class="post">
+							<h3>Post a Comment</h3>
+							<form accept-charset="UTF-8" action="" method="post">
+								<textarea data-fieldlength="500" id="newcomment" name="comment"></textarea><br>
+								<div class="bootstrap right">
+									<button type="button" id="postnewcomment" class="btn btn-success right">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div> <!-- /Commentsblock -->
 				</div> <!-- /projectContent -->
 			</div> <!-- /left panel -->
 			
 		</div> <!-- /project -->
 	</div>
 </div>  <!-- /content, /container -->
+<script>
+	var likes = parseInt($( "#likeCount" ).html());
+	console.log(likes);
+	$( "#likes" ).click(function() {
+		$.post( "ajax/like.php", { user: "{$user->userId}", project: "{$project->projectId}" })
+			.done(function( data ) {
+				if (data == true) {
+					$( "#likeCount" ).html( likes + 1 );
+				} else {
+					console.log(data);
+				}
+			
+			});
+	});
+	
+	$( "#newcomment" ).editable({
+            inlineMode: false, 
+            language: 'en_gb',
+             buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
+        });
+	
+	var newCommentHtml = $( "#newcomment" ).html();
+	console.log(newCommentHtml);
+	$( "#postnewcomment" ).click(function() {
+
+		$.post( "ajax/comment.php", { user: "{$user->userId}", project: "{$project->projectId}", content: "newCommentHtml" })
+			.done(function( data ) {
+				if (data == true) {
+					$( ".CommentsBlock").html().append();
+				} else {
+					console.log(data);
+				}
+			
+			});
+	});
+	
+</script>
 HTML;
 include 'includes/footer.php';
 ?>

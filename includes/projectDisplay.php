@@ -16,7 +16,7 @@ if(checkCount($result)) // If there is result
 		echo <<<HTML
 		<td>
 			<div class='box'>
-				<a href="project.php?id={$miniproject->projectId}"><img src="{$miniproject->featureImageUrl}" alt="{$miniproject->title}" />
+				<a href="project.php?id={$miniproject->projectId}"><img src="images/{$miniproject->featureImageUrl}" alt="{$miniproject->title}" />
 				<h2 class="projectTitle">{$miniproject->title}</h2></a>
 				<p class="descrption">{$miniproject->summary}</p>
 				<p class="tags"><a href="#">{$miniproject->category}</a>

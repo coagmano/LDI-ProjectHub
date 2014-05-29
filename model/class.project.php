@@ -44,7 +44,7 @@ class Project {
 		$this->createdBy 		= $this->getCreatedBy();
 		$this->roles			= $this->getRoles(); // Roles contain team members
 		$this->teamMembers 		= $this->getTeamMembersFromRoles();
-		$this->blogPosts		= $this->getBlogposts();
+		$this->blogPosts		= $this->getBlogPosts();
 		$this->comments			= $this->getComments();
 
 	}
