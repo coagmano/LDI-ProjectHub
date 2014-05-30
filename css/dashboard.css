@@ -1,18 +1,25 @@
 .dashboard {
 	width: 800px !important;
 }
-.froala-editor {
-	height: 35px;
+.boxLayout {
+	padding-top: 20px;
+}
+.hr {
+	margin: 0 auto;
+	width: 600px;
+	height: 70px;
+	background: url(../images/hr.jpg) no-repeat left bottom;
+	margin-bottom: 50px;
 }
 
 /* 
 	nav bar
 */
 .dashboard-nav {
-	width: 598px;
+	width: 750px;
 	margin: 50px auto 0 auto;
 	background-color: #fff;
-	height: 62px;
+	height: 50px;
 	border-radius: 5px;
 	border: 1px solid #d9d9de;
 }
@@ -23,7 +30,7 @@
 .dashboard-nav ul li {
 	border-right: 1px solid #d9d9de;
 	display: inline-block;
-	height: 62px;
+	height: 50px;
 	margin-left: -4px;
 }
 .dashboard-nav .last {
@@ -44,12 +51,17 @@
 }
 .dashboard-nav a {
 	color: #000;
-	padding: 20px 30px;
+	padding: 13px 30px;
 	display: inline-block;
 }
 .dashboard-nav li:hover {
 	background-color: #f9d472;
 }
+
+
+/*****************
+ *   Dashboard   *
+ *****************/
 
 
 /* 
@@ -111,10 +123,105 @@
 
 
 
-/*
-	Edit Project 
-*/
+/********************
+ *   Edit Project   *
+ ********************/
 
 .editProject {
-	width: 700px;
+	width: 750px;
+}
+
+/* 
+	form layout
+*/
+.editProject .form-group {
+	margin-bottom: 30px !important;
+}
+.editProject .control-label {
+	margin-left: 60px !important;
+}
+.editProject .col-sm-10 {
+	width: 65% !important;
+}
+.editProject .control-label {
+	font-size: 18px !important;
+	font-weight: 500 !important;
+	letter-spacing: 1px;
+}
+.editProject .form-control {
+	height: 45px !important;
+}
+.editProject p {
+	margin: 5px 5px 0 0!important;
+	font-size: 13px;
+	-webkit-font-smoothing: antialiased;
+}
+
+
+/*
+	Upload Image
+*/
+
+.editProject .uploadImage {
+	height: 100px;
+}
+.editProject .fileUpload {
+	color: #fff !important;
+	background-color:  #60257d!important;
+	position: relative;
+	top: -5px;
+	overflow: hidden;
+	margin: 10px;
+}
+.editProject .fileUpload:hover {
+	background-color: #3c0059 !important;
+}
+.editProject .fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.editProject #uploadFile {
+	height: 35px !important;
+}
+
+/* video */
+.editProject .video {
+	margin-top: 20px !important;
+}
+
+/*
+	Description
+*/
+.editProject .description {
+	margin: 0 auto !important;
+	width: 660px !important;
+}
+.editProject .description label {
+	font-weight: 500 !important;
+	-webkit-font-smoothing: antialiased;
+	font-size: 27px !important;
+	margin-bottom: -10px !important;
+}
+.editProject .description .form-control-static {
+	font-size: 16px !important;
+	margin-bottom: 20px !important;
+}
+
+/* 
+	save /preview button 
+*/
+.save {
+	margin: 50px 45px 0 0;
+}
+.save button{
+	font-size: 18px !important;
+	width: 110px !important;
+	height: 40px !important;
 }

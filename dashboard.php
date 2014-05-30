@@ -7,6 +7,9 @@ require_once('includes/include.php');
 include 'includes/header.php';
 include 'includes/navbar.php';
 
+//User must be logged in
+if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(); }
+
 // if(empty($_GET))
 // {
 // 	header("Location: http://".$_SERVER['HTTP_HOST']);
@@ -23,6 +26,7 @@ include 'includes/navbar.php';
 		<ul>
 			<li class="first active"><a href="dashboard.php">Dashboard</a></li>
 			<li><a href="edit.php">Edit Project</a></li>
+			<li><a href="roles.php">Assign roles</a></li>
 			<li><a href="#">Updates</a></li>
 			<li class="last"><a href="#">Team members</a></li>
 		</ul>
