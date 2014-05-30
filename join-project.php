@@ -135,7 +135,6 @@ HTML;
     });
 	
 	$("#skills").select2({
-                      tags:[ <?php implode(", ", $user->tags) ?> ],
                       tokenSeparators: [",", " "],
                       placeholder: "type your skills separated by commas",
                       formatNoMatches: "type to search or add new skills"

@@ -121,6 +121,15 @@ if(!empty($_POST))
                 </p>
 
                 <p>
+                    <label>About you:</label>
+                    <textarea name="blurb" id="blurb"></textarea>
+                </p>
+                <p>
+                    <label>Your skills and interests:</label>
+                    <input type="text" name="tags" id="tags" style="width:33%" value="<?php echo implode(", ", $user->tags); ?>" />
+                </p>
+
+                <p>
                     <label>Profile Photo:</label>
                     <input type="text" name="profilePicUrl" />
                 </p>
@@ -152,6 +161,11 @@ if(!empty($_POST))
         	language: 'en_gb',
         	 buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
         })
+        $("#tags").select2({
+                      tokenSeparators: [",", " "],
+                      placeholder: "type your skills separated by commas",
+                      formatNoMatches: "type to search or add new skills"
+                  });
     });
 </script>
 

@@ -16,6 +16,9 @@ THINGS THAT NEED TO BE DONE
 	require('includes/include.php');
 	include 'includes/header.php';
 	include 'includes/navbar.php';
+
+	//$tags = getProjectTags();
+	//// something something searchTags()
 ?>
 
  <script>
@@ -106,17 +109,21 @@ HTML;
 			  </ul>
 			</div>
 			<div class="btn-group">
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Required Skills</button>
+				<input type="text" name="searchTags" id="tags" style="width:100%" value="" />
+			  <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Required Skills</button>
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			    <span class="caret"></span>
 			    <span class="sr-only">Toggle Dropdown</span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#">Skill 1</a></li>
-			    <li><a href="#">Skill 2</a></li>
-			    <li><a href="#">Skill 3</a></li>
-			    <li><a href="#">Skill 4</a></li>
-			  </ul>
+			  </button> -->
+			  <div class="" role="menu">
+			  <!-- <select class="dropdown-menu" role="menu">
+				<?php 
+			    // foreach ($tags as $tag) {
+			    // 	echo "<option>{$tag}</option>";
+			    // }
+			    ?>
+			  </select> -->
+			  </div>
 			</div>
 		</div>
 		<div class="category">
@@ -169,7 +176,7 @@ HTML;
 	}
 	else 
 	{ 	// if there isn't a result, display message no result
-		echo "<h2><center> <br/> <br/> Sorrry :( There is no project at the moment. <br /> Why not <a href='#'>Create your own?</a></center></h2>";
+		echo "<h2><center> <br/> <br/> Sorrry :( There is no project at the moment. <br /> Why not <a href='new-project.php'>Create your own?</a></center></h2>";
 	}	
  ?>
 
@@ -177,7 +184,15 @@ HTML;
 </div> <!-- end of contant -->
 </div> <!-- end of container -->
 
+<script type="text/javascript">
 
+	$("#tags").select2({
+                      tokenSeparators: [",", " "],
+                      placeholder: "Search by Required Skills",
+                      formatNoMatches: "Hit enter to search"
+                  });
+
+</script>
 <?php
 	include 'includes/footer.php';
 ?>

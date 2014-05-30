@@ -28,6 +28,20 @@ function projectExists($id)
 	}
 }
 
+function getProjectTags() 
+{
+	$sql = "SELECT";
+}
+
+function searchTags($term) 
+{
+	$sql = "SELECT * FROM Projects
+    		WHERE MATCH (skills) AGAINST ('{$term}')";
+	$result = mysql_query($sql);
+	return $$result;
+
+}
+
 function addLike($projectId, $userId)
 {
 	$p = mysql_escape_string(sanitise($projectId));

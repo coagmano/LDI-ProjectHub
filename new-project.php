@@ -130,7 +130,7 @@ include 'includes/navbar.php';
                 </p>
                 <p>
                     <label><h2>What skills do you need for the project?:</h2></label>
-                    <input type="text" name="skills" />
+                    <input type="text" name="skills" id="skills"style="width:33%" value="<?php echo implode(", ", $user->tags); ?>" />
                 </p>
                 <p>
                     <label><h2>Do you have a photo or image to feature on your page?</h2></label>
@@ -170,6 +170,12 @@ include 'includes/navbar.php';
             width: 800,  
             language: 'en_gb'
         });
+
+        $("#skills").select2({
+                      tokenSeparators: [",", " "],
+                      placeholder: "type your skills separated by commas",
+                      formatNoMatches: "type to search or add new skills"
+                  });
     });
 </script>
 

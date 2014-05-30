@@ -24,10 +24,7 @@
         <div class="project">
             <div id="regbox">
                 <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-				<p>
-                    <label>Email:</label>
-                    <input type="email" name="email" />
-                </p>
+				
 
                 <p>
                     <label>About you:</label>
@@ -37,3 +34,24 @@
                     <label>Your skills and interests:</label>
                     <input type="text" name="tags" />
                 </p>
+                
+            	</form>
+        
+          	</div>
+        </div>           
+  	</div>
+</div>
+<script>
+    $(function() {
+        $('#blurb').editable({
+        	inlineMode: false, 
+        	width: 800,  
+        	language: 'en_gb',
+        	 buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
+        })
+    });
+</script>
+
+<?php
+include('includes/footer.php');
+?>
