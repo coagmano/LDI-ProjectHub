@@ -17,8 +17,6 @@ if ($user->isLoggedIn)
     die(); 
 }
 
-$errors = array();
-$message = "";
 
 // Process registration if forms posted
 if(!empty($_POST))
@@ -112,19 +110,14 @@ if(!empty($_POST))
                     <label>Last Name:</label>
                     <input type="text" name="lastName" />
                 </p>
+                <p>
+                    <label>QUT Student Number</label>
+                    <input type="text" name="studentNo" />
+                </p>
 
                 <p>
                     <label>Email:</label>
                     <input type="email" name="email" />
-                </p>
-
-                <p>
-                    <label>About you:</label>
-                    <textarea name="blurb" id="blurb"></textarea>
-                </p>
-                <p>
-                    <label>Your skills and interests:</label>
-                    <input type="text" name="tags" />
                 </p>
 
                 <p>
