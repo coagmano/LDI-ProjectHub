@@ -16,7 +16,7 @@
 	nav bar
 */
 .dashboard-nav {
-	width: 750px;
+	width: 704px;
 	margin: 50px auto 0 auto;
 	background-color: #fff;
 	height: 50px;
@@ -33,7 +33,7 @@
 	height: 50px;
 	margin-left: -4px;
 }
-.dashboard-nav .last {
+.dashboard-nav li:last-child {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border: none;
@@ -44,7 +44,7 @@
 .dashboard-nav .active a{
 	color: white;
 }
-.dashboard-nav .first {
+.dashboard-nav li:first-child {
 	margin-left: 0 !important;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -57,12 +57,15 @@
 .dashboard-nav li:hover {
 	background-color: #f9d472;
 }
+.dashboard-nav li:hover a{
+	background-color: #f9d472;
+	color: #fff;
+}
 
 
 /*****************
  *   Dashboard   *
  *****************/
-
 
 /* 
 	files and links
@@ -78,11 +81,14 @@
 	color: #ff7a19;
 }
 
+
+
 /* 
 	join request 
 */
 .request .commentsBox {
 	border: none;
+	margin-bottom: 10px;
 }
 .request .panel-body {
 	display: inline-block !important;
@@ -90,6 +96,10 @@
 .apply {
 	color: #999;
 	font-size: 13px;
+}
+.rejectReason {
+	width: 100% !important;
+	resize:vertical !important;
 }
 
 
@@ -99,7 +109,11 @@
 .post {
 	background-color: transparent;
 }
+.post .froala-editor {
+	height: 35px !important;
+}
 .posts {
+	/*display: none;*/
 	border: 1px solid #eee;
 	background-color: #f9fafb;
 	margin-bottom: 20px;
@@ -134,13 +148,13 @@
 /* 
 	form layout
 */
-.editProject .form-group {
+.editProject .form-group, .assignRoles .form-group {
 	margin-bottom: 30px !important;
 }
 .editProject .control-label {
 	margin-left: 60px !important;
 }
-.editProject .col-sm-10 {
+.editProject .col-sm-10, .assignRoles .col-sm-10{
 	width: 65% !important;
 }
 .editProject .control-label {
@@ -151,10 +165,14 @@
 .editProject .form-control {
 	height: 45px !important;
 }
-.editProject p {
+.editProject p, .assignRoles p {
 	margin: 5px 5px 0 0!important;
 	font-size: 13px;
 	-webkit-font-smoothing: antialiased;
+}
+.editProject .pitchTextarea {
+	height: 80px !important;
+	resize: none;
 }
 
 
@@ -224,4 +242,107 @@
 	font-size: 18px !important;
 	width: 110px !important;
 	height: 40px !important;
+}
+
+
+
+
+/********************
+ *   Team members   *
+ ********************/
+.teamMembers {
+	width: 815px !important;
+	overflow: hidden;
+}
+.teamMembers .left {
+	width: 210px !important;
+}
+.teamMembers .rightPanel {
+	width: 540px !important;
+}
+
+/*
+	Nav bar (left panel)
+*/
+.teamMembers .teamNav {
+	padding: 20px 20px;
+}
+.teamMembers .teamNav button {
+	width: 90% !important;
+	font-size: 16px !important;
+	margin-bottom: 10px !important;
+}
+
+/* 
+	Team mebmers (Right panel)
+*/
+.teamMembers .commentsBox {
+	width: 470px;
+	background-color: #f6fafb;
+	border: none !important;
+	margin-bottom: 20px;
+}
+.teamMembers .nameDate {
+	font-size: 18px;
+}
+.teamMembers .nameDate a {
+	color: #000;
+}
+.teamMembers .label-role {
+	background-color: #60257d;
+}
+.teamMembers .label {
+	font-size: 12px !important;
+}
+.teamMembers .label-role a {
+	position: relative;
+	top: 1px;
+	color: #ccc;
+}
+.teamMembers .label-role a:hover {
+	color: #f4b81a;
+}
+.teamMembers .hr {
+	margin-left: -40px;
+}
+
+.assignRoles button.right {
+	margin-right: 105px !important;
+}
+.teamMembers .lookingFor {
+	width: 450px !important;
+	padding-bottom: 50px !important;
+}
+
+
+/********************
+ *      Updates     *
+ ********************/
+.updateHr {
+	margin-top: 80px;
+}
+.newUpdateSave {
+	margin: 20px 80px 20px 0 !important;
+}
+.update {
+	background-color: #f6fafb;
+	padding: 10px 20px 20px 20px !important;
+	-webkit-font-smoothing: antialiased;
+	color: #4c4c4c;
+	font-size: 17px;
+	line-height: 30px;
+}
+.update h3 {
+	font-size: 33px!important;
+	color: #035084 !important;
+	margin-bottom: 10px!important;
+	font-family: Populaire!important;
+	letter-spacing: 2px!important;
+}
+.editUpdate {
+	font-size: 16px !important;
+	margin-top: 30px !important;
+	margin-right: 20px !important;
+	width: 60px !important;
+	height: 35px !important;
 }

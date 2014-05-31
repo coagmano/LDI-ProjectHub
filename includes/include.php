@@ -31,10 +31,4 @@
 	$errors = array();
 	$message = "";
 	$errors = (isset($_SESSION['errors'])) ? $_SESSION['errors'] : array();
-
-	// include 'loginCheck.php';
-	
-
-	
-	
 ?>

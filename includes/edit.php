@@ -1,39 +1,3 @@
-<?php
-$style = "dashboard";
-require_once('includes/include.php');
-// $project = new Project(); 
-// $project->getById($_GET['id']);
-// $pageTitle = "$project->title";
-include 'includes/header.php';
-include 'includes/navbar.php';
-
-//User must be logged in
-if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(); }
-
-// if(empty($_GET))
-// {
-// 	header("Location: http://".$_SERVER['HTTP_HOST']);
-// 	die();
-// }
-
-?>
-
-<div class="container dashboard">
-
-	<!-- Nav bar -->
-
-	<div class="dashboard-nav">
-		<ul>
-			<li class="first"><a href="dashboard.php">Dashboard</a></li>
-			<li class="active"><a href="edit.php">Edit Project</a></li>
-      <li><a href="roles.php">Assign roles</a></li>
-			<li><a href="#">Updates</a></li>
-			<li class="last"><a href="#">Team members</a></li>
-		</ul>
-	</div>
-
-</div>
-
 <!-- From Start (There's no action on this from) -->
 
 <div class="container">
@@ -44,7 +8,7 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   <div class="form-group">
     <label class="col-sm-2 control-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Project Name">
+      <input type="text" class="form-control" name="title" placeholder="Project Name">
       <p class="form-control-static"> What are you going to call your grand idea? </p>
     </div>
   </div>
@@ -53,7 +17,7 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   <div class="form-group">
     <label class="col-sm-2 control-label">Category</label>
     <div class="col-sm-10">
-      <select class="form-control">
+      <select name="category" class="form-control">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -69,8 +33,8 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   <div class="form-group">
     <label class="col-sm-2 control-label">Pitch text</label>
     <div class="col-sm-10">
-        <textarea name="summary" id="summary"></textarea>
-      <p class="form-control-static pitchText"> This short description will be at the top of your project page and should tell them what your project is about in 200 characters or less </p>
+        <textarea maxlength="155" name="summary" placeholder="what is your project about?" class="form-control pitchTextarea"></textarea>
+      <p class="form-control-static pitchText"> This short description will be at the top of your project page and should tell them what your project is about <b>in 150 characters or less </b></p>
     </div>
   </div>
 
@@ -79,7 +43,7 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   <div class="form-group uploadImage">
     <label class="col-sm-2 control-label">Image</label>
     <div class="col-sm-10">
-      <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+      <input id="uploadFile" name="featureImageUrl" placeholder="Choose File" disabled="disabled" />
       <div class="fileUpload btn">
           <span>Upload Image</span>
           <input id="uploadBtn" type="file" class="upload"  name="featureImageUrl" accept="image/*" />
@@ -93,8 +57,8 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   <div class="form-group video">
     <label class="col-sm-2 control-label">Video</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=">
-      <p class="form-control-static"> Have a video that shows off your idea? <br/>Just enter the web address to a youtube or vimeo video </p>
+      <input type="text" name="videoUrl" class="form-control" placeholder="https://www.youtube.com/watch?v=">
+      <p class="form-control-static"> Have a video that shows off your idea? <br/>Just enter the web address to a <b>youtube</b> or <b>vimeo</b> video </p>
     </div>
   </div>
 
@@ -124,7 +88,7 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
 
   <div class="save right">
      <button type="button" class="btn btn-default">Preview</button>
-    <button type="button" class="btn btn-success">Save</button>
+    <button type="submit" data-loading-text="Saving..." class="loading btn btn-success">Save</button>
   </div>
 
 </form>
@@ -139,21 +103,10 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
   };
 
   $(function() {
-        $('#summary').editable({
-            inlineMode: false,  
-            language: 'en_gb',
-             buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
-        });
         $('#description').editable({
             inlineMode: false, 
             language: 'en_gb'
         });
-
-        // $("#skills").select2({
-        //               tokenSeparators: [",", " "],
-        //               placeholder: "type your skills separated by commas",
-        //               formatNoMatches: "type to search or add new skills"
-        //           });
     });
   
 </script>

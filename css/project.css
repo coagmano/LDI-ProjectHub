@@ -63,37 +63,6 @@
 
 
 /*
-	Looking for (left panel)
-*/
-.lookingFor {
-	width: -moz-calc(100% - 40px);
-    width: -webkit-calc(100% - 40px);
-    width: calc(100% - 40px);
-	border: 10px solid #f5f5f5;
-	padding: 10px;
-}
-.lookingFor h3 {
-	margin-top: 5px !important;
-}
-.lookingFor .tags {
-	font-size: 15px;
-}
-.lookingFor a {
-	margin-left: 10px;
-	font-size: 17px;
-	text-decoration: none !important;
-}
-.lookingFor a:hover .label {
-	background-color: #FFA54F;
-}
-.lookingFor {
-	padding-bottom: 50px;
-	margin-bottom: 30px;
-}
-
-
-
-/*
 	blog post (left panel)
 */
 .blogPostTitle {
@@ -155,16 +124,16 @@ textarea:focus {
 	margin-top: 15px;
 	font-weight: 700;
 }
-.aspiration {
+.Aspiration {
 	color: #3c0059;
 }
-.incubatin {
+.Incubatin {
 	color: #f4b81a;
 }
-.developing {
+.Developing {
 	color: #ff7a19;
 }
-.mature {
+.Mature {
 	color: #8ab23f;
 }
 .status {

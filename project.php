@@ -191,7 +191,7 @@ echo <<<HTML
 					<div class="block"><a name="blog"></a>
 						<h2 class="blogPostTitle">Updates</h2>
 HTML;
-foreach ($project->blogPosts as $blogPost) 
+		foreach ($project->blogPosts as $blogPost) 
 {
 	echo <<<HTML
 						<div class="blogPost">
