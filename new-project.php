@@ -126,12 +126,15 @@ include 'includes/navbar.php';
                 </p>
 
                 <p>
-                    <label><h2>What category does it fit best?</h2></label>
+                    <label><h2>What category does it best fit?</h2></label>
                     <select name="category">
-                    	<option value="personal excellence">Personal Excellence</option>
-                    	<option value="social change">social change</option>
-                    	<option value="community leadership">community leadership</option>
-                    	<option value="other">something else</option>
+                        <option value="Personal Development Project">Personal Development Project</option>
+                        <option value="Social &amp; Global Change Project">Social &amp; Global Change Project</option>
+                        <option value="Student/Campus Community Project">Student/Campus Community Project</option>
+                        <option value="Community Development Project">Community Development Project</option>
+                        <option value="Social Enterprise">Social Enterprise</option>
+                        <option value="Business Enterprise">Business Enterprise</option>
+                        <option value="Technical Innovation">Technical Innovation</option>
                     </select>
                 </p>
                 <p>

@@ -13,20 +13,21 @@ if(empty($_GET))
 	die();
 }
 
+$isTeamMember = ($user == $project->createdBy || in_array($user, $project->teamMembers)) ? "true" : "false";
 $teamCount = $project->countTeam();
 $emptyRolesCount = $project->countEmptyRoles();
 $blogPostCount = $project->countBlogPosts();
-$commentCount = 6;
+$commentCount = $project->countComments();
 
 // Insert spagetti code here
 $userlikesthis = likesActiveProject($user->userId, $project->projectId);
-$hiddenMessage .= $userlikesthis."\n";
-$hiddenMessage .= "user: $user->userId "."\n";
-$hiddenMessage .= "project: $project->projectId "."\n";
+// $hiddenMessage .= $userlikesthis."\n";
+// $hiddenMessage .= "user: $user->userId "."\n";
+// $hiddenMessage .= "project: $project->projectId "."\n";
 if ($user->isLoggedIn) {
 	$liketext = ($userlikesthis) ? "Liked" : "Like this" ;
 } else {
-	$liketext = "<a href=\"/\">Login to like</a>";
+	$liketext = "<a href=\"/\">Login</a>";
 }
 
 echo <<<HTML
@@ -39,6 +40,18 @@ echo <<<HTML
 			<small>{$project->summary}</small>
 			</h1>
 		</div>
+		<div id="success">
+HTML;
+            if (isset($message)) {
+                foreach ($message as $message) { echo "<p class='message'>".$message."</p>"; }
+                unset($_SESSION['message']);
+            } 
+            if (isset($errors)) {
+                foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
+                unset($_SESSION['errors']);
+            } 
+echo <<<HTML
+        </div>
 		<div class="project boxLayout">
 			<!-- right panel -->
 			<div class="rightPanel right">
@@ -68,12 +81,12 @@ echo <<<HTML
 					</button>
 					
 					<!-- Other buttons -->
-					<button type="button" class="btn longBtn join">
+					<a href="join-project.php?id={$project->projectId}"><button type="button" class="btn longBtn join">
 					I want to join
-					</button>
-					<button type="button" class="btn longBtn ask">
+					</button></a>
+					<a href="mailto:{$project->createdBy->email}"><button type="button" class="btn longBtn ask">
 					Contact project leader
-					</button>
+					</button></a>
 				</div>
 				<!-- collaboraters -->
 				<div class="peopleBorder">
@@ -126,9 +139,12 @@ echo <<<HTML
 				<div class="bootstrap">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#top">Project</a></li>
-						<li><a href="#look">Looking for <span class="badge">{$emptyRolesCount}</span></a></li>
-						<li><a href="#blog">Updates <span class="badge">{$blogPostCount}</span></a></li>
-						<li><a href="#comments">Comments <span class="badge">{$commentCount}</span></a></li>
+						<li><a href="#look">Looking for <span class="badge emptyRolesCount">{$emptyRolesCount}</span></a></li>
+						<li><a href="#blog">Updates <span class="badge blogPostCount">{$blogPostCount}</span></a></li>
+						<li><a href="#comments">Comments <span class="badge commentCount">{$commentCount}</span></a></li>
+HTML;
+if ($isTeamMember) { echo "<li><a href=\"dashboard.php?id={$project->projectId}\">Dash</a></li>";}
+echo <<<HTML
 					</ul>
 				</div>
 HTML;
@@ -303,9 +319,10 @@ echo <<<HTML
 				if (data === false) {
 					$( ".newcomment" ).after( "Sorry, something went wrong" );
 				} else {
-
+					$( ".post" ).before( data );
+					$( ".commentCount" ).html(parseInt($( ".commentCount" ).html()) + 1);
 				}
-				$( ".post" ).before( data );
+				
 			
 			});
 	});

@@ -10,14 +10,28 @@ if (!empty($_POST) && $user->isLoggedIn)
 	$c->postedBy->getById($_POST['user']);
 	$c->timeElapsed 		= "Just now";
 
+	
+
 	$result = $c->saveToDatabase();
+
+	$p = new Project();
+	$p->getById($_POST['project']);
+
+	$commentClass = "";
+	$commentTeam = "";
+	if ($c->postedBy == $p->createdBy || in_array($c->postedBy, $p->teamMembers))
+	{
+		$commentClass = "owner yellowBorder";
+		$commentTeam = '<span class="label label-warning team">Team</span>';
+	} 
+
 	if ($result) 
 	{
 		echo <<<HTML
-		<div class="commentsBox">
+		<div class="commentsBox {$commentClass}">
 			<div class="right commentsContainer">
 				<div class="nameDate bootstrap">
-					{$c->postedBy->firstName} {$c->postedBy->lastName} <span class="date">{$c->timeElapsed}</span>
+					{$commentTeam}{$c->postedBy->firstName} {$c->postedBy->lastName} <span class="date">{$c->timeElapsed}</span>
 				</div>
 				<div class="comments">
 					{$c->content}

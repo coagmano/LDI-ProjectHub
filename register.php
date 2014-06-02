@@ -64,13 +64,13 @@ if(!empty($_POST))
 		$result = $user->saveToDatabase();
 		if($result) 
 		{ 
-			$message .= "Account created successfully";
+			$message[] = "Account created successfully";
 			//header('Location: dashboard.php');
 
 		}
 		else
 		{
-			$message .= $result;
+			$message[] = $result;
 			
 		}
 	}

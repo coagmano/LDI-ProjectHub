@@ -56,18 +56,22 @@ if(!empty($_POST))
 		$result = $joinRequest->saveToDatabase();
 		if($result) 
 		{ 
-			$message .= "Request sent successfully";
+			$message[] = "Request sent successfully";
 			$_SESSION['message'] = $message;
 			$user->tags = explode(',', $_POST['skills']);
 			$result = $user->saveToDatabase();
 			if (!$result) {
-				$errors[] = "could add skills"; 
-			}
+				$errors[] = "could not add skills"; 
+			} else {
+                header("Location: http://".$_SERVER['HTTP_HOST']."/project.php?id=".$_POST["project"]);
+                die();
+            }
 
 		}
 		else
 		{
-			$message .= $result;
+			$message[] = $result;
+            $_SESSION['message'] = $message;
 		}
 	}
 }
@@ -87,7 +91,10 @@ echo <<<HTML
 
         <div id="success">
 HTML;
-    if (isset($message)) { echo "<p class='message'>".$message."</p>"; unset($_SESSION['message']); }
+    if (isset($message)) {
+        foreach ($message as $message) { echo "<p class='message'>".$message."</p>"; }
+        unset($_SESSION['message']);
+    } 
     if (isset($errors)) {
         foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
         unset($_SESSION['errors']);
@@ -95,13 +102,13 @@ HTML;
 echo <<<HTML
         </div>
         
-        <div class="project">
+        <div class="boxLayout">
             <div id="regbox" class="bootstrap">
                 <form name="join" action="{$_SERVER['PHP_SELF']}" method="post">
                 
                 <p>
                     <label><h3>Write a quick message to the team</h3></label>
-                    <small>Tell {$project->createdBy->firstName} why you want to work on $project->title </small><br>
+                    <small>Tell why you want to work on "{$project->title}" </small><br>
                     <textarea name="message" id="message"></textarea>
                 </p>
                 <p>
@@ -135,6 +142,7 @@ HTML;
     });
 	
 	$("#skills").select2({
+                      tags: [],
                       tokenSeparators: [",", " "],
                       placeholder: "type your skills separated by commas",
                       formatNoMatches: "type to search or add new skills"

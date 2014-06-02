@@ -4,14 +4,18 @@ if(checkCount($result)) // If there is result
 	echo "<div class='displayProjects test'>
 			<table class='projects'>
 				<tr>";
-	$colum = 1;
-	while ($row = mysql_fetch_assoc($result)) {
+	$column = 1;
+
+	while ($row = mysql_fetch_assoc($result)) 
+	{
+		if (!is_null($row['id'])) 
+		{
 		$miniproject = new Project;
 		$miniproject->constructFromRow($row);
 		$percentage = progress($miniproject->stage);	// this is for the progress bar
 		$teamCount = $miniproject->countTeam();
 
-		if($colum==1){ echo "<tr>"; }	// a new row
+		if($column==1){ echo "<tr>"; }	// a new row
 
 		echo <<<HTML
 		<td>
@@ -21,11 +25,11 @@ if(checkCount($result)) // If there is result
 				<p class="descrption">{$miniproject->summary}</p>
 				<p class="tags"><a href="#">{$miniproject->category}</a>
 HTML;
-	foreach ($miniproject->skills as $skill) 
-	{
-		echo '<a href="#">'.$skill.'</a>';
-	}
-	echo <<<HTML
+		foreach ($miniproject->skills as $skill) 
+		{
+			echo '<a href="#">'.$skill.'</a>';
+		}
+		echo <<<HTML
 			</p>
 			<div class='bootstrap'><div class='progress'>
 				 <div class='progress-bar {$miniproject->stage}' role='progressbar' aria-valuenow='{$percentage}' aria-valuemin='0' aria-valuemax='100' style='width: {$percentage}%;'>
@@ -41,15 +45,20 @@ HTML;
 		</td>
 HTML;
 		// Display 3 <td> per row
-		if($colum!=3){$colum++;} else{$colum=1; echo "</tr>";}
+		if($column!=3){$column++;} else{$column=1; echo "</tr>";}
 
 		unset($miniproject); // Delete the object for cleanliness 
+		}
+		else
+		{
+			echo "<h2><center> <br>Sorry :( We couldn't find any projects with the options you searched for. <br> Why not <a href='new-project.php'>Create your own?</a></center></h2>";
+		}
 	}	// End of while
 
 	echo'	</table>
 		</div>	';
 
 		// Load more button (just a empty button atm)
-	echo'	<div class="bootstrap loadmore"><button type="button" class="btn btn-primary">Load more</button></div>';	
+	//echo'	<div class="bootstrap loadmore"><button type="button" class="btn btn-primary">Load more</button></div>';	
 }
 ?>

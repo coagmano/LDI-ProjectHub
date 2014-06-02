@@ -15,7 +15,7 @@
 		<li> | </li> 
 		<li class="bootstrap search">
 			<span class="glyphicon glyphicon-search"></span>
-			<form class="searchForm" action="#" method="POST">
+			<form class="searchForm" action="index.php?action=search" method="POST">
 				<input type="text" name="search" placeholder="Search" onclick="this.value='';"  onblur="this.value=!this.value?'Search':this.value;" value="Search"> </input> 
 			</form>
 		</li>

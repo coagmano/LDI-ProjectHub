@@ -81,64 +81,103 @@ function removeLike($projectId, $userId)
 
 /********************************
  * Start project display block 	*
- * @author Yancie				*
  ********************************/
 
 // Both category and skill filters not set
-function noCate_noSkill($stage,$sort) {
-	$sql = "SELECT * 
-			FROM Projects  
-			WHERE stage = '$stage' 
+function noCate_noSkill($stage,$sort) 
+{
+	global $hiddenMessage;
+	$hiddenMessage .= "noCate_noSkill";
+	$sql = "SELECT p.*, COUNT(project_id) as likes
+			FROM Projects p 
+			LEFT JOIN project_likes l
+			ON p.id = l.project_id
+			WHERE p.stage = '$stage'
+			GROUP BY p.id
 			ORDER BY $sort 
 			LIMIT 9 ";
-
-	$result = mysql_query($sql);
+	$hiddenMessage .= "\n".$sql;
+	$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
 	return $result;
 }
 
 // Category filler not set
-function noCate($skill,$stage,$sort) {
-	$sql = "SELECT *
-			FROM Projects 
+function noCate($skill,$stage,$sort) 
+{
+	global $hiddenMessage;
+	$hiddenMessage .= "noCate";
+	$sql = "SELECT p.*, COUNT(project_id) as likes
+			FROM Projects p 
+			LEFT JOIN project_likes l
+			ON p.id = l.project_id
 			WHERE stage = '$stage'
-			AND category = '$category'
+			AND skill = '$skill'
+			GROUP BY p.id
 			ORDER BY $sort
 			LIMIT 9 ";
 
-	$result = mysql_query($sql);
+	$result = mysql_query($sql)or die(mysql_error()."\n".$sql);
 	return $result;
 }
 
 // Skill filler not set
-function noSkill($category,$stage,$sort) {
-	$sql = "SELECT *
-			FROM Projects 
+function noSkill($category,$stage,$sort) 
+{
+	global $hiddenMessage;
+	$hiddenMessage .= "noSkill";
+	$sql = "SELECT p.*, COUNT(project_id) as likes
+			FROM Projects p 
+			LEFT JOIN project_likes l
+			ON p.id = l.project_id
 			WHERE stage = '$stage'
-			AND skill = '$skill'
+			AND category = '$category'
+			GROUP BY p.id
 			ORDER BY $sort
 			LIMIT 9 ";
 
-	$result = mysql_query($sql);
+	$result = mysql_query($sql)or die(mysql_error()."\n".$sql);
 	return $result;
 }
 
 // All filters set
-function allFilters($category,$skill,$stage,$sort) {
-	$sql = "SELECT *
-			FROM Projects 
+function allFilters($category,$skill,$stage,$sort) 
+{
+	global $hiddenMessage;
+	$hiddenMessage .= "allFilters";
+	$sql = "SELECT p.*, COUNT(project_id) as likes
+			FROM Projects p 
+			LEFT JOIN project_likes l
+			ON p.id = l.project_id
 			WHERE stage = '$stage'
 			AND category = '$category'
 			AND skill = '$skill'
+			GROUP BY p.id
 			ORDER BY $sort
 			LIMIT 9 ";
 
-	$result = mysql_query($sql);
+	$result = mysql_query($sql)or die(mysql_error()."\n".$sql);
 	return $result;
 }
 
+function projectSearch($term)
+{
+    $sort = "likes DESC";
+
+    $sql = "SELECT p.*, COUNT(project_id) as likes
+			FROM Projects p 
+			LEFT JOIN project_likes l
+			ON p.id = l.project_id
+            WHERE MATCH(title, summary, description, category, stage) AGAINST ('{$term}')
+            GROUP BY p.id
+            LIMIT 9 ";
+
+    $result = mysql_query($sql)or die(mysql_error()."\n".$sql);
+	return $result;
+}
 
 //check if there is an result
-function checkCount($result){
+function checkCount($result)
+{
 	$count = mysql_num_rows($result);
 	if ($count != 0) { return true;}
 	else {return false;}
@@ -146,11 +185,12 @@ function checkCount($result){
 
 
 // progress bar string to perstange 
-function progress($stage){
+function progress($stage)
+{
 	if($stage=="Aspiration"){return 0;}
-	else if($stage=="Incubating"){return 25;}
-	else if($stage=="Developing"){return 75;}
-	else if($stage=="Mature"){return 100;}
+	else if($stage=="Incubation"){return 25;}
+	else if($stage=="Implementation"){return 75;}
+	else if($stage=="Maturation"){return 100;}
 }
 /*****************************
  * End project display block *

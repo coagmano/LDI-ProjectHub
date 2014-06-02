@@ -54,7 +54,7 @@ class JoinRequest {
 			$hiddenMessage .= $sql."<br>\n";
 		}
 
-		$result = mysql_query($sql) ;//or die(mysql_error()."<br>\nSQL: ".$sql);
+		$result = mysql_query($sql) or die(mysql_error()."<br>\nSQL: ".$sql);
 
 		if ($result)
 		{

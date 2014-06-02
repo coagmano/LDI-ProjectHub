@@ -19,6 +19,9 @@ THINGS THAT NEED TO BE DONE
 
 	//$tags = getProjectTags();
 	//// something something searchTags()
+
+if (is_null($_GET))
+{
 ?>
 
  <script>
@@ -76,7 +79,9 @@ HTML;
 	</div> <!-- End of Container -->
 </div> <!-- End of Header -->
 
-
+<?php 
+} // END if GET is null block 
+?>
 
 <!-- Category and View  -->
 <div class="container">	
@@ -85,16 +90,11 @@ HTML;
 		<p class="ProjectStages"> Project Stages : </p>
 
 		<div class="breadcrumb">
-			<a href="#" class="active first">Aspiration</a>
-			<a href="#" class="second">Incubating </a>
-			<a href="#" class="third">Developing</a>
-			<a href="#" class="forth">Mature</a>
+			<a href="index.php?stage=Aspiration" class="active first">Aspiration</a>
+			<a href="index.php?stage=Incubation" class="second">Incubation</a>
+			<a href="index.php?stage=Implementation" class="third">Implementation</a>
+			<a href="index.php?stage=Maturation" class="forth">Maturation</a>
 		</div>
-
-		<!-- Prefixfree -->
-		<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript">
-		</script>
-
 
 		<!-- Category -->
 		<div class="bootstrap cate">
@@ -105,39 +105,27 @@ HTML;
 			    <span class="sr-only">Toggle Dropdown</span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#">Category 1</a></li>
-			    <li><a href="#">Category 2</a></li>
-			    <li><a href="#">Category 3</a></li>
-			    <li><a href="#">Category 4</a></li>
+			    <li><a href="index.php?category=Personal Development Project">Personal Development Project</a></li>
+			    <li><a href="index.php?category=Social and Global Change Project">Social &amp; Global Change Project</a></li>
+			    <li><a href="index.php?category=Student/Campus Community Project">Student/Campus Community Project</a></li>
+			    <li><a href="index.php?category=Social Enterprise">Social Enterprise</a></li>
+			    <li><a href="index.php?category=Business Enterprise">Business Enterprise</a></li>
+			    <li><a href="index.php?category=Technical Innovation">Technical Innovation</a></li>
 			  </ul>
 			</div>
 			<div class="btn-group">
-				<input type="text" name="searchTags" id="tags" style="width:100%" value="" />
-			  <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Required Skills</button>
-			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			    <span class="caret"></span>
-			    <span class="sr-only">Toggle Dropdown</span>
-			  </button> -->
-			  <div class="" role="menu">
-			  <!-- <select class="dropdown-menu" role="menu">
-				<?php 
-			    // foreach ($tags as $tag) {
-			    // 	echo "<option>{$tag}</option>";
-			    // }
-			    ?>
-			  </select> -->
-			  </div>
+				<input type="text" name="searchTags" id="tags" style="width: 219px" value="" />
 			</div>
 		</div>
 		<div class="category">
 			<ul class="view"> 
-				<li>View By : </li>
+				<li>Order By : </li>
 				<li>
 					<select name ="viewBy">
-					  <option value="something">Something</option>
-					  <option value="something">something</option>
-					  <option value="something">something</option>
-					  <option value="something">something</option>
+					  <option value="likes DESC">Most liked</option>
+					  <option value="likes">Least liked</option>
+					  <option value="createdTimestamp DESC">Newest first</option>
+					  <option value="createdTimestamp">Oldest first</option>
 					</select>
 				</li>
 			</ul>
@@ -148,40 +136,49 @@ HTML;
 <!-- Display Projects -->
 
 <?php 
+
+if (isset($_POST['search']) && $_GET['action'] == "search") 
+{
+	$result = projectSearch($_POST['search']);
+}
+else 
+{
 	$tags = getAllTags();
 	// Set up default search filters
-	$stage = "Aspiration";
-	$category = "none";
-	$skill = "none";
-	$sort = "none";
-	
-	// Figure what fillers are set then fetch from databse using below functions
-	if($sort="none"){$sort= "id";}	// default sort by popularily (likes)
-	if($category = "none" && $skill = "none")
-		{
-			$result = noCate_noSkill($stage,$sort);
-		}
-	else if($category = "none")
-		{
-			$result = noCate($skill,$stage,$sort);
-		}
-	else if($skill = "none")
-		{
-			$result = noSkill($category,$stage,$sort);
-		}
-	else 
-		{
-			$result = allFillers($category,$skill,$stage,$sort);
-		}
+	$stage = (isset($_GET['stage'])) ? $_GET['stage'] : "Aspiration" ;
+	$category = (isset($_GET['category'])) ? $_GET['category'] : "none";
+	$skill = (isset($_GET['skill'])) ? $_GET['skill'] : "none";
+	$sort = (isset($_GET['sort'])) ? $_GET['sort'] : "none";
+	if ($category == "Social and Global Change Project") {$category = "Social &amp; Global Change Project";}
 
-	if(checkCount($result)) // If there is result
+	// Figure what fillers are set then fetch from databse using below functions
+	if($sort="none"){$sort= "likes DESC";}	// default sort by popularily (likes)
+	if($category == "none" && $skill == "none")
 	{
-		include 'includes/projectDisplay.php';		// Display projects	
+		$result = noCate_noSkill($stage,$sort);
+	}
+	else if($category == "none")
+	{
+		$result = noCate($skill,$stage,$sort);
+	}
+	else if($skill == "none")
+	{
+		$result = noSkill($category,$stage,$sort);
 	}
 	else 
-	{ 	// if there isn't a result, display message no result
-		echo "<h2><center> <br/> <br/> Sorrry :( There is no project at the moment. <br /> Why not <a href='new-project.php'>Create your own?</a></center></h2>";
-	}	
+	{
+		$result = allFillers($category,$skill,$stage,$sort);
+	}
+}
+
+if(checkCount($result)) // If there is result
+{
+	include 'includes/projectDisplay.php';		// Display projects	
+}
+else 
+{ 	// if there isn't a result, display message no result
+	echo "<h2><center> <br>Sorry :( We couldn't find any projects with the options you searched for. <br> Why not <a href='new-project.php'>Create your own?</a></center></h2>";
+}	
  ?>
 
 

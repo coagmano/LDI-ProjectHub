@@ -38,8 +38,7 @@ class Project {
 		$this->fileShareUrl 	= $row['fileShareUrl'];
 		$this->location 		= $row['location'];
 
-		//$this->skills 			= explode(',', $row['skills']);
-
+		$this->skills 			= $this->getSkills();
 		$this->likes 			= $this->countLikes();
 		$this->createdBy 		= $this->getCreatedBy();
 		$this->roles			= $this->getRoles(); // Roles contain team members
@@ -104,7 +103,7 @@ class Project {
 		$sql = "SELECT *
 				FROM project_roles
 				WHERE project_id = $this->projectId";
-		$result = mysql_query($sql) or die(mysql_error());
+		$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
 		
 		while ($row = mysql_fetch_assoc($result)) 
 		{
@@ -162,6 +161,22 @@ class Project {
 			$cs[] = $c;
 		}
 		return $cs;
+	}
+
+	public function getSkills()
+	{
+		$tags = Array();
+		$sql = "SELECT tag, COUNT(*) freq
+		        FROM tags
+		        WHERE project_id = $this->projectId
+		        GROUP BY tag
+		        ORDER BY freq DESC";
+		$result = mysql_query($sql) or die("Error getting tags: ".mysql_error());
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+		    $tags[] = $row['tag'];
+		}
+		return $tags;
 	}
 
 	public function countLikes()

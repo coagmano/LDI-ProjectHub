@@ -7,10 +7,14 @@
 	margin: 0 auto;
 	width: 1000px;
 }
+table.projects tbody {
+	vertical-align: top;
+}
+
 .box {
 	background-color: #fff;
 	width: 310px;
-	height: 360px;
+	/*height: 360px;*/
 	margin: 10px 10px 0 0;
 	padding: 5px;
 	border-style: solid;
@@ -33,7 +37,7 @@
 	}
 .box .descrption {
 	margin-bottom: -10px;
-	height: 55px;
+	/*height: 55px;*/
 	overflow: hidden;
 	}
 .box .descrption,.box .status {

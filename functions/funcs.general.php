@@ -61,7 +61,7 @@ function getAllTags()
             GROUP BY tag
             ORDER BY freq DESC
             LIMIT 20";
-    $result = mysql_query($sql);
+    $result = mysql_query($sql) or die("Error getting tags: ".mysql_error());
     while ($row = mysql_fetch_assoc($result)) 
     {
         $tags[] = $row['tag'];
