@@ -90,7 +90,7 @@ function noCate_noSkill($stage,$sort) {
 			FROM Projects  
 			WHERE stage = '$stage' 
 			ORDER BY $sort 
-			LIMIT 15 ";
+			LIMIT 9 ";
 
 	$result = mysql_query($sql);
 	return $result;
@@ -103,7 +103,7 @@ function noCate($skill,$stage,$sort) {
 			WHERE stage = '$stage'
 			AND category = '$category'
 			ORDER BY $sort
-			LIMIT 15 ";
+			LIMIT 9 ";
 
 	$result = mysql_query($sql);
 	return $result;
@@ -116,7 +116,7 @@ function noSkill($category,$stage,$sort) {
 			WHERE stage = '$stage'
 			AND skill = '$skill'
 			ORDER BY $sort
-			LIMIT 15 ";
+			LIMIT 9 ";
 
 	$result = mysql_query($sql);
 	return $result;
@@ -130,7 +130,7 @@ function allFilters($category,$skill,$stage,$sort) {
 			AND category = '$category'
 			AND skill = '$skill'
 			ORDER BY $sort
-			LIMIT 15 ";
+			LIMIT 9 ";
 
 	$result = mysql_query($sql);
 	return $result;

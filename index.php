@@ -148,6 +148,7 @@ HTML;
 <!-- Display Projects -->
 
 <?php 
+	$tags = getAllTags();
 	// Set up default search filters
 	$stage = "Aspiration";
 	$category = "none";
@@ -188,12 +189,14 @@ HTML;
 </div> <!-- end of container -->
 
 <script type="text/javascript">
-
-	$("#tags").select2({
+	$(document).ready(function() {
+        $("input#tags").select2({
+                      tags:["tag", "awesome" ],
                       tokenSeparators: [",", " "],
-                      placeholder: "Search by Required Skills",
-                      formatNoMatches: "Hit enter to search"
+                      placeholder: "Search for tags",
+                      formatNoMatches: "start typing"
                   });
+    });
 
 </script>
 <?php

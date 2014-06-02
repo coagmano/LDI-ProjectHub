@@ -1,5 +1,5 @@
 // Tooltips
-$('.tooltipLink').tooltip();
+// $('.tooltipLink').tooltip();
 
 // Loading
 $(".loading").click(function() {
