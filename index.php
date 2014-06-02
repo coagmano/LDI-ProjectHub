@@ -39,12 +39,15 @@ THINGS THAT NEED TO BE DONE
 			<!-- log in from  -->
 			<div id="errors">
            	<?php 
-           	    if (isset($message)) { echo "<p class='message'>".$message."</p>"; }
-           	    if (isset($errors)) {
-           	        foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
-           	        unset($_SESSION['errors']);
-           	    } 
-           	?>
+            if (isset($message)) {
+                foreach ($message as $message) { echo "<p class='message'>".$message."</p>"; }
+                unset($_SESSION['message']);
+            } 
+            if (isset($errors)) {
+                foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
+                unset($_SESSION['errors']);
+            } 
+        ?>
         	</div>
 			<?php
 			if ($user->isLoggedIn) {

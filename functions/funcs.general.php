@@ -53,4 +53,20 @@ function in_multiarray($elem, $array)
     return false;
 }
 
+function getAllTags() 
+{
+    $tags = Array();
+    $sql = "SELECT tag, COUNT(*) freq
+            FROM tags
+            GROUP BY tag
+            ORDER BY freq DESC
+            LIMIT 20";
+    $result = mysql_query($sql);
+    while ($row = mysql_fetch_assoc($result)) 
+    {
+        $tags[] = $row['tag'];
+    }
+    return $tags;
+}
+
 ?>

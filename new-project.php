@@ -13,8 +13,6 @@ $style = "project";
 //User must be logged in
 if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(); }
 
-$errors = array();
-$message = "";
 
 // Process creation if forms posted
 if(!empty($_POST))
@@ -40,7 +38,7 @@ if(!empty($_POST))
 		$project->description		= $_POST["description"];
 		$project->category			= $_POST["category"];
 		$project->skills			= array_map('trim',explode(",",$_POST["skills"]));
-		$project->featureImageUrl	= $_POST["featureImageUrl"];
+		//$project->featureImageUrl	= $_POST["featureImageUrl"];
 		$project->stage			    = "Aspiration";
 		$project->createdTimestamp	= time();
 		$project->videoUrl			= $_POST["videoUrl"];
@@ -52,15 +50,20 @@ if(!empty($_POST))
 		$result = $project->saveToDatabase();
 		if($result) 
 		{ 
-			$message .= "Account created successfully";
+			$message[] = "Account created successfully";
+            $_SESSION['message'] = $message;
+            header('Location: dashboard.php?id='.$project->projectId);
+            die();
 
 		}
 		else
 		{
-			$message .= $result;
+			$errors[] = $result;
 		}
 	}
 }
+
+$tags = getAllTags();
 
 // Load form
 include 'includes/header.php';
@@ -76,7 +79,10 @@ include 'includes/navbar.php';
 
         <div id="success">
         <?php 
-            if (isset($message)) { echo "<p class='message'>".$message."</p>"; }
+            if (isset($message)) {
+                foreach ($message as $message) { echo "<p class='message'>".$message."</p>"; }
+                unset($_SESSION['message']);
+            } 
             if (isset($errors)) {
                 foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
                 unset($_SESSION['errors']);
@@ -85,7 +91,7 @@ include 'includes/navbar.php';
             </p>
         </div>
         
-        <div class="project">
+        <div class="project boxLayout">
             <div id="regbox">
                 <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 
@@ -130,7 +136,7 @@ include 'includes/navbar.php';
                 </p>
                 <p>
                     <label><h2>What skills do you need for the project?:</h2></label>
-                    <input type="text" name="skills" id="skills"style="width:33%" value="<?php echo implode(", ", $user->tags); ?>" />
+                    <input name="skills" class="select2" style="width:33%;" />
                 </p>
                 <p>
                     <label><h2>Do you have a photo or image to feature on your page?</h2></label>
@@ -158,7 +164,7 @@ include 'includes/navbar.php';
   	</div>
 </div>
 <script>
-    $(function() {
+ $(document).ready(function() {
         $('#summary').editable({
             inlineMode: false, 
             width: 800,  
@@ -171,7 +177,11 @@ include 'includes/navbar.php';
             language: 'en_gb'
         });
 
-        $("#skills").select2({
+        $('.select2').select2({
+                      tags:[ 
+                            <?php foreach ($tags as $tag) {
+                                    echo '"'.$tag.'", ';
+                            } ?> ],
                       tokenSeparators: [",", " "],
                       placeholder: "type your skills separated by commas",
                       formatNoMatches: "type to search or add new skills"

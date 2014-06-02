@@ -38,7 +38,7 @@ class Project {
 		$this->fileShareUrl 	= $row['fileShareUrl'];
 		$this->location 		= $row['location'];
 
-		$this->skills 			= explode(',', $row['skills']);
+		//$this->skills 			= explode(',', $row['skills']);
 
 		$this->likes 			= $this->countLikes();
 		$this->createdBy 		= $this->getCreatedBy();
@@ -225,9 +225,12 @@ class Project {
 
 	public function saveToDatabase()
 	{
-		global $hiddenMessage; // Use hiddenMessage for debug messages
+		global $hiddenMessage, $errors; // Use hiddenMessage for debug messages
 		if (projectExists($this->projectId)) 
 		{
+			// For existing projects, delete all tags before update.
+			$tagDeleteSql = "DELETE FROM tags WHERE project_id = ".$this->projectId;
+			$tagDeleteResult = mysql_query($tagDeleteSql) or die("Error clearing tags before update: ".mysql_error());
 			$sql = 
 			   'UPDATE Projects
 		    	SET 
@@ -236,7 +239,6 @@ class Project {
 				description = "'.mysql_real_escape_string($this->description).'",
 				category ="'.mysql_real_escape_string($this->category).'",
 				stage = "'.mysql_real_escape_string($this->stage).'",
-				skills ="'.mysql_real_escape_string(implode(",", $this->skills)).'",
 				featureImageUrl = "'.mysql_real_escape_string($this->featureImageUrl).'",
 				createdTimestamp = "'.mysql_real_escape_string($this->createdTimestamp).'",
 				videoUrl = "'.mysql_real_escape_string($this->videoUrl).'",
@@ -250,38 +252,45 @@ class Project {
 		} 
 		else 
 		{
-			$sql = 
-				'INSERT INTO Projects
-		    	SET 
-       		    title ="'.mysql_real_escape_string($this->title).'",
-				summary ="'.mysql_real_escape_string($this->summary).'",
-				description = "'.mysql_real_escape_string($this->description).'",
-				category ="'.mysql_real_escape_string($this->category).'",
-				stage = "'.mysql_real_escape_string($this->stage).'",
-				skills ="'.mysql_real_escape_string(implode(",", $this->skills)).'",
-				featureImageUrl = "'.mysql_real_escape_string($this->featureImageUrl).'",
-				createdTimestamp = "'.mysql_real_escape_string($this->createdTimestamp).'",
-				videoUrl = "'.mysql_real_escape_string($this->videoUrl).'",
-				location = "'.mysql_real_escape_string($this->location).'",
-				createdBy_id = "'.mysql_real_escape_string($this->createdBy_id).'"
-		        ';
+			$sql = 'INSERT INTO Projects
+					(title, summary, description, category, stage, featureImageUrl, createdTimestamp, videoUrl, location, createdBy_id)
+			    	VALUES (
+			    	"'.$this->title.'", 
+					"'.$this->summary.'", 
+					"'.$this->description.'", 
+					"'.$this->category.'", 
+					"'.$this->stage.'", 
+					"'.$this->featureImageUrl.'", 
+					"'.$this->createdTimestamp.'", 
+					"'.$this->videoUrl.'", 
+					"'.$this->location.'", 
+					"'.$this->createdBy->userId.'
+					")';
+
 			$type = "INSERT";
 			$hiddenMessage .= $sql."<br>";
 		}
 
-		$result = mysql_query($sql) or die(mysql_error());
+		$result1 = mysql_query($sql) or die(mysql_error());
+		if ($type == "INSERT") { $this->projectId = mysql_insert_id(); }
 
-		if ($result)
-		{
-			if ($type == "INSERT") {
-				$this->projectId = mysql_insert_id();
-			}
-			return true;
-		} 
+		$tagInsertSql = 'INSERT INTO tags (tag, project_id) VALUES';
+		for ($i=0; $i < count($this->skills); $i++) 
+		{ 
+			$tagInsertSql .= '("'.$this->skills[$i].'", '.$this->projectId.')';
+        	if ($i != (count($this->skills)-1)) 
+        	{ 
+        		$tagInsertSql .= ", "; 
+        	}
+		}
+
+        $result2 = mysql_query($tagInsertSql) or die(mysql_error());
+
+		if ($result1 && $result2) { return true; } 
 		else
 		{
-			$error = "Error saving Project to database: ".mysql_error();
-			return $error;
+			$errors[] = "Error saving Project to database: ".mysql_error();
+			return false;
 		}
 	}
 }

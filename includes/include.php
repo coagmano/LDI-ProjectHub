@@ -29,6 +29,7 @@
 	$_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 	
 	$errors = array();
-	$message = "";
+	$message = array();
 	$errors = (isset($_SESSION['errors'])) ? $_SESSION['errors'] : array();
+	$message = (isset($_SESSION['message'])) ? $_SESSION['message'] : array();
 ?>

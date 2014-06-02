@@ -90,7 +90,10 @@ if(!empty($_POST))
 
         <div id="success">
         <?php 
-            if (isset($message)) { echo "<p class='message'>".$message."</p>"; }
+            if (isset($message)) {
+                foreach ($message as $message) { echo "<p class='message'>".$message."</p>"; }
+                unset($_SESSION['message']);
+            } 
             if (isset($errors)) {
                 foreach ($errors as $error) { echo "<p class='error'>".$error."</p>"; }
                 unset($_SESSION['errors']);
@@ -98,7 +101,7 @@ if(!empty($_POST))
         ?>
         </div>
 
-        <div class="project">
+        <div class="boxLayout">
             <div id="regbox">
                 <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <small>To become a member of ProjectHub, you must be an LDI member on CareerHub.</small>
@@ -162,6 +165,7 @@ if(!empty($_POST))
         	 buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
         })
         $("#tags").select2({
+                      tags: [<?php echo('"'.implode('", "', getAllTags()).'"'); ?>],
                       tokenSeparators: [",", " "],
                       placeholder: "type your skills separated by commas",
                       formatNoMatches: "type to search or add new skills"
