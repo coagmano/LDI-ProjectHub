@@ -121,7 +121,6 @@ HTML;
                 	<input type="hidden" name="project" value="{$project->projectId}" />
                 	<input type="hidden" name="role" value="{$roleId}" />
                     <button type="submit" name="submit" value="submit" class="btn btn-success">Send Request</button>
-                    <input type="submit" name"submit" value="Send Request" />
                 </p>
 
             	</form>

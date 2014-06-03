@@ -195,7 +195,7 @@ HTML;
 		echo <<<HTML
 							</p>
 							<p>{$role->blurb}</p>
-							<a href="project-apply.php?role={$role->roleId}"><button type="button" class="btn btn-success right">Apply</button></a>
+							<a href="join-project.php?id={$project->projectId}&amp;role={$role->roleId}"><button type="button" class="btn btn-success right">Apply</button></a>
 						</div>
 HTML;
 	}
@@ -256,6 +256,7 @@ echo <<<HTML
 							<h3>Post a Comment</h3>
 							<form accept-charset="UTF-8" action="" method="post">
 								<textarea data-fieldlength="500" id="newcomment" name="comment"></textarea><br>
+								<input type="hidden" name="private" value="false" />
 								<div class="bootstrap submit right">
 									<button type="button" id="postnewcomment" class="btn btn-success right">Submit</button>
 								</div>

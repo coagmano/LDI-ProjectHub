@@ -4,6 +4,10 @@ function sanitise($str)
 {
 	return strtolower(strip_tags(trim(($str))));
 }
+function sanitize($str)
+{
+    return strtolower(strip_tags(trim(($str))));
+}
 
 function time_elapsed_string($datetime, $full = false) 
 {

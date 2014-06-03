@@ -24,6 +24,7 @@ if(!empty($_POST))
 	$email = trim($_POST["email"]);
 	$password = trim($_POST["password"]);
 	$confirm_pass = trim($_POST["passwordc"]);
+    $profilePicUrl = "none.png"; // Set default image, if one is uploaded the var is overwritten
 
 	//Perform some validation
 	if(strlen($password) < 6 )
@@ -42,6 +43,32 @@ if(!empty($_POST))
 	{
 		$errors[] = "An account with that email already exists. Do you want to <a href='login.php'>Login instead?</a>";
 	}
+    if (isset($_FILES)) 
+    {
+        if($_FILES['profilePic']['error'] > 0){
+            $errors[] = 'An error ocurred when uploading.';
+        }
+        if(!getimagesize($_FILES['profilePic']['tmp_name'])){
+            $errors[] = 'Please ensure you are uploading an image.';
+        }
+        // Check filetype
+        if(!in_array($_FILES['profilePic']['type'], array('image/jpg','image/jpeg','image/png','image/gif'))) {
+            $errors[] = 'Unsupported filetype uploaded.';
+        }
+        // Check filesize
+        if($_FILES['profilePic']['size'] > 500000){
+            $errors[] = 'File uploaded exceeds maximum upload size.';
+        }
+        // Set new filename based off image contents
+        $profilePicUrl = sha1_file($_FILES['profilePic']['tmp_name']);
+        // Check if the file exists
+        if(!file_exists('images/profile/'.$profilePicUrl)) {
+            // Upload profile image
+            if(!move_uploaded_file($_FILES['profilePic']['tmp_name'], 'images/profile/' . $profilePicUrl)) {
+                $errors[] = 'Error uploading file - check destination is writeable.';
+            }
+        } // Else fall back to existing image
+    }
 
 	//End data validation
 	if(count($errors) == 0)
@@ -54,7 +81,7 @@ if(!empty($_POST))
 		$user->firstName 			= $_POST["firstName"];
 		$user->lastName 			= $_POST["lastName"];
 		$user->blurb 				= $_POST["blurb"];
-		$user->profilePicUrl 		= $_POST["profilePicUrl"];
+		$user->profilePicUrl 		= $profilePicUrl;
 		$user->isLoggedIn 			= true;
 		$user->signupTimeStamp 		= time();
 
@@ -65,7 +92,8 @@ if(!empty($_POST))
 		if($result) 
 		{ 
 			$message[] = "Account created successfully";
-			//header('Location: dashboard.php');
+            $_SESSION['user'] = $user;
+			header('Location: index.php?search=');
 
 		}
 		else
@@ -103,7 +131,7 @@ if(!empty($_POST))
 
         <div class="boxLayout">
             <div id="regbox">
-                <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <form name="register" enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <small>To become a member of ProjectHub, you must be an LDI member on CareerHub.</small>
                 <p>
                     <label>First Name:</label>
@@ -134,7 +162,8 @@ if(!empty($_POST))
 
                 <p>
                     <label>Profile Photo:</label>
-                    <input type="text" name="profilePicUrl" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+                    <input type="file" name="profilePic" accept="image/*" />
                 </p>
                 
                 <p>

@@ -25,8 +25,10 @@
 	if (isset($_SESSION["user"])) {$user = $_SESSION["user"];} else {$user = new User();}
 	
 	//Sanitise POST and GET array
-	$_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-	$_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+	$DIRTY_POST = $_POST;
+	$DIRTY_GET = $_GET;
+	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+	$_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 	
 	$errors = array();
 	$message = array();

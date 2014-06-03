@@ -226,12 +226,12 @@ button:focus {
   zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
 .commentsContainer {
-	width: -moz-calc(100% - 90px);
+	/*width: -moz-calc(100% - 90px);
     width: -webkit-calc(100% - 90px);
-    width: calc(100% - 90px); 
+    width: calc(100% - 90px); */
 }
 .photo {
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 70px;
 	height: 70px;
 	border-radius: 5px;

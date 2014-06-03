@@ -151,7 +151,28 @@ class Project {
 
 		$sql = "SELECT *
 				FROM Comments
-				WHERE project_id = $this->projectId";
+				WHERE project_id = $this->projectId
+				AND private = 0";
+		$result = mysql_query($sql) or die(mysql_error());
+		
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+			$c = new Comment();
+			$c->constructFromRow($row);
+			$cs[] = $c;
+		}
+		return $cs;
+	}
+
+	public function getPrivateComments()
+	{
+		global $hiddenMessage;
+		$cs = array();
+
+		$sql = "SELECT *
+				FROM Comments
+				WHERE project_id = $this->projectId
+				AND private = 1";
 		$result = mysql_query($sql) or die(mysql_error());
 		
 		while ($row = mysql_fetch_assoc($result)) 
@@ -177,6 +198,22 @@ class Project {
 		    $tags[] = $row['tag'];
 		}
 		return $tags;
+	}
+
+	public function getJoinRequests()
+	{
+		$requests = Array();
+		$sql = "SELECT *
+		        FROM project_requests
+		        WHERE project_id = $this->projectId ";
+		$result = mysql_query($sql) or die("Error getting tags: ".mysql_error());
+		while ($row = mysql_fetch_assoc($result)) 
+		{
+		    $request = new JoinRequest();
+		    $request->constructFromRow($row);
+		    $requests[] = $request;
+		}
+		return $requests;
 	}
 
 	public function countLikes()
@@ -249,16 +286,16 @@ class Project {
 			$sql = 
 			   'UPDATE Projects
 		    	SET 
-				title ="'.mysql_real_escape_string($this->title).'",
-				summary ="'.mysql_real_escape_string($this->summary).'",
-				description = "'.mysql_real_escape_string($this->description).'",
-				category ="'.mysql_real_escape_string($this->category).'",
-				stage = "'.mysql_real_escape_string($this->stage).'",
-				featureImageUrl = "'.mysql_real_escape_string($this->featureImageUrl).'",
-				createdTimestamp = "'.mysql_real_escape_string($this->createdTimestamp).'",
-				videoUrl = "'.mysql_real_escape_string($this->videoUrl).'",
-				location = "'.mysql_real_escape_string($this->location).'",
-				createdBy_id = "'.mysql_real_escape_string($this->createdBy_id).'"
+				title ="'.$this->title.'",
+				summary ="'.$this->summary.'",
+				description = "'.$this->description.'",
+				category ="'.$this->category.'",
+				stage = "'.$this->stage.'",
+				featureImageUrl = "'.$this->featureImageUrl.'",
+				createdTimestamp = "'.$this->createdTimestamp.'",
+				videoUrl = "'.$this->videoUrl.'",
+				location = "'.$this->location.'",
+				createdBy_id = "'.$this->createdBy_id.'"
 		   		WHERE
 			    id = "'.$this->projectId.'"';
 		    $type = "UPDATE";

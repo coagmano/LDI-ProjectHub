@@ -19,18 +19,49 @@ if(!empty($_POST))
 {
 	$title = trim($_POST["title"]);
 	$description = trim($_POST["description"]);
+    $featureImageUrl = "emptyProject.jpg"; // Set default image, if one is uploaded the var is overwritten
 
 	//Perform some validation
 	if(strlen($title) == 0 )
 	{
 		$errors[] = "Looks like you forgot to enter a title! A title helps draw attention to your project.";
 	}
+    if (isset($_FILES)) 
+    {
+        if($_FILES['file_upload']['error'] > 0){
+            $errors[] = 'An error ocurred when uploading.';
+        }
+        if(!getimagesize($_FILES['file_upload']['tmp_name'])){
+            $errors[] = 'Please ensure you are uploading an image.';
+        }
+        // Check filetype
+        if($_FILES['file_upload']['type'] != 'image/png'){
+            $errors[] = 'Unsupported filetype uploaded.';
+        }
+        // Check filesize
+        if($_FILES['file_upload']['size'] > 500000){
+            $errors[] = 'File uploaded exceeds maximum upload size.';
+        }
+        // Check if the file exists
+        if(file_exists('upload/' . $_FILES['file_upload']['name'])){
+            $errors[] = 'File with that name already exists.';
+        }
+        // Upload feature image
+        $featureImageUrl = sha1_file($_FILES['file_upload']['tmp_name']);
+        if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], 'images/project/' . $featureImageUrl)){
+            $errors[] = 'Error uploading file - check destination is writeable.';
+        }
+    }
+    
+
+    die('File uploaded successfully.');
+
 	
 
 	//End data validation
 	if(count($errors) == 0)
 	{	
-		//Construct a project object and populate its variables
+        //Construct a project object and populate its variables
 		$project = new Project();
 
 		$project->title				= $_POST["title"];
@@ -38,7 +69,7 @@ if(!empty($_POST))
 		$project->description		= $_POST["description"];
 		$project->category			= $_POST["category"];
 		$project->skills			= array_map('trim',explode(",",$_POST["skills"]));
-		//$project->featureImageUrl	= $_POST["featureImageUrl"];
+		$project->featureImageUrl	= $featureImageUrl;
 		$project->stage			    = "Aspiration";
 		$project->createdTimestamp	= time();
 		$project->videoUrl			= $_POST["videoUrl"];
@@ -93,7 +124,7 @@ include 'includes/navbar.php';
         
         <div class="project boxLayout">
             <div id="regbox">
-                <form name="register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <form name="register" enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 
                 <p>
                     <label><h2>What are you going to call your grand idea?</h2></label>
@@ -143,7 +174,8 @@ include 'includes/navbar.php';
                 </p>
                 <p>
                     <label><h2>Do you have a photo or image to feature on your page?</h2></label>
-                    <input type="file" name="featureImageUrl" accept="image/*">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+                    <input type="file" name="featureImage" accept="image/*" />
                 </p>
                 <p>
                     <label><h2>Have a video that shows off your idea?</h2></label>

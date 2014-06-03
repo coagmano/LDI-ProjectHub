@@ -5,10 +5,10 @@ if (!empty($_POST) && $user->isLoggedIn)
 {
 	$c = new Comment();
 	$c->projectId 			= $_POST['project'];
-	$c->content 			= $_POST['content'];
-	$c->postedBy			= new User();
-	$c->postedBy->getById($_POST['user']);
+	$c->content 			= mysql_real_escape_string($_POST['content']);
+	$c->postedBy			= $user;
 	$c->timeElapsed 		= "Just now";
+	$c->private 			= $_POST['private'];
 
 	
 

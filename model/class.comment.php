@@ -8,6 +8,7 @@ class Comment {
 	public $timestamp = 0;
 	public $timeElapsed = "";
 	public $postedBy = NULL;
+	public $private = 0;
 
 	public function constructFromRow(array $row)
 	{
@@ -17,6 +18,7 @@ class Comment {
 		$this->content 			= $row["content"];
 		$this->timestamp		= $row["postedTimestamp"];
 		$this->timeElapsed 		= time_elapsed_string($this->timestamp);
+		$this->private 			= $row["private"];
 
 		$u = new User();
 		$u->getById($row["user_id"]);
@@ -38,17 +40,16 @@ class Comment {
 		} 
 		else 
 		{
-			$sql = 
-				"INSERT INTO Comments 
-				SET 
-				project_id = ".$this->projectId.",
-				user_id = ".$this->postedBy->userId.",
-				content = \"{$this->content}\",
-				postedTimestamp = '".time()."'";
+			$sql = "INSERT INTO Comments
+					SET
+					user_id = {$this->postedBy->userId} ,
+					project_id = $this->projectId ,
+					content = \"$this->content \",
+					private = $this->private ";
 			$type = "INSERT";
 			$hiddenMessage .= $type." ".$sql."<br>\n";
 		}
-
+		
 		$result = mysql_query($sql) or die(mysql_error());
 
 		if ($result)
