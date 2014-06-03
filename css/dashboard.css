@@ -180,9 +180,7 @@
 	Upload Image
 */
 
-.editProject .uploadImage {
-	height: 100px;
-}
+
 .editProject .fileUpload {
 	color: #fff !important;
 	background-color:  #60257d!important;

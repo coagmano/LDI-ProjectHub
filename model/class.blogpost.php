@@ -2,7 +2,7 @@
 
 class BlogPost {
 	
-	public /*.int.*/ $blogPostId = NULL;
+	public /*.int.*/ $id = NULL;
 	public /*.int.*/ $projectId = NULL;
 	public $title = "";
 	public $content = "";
@@ -13,7 +13,7 @@ class BlogPost {
 	public function constructFromRow(array $row)
 	{
 		global $hiddenMessage;
-		$this->blogPostId		= $row["id"];
+		$this->id				= $row["id"];
 		$this->projectId 		= $row["project_id"];
 		$this->title			= $row["title"];
 		$this->content 			= $row["content"];
@@ -27,7 +27,7 @@ class BlogPost {
 	public function saveToDatabase()
 	{
 		global $hiddenMessage; // Use hiddenMessage for debug messages
-		if (!is_null($this->blogPostId) && $this->blogPostId != 0) 
+		if (!is_null($this->id) && $this->id != 0) 
 		{
 			$sql = 
 			   "UPDATE BlogPosts
@@ -35,7 +35,7 @@ class BlogPost {
 				user_id = $this->postedBy->userId,
 				title = $this->title,
 				content = $this->content,
-		   		WHERE id = ".$this->blogPostId;
+		   		WHERE id = ".$this->id;
 		    $type = "UPDATE";
 		    $hiddenMessage .= $sql."<br>\n";
 
@@ -45,21 +45,20 @@ class BlogPost {
 			$sql = 
 				"INSERT INTO BlogPosts 
 				SET 
-				project_id = $this->project_id,
-				user_id = $this->postedBy->userId,
-				title = $this->title,
-				content = $this->content,
-				postedTimestamp = ".time();
+				project_id = {$this->projectId},
+				user_id = {$this->postedBy->userId},
+				title = \"{$this->title}\",
+				content = \"".$this->content."\"";
 			$type = "INSERT";
 			$hiddenMessage .= $sql."<br>\n";
 		}
 
-		$result = mysql_query($sql) or die(mysql_error());
+		$result = mysql_query($sql) or die("Error adding BlogPost to database: ".mysql_error()."\n<br>".$sql);
 
 		if ($result)
 		{
 			if ($type == "INSERT") {
-				$this->blogPostId = mysql_insert_id();
+				$this->id = mysql_insert_id();
 			}
 			return true;
 		} 

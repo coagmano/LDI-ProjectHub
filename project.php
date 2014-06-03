@@ -155,17 +155,10 @@ if (!($project->videoUrl == ""))
 				<div class="videoPic"><img src="{$project->videoUrl}" alt=""></div>
 HTML;
 }
-elseif (!($project->featureImageUrl) == "")
-{
-	echo <<<HTML
-				<div class="videoPic"><img src="images/{$project->featureImageUrl}" alt=""></div>
-HTML;
-}
 else
 {
 	echo <<<HTML
-				<!-- Placeholder image -->
-				<div class="videoPic"><img src="images/emptyProject.jpg" alt=""></div>
+				<div class="videoPic"><img src="images/{$project->featureImageUrl}" alt=""></div>
 HTML;
 }
 echo <<<HTML

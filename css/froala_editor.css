@@ -269,7 +269,7 @@ button {
   cursor: pointer;
 }
 .f-html .froala-element {
-  background: #353535;
+  background: #353535 !important;
   color: #FFF;
   font-family: "Courier New", Courier, monospace;
   font-size: 13px;

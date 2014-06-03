@@ -18,7 +18,6 @@ if (!$user->isLoggedIn){ header("Location: http://".$_SERVER['HTTP_HOST']); die(
 if(!empty($_POST))
 {
 	$title = trim($_POST["title"]);
-	$description = trim($_POST["description"]);
     $featureImageUrl = "emptyProject.jpg"; // Set default image, if one is uploaded the var is overwritten
 
 	//Perform some validation
@@ -26,47 +25,43 @@ if(!empty($_POST))
 	{
 		$errors[] = "Looks like you forgot to enter a title! A title helps draw attention to your project.";
 	}
-    if (isset($_FILES)) 
+    if (isset($_FILES['featureImage']))
     {
-        if($_FILES['file_upload']['error'] > 0){
+        if($_FILES['featureImage']['error'] > 0){
             $errors[] = 'An error ocurred when uploading.';
         }
-        if(!getimagesize($_FILES['file_upload']['tmp_name'])){
+        if(!getimagesize($_FILES['featureImage']['tmp_name'])){
             $errors[] = 'Please ensure you are uploading an image.';
         }
         // Check filetype
-        if($_FILES['file_upload']['type'] != 'image/png'){
+        if($_FILES['featureImage']['type'] != 'image/png'){
             $errors[] = 'Unsupported filetype uploaded.';
         }
         // Check filesize
-        if($_FILES['file_upload']['size'] > 500000){
+        if($_FILES['featureImage']['size'] > 500000){
             $errors[] = 'File uploaded exceeds maximum upload size.';
         }
         // Check if the file exists
-        if(file_exists('upload/' . $_FILES['file_upload']['name'])){
+        if(file_exists('upload/' . $_FILES['featureImage']['name'])){
             $errors[] = 'File with that name already exists.';
         }
         // Upload feature image
-        $featureImageUrl = sha1_file($_FILES['file_upload']['tmp_name']);
-        if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], 'images/project/' . $featureImageUrl)){
+        $featureImageUrl = sha1_file($_FILES['featureImage']['tmp_name']);
+        if(!move_uploaded_file($_FILES['featureImage']['tmp_name'], 'images/project/' . $featureImageUrl)){
             $errors[] = 'Error uploading file - check destination is writeable.';
         }
     }
     
-
-    die('File uploaded successfully.');
-
-	
-
 	//End data validation
 	if(count($errors) == 0)
 	{	
         //Construct a project object and populate its variables
 		$project = new Project();
+        if (!empty($_POST['project'])) { $project->projectId = $_POST['project']; }
 
 		$project->title				= $_POST["title"];
 		$project->summary			= $_POST["summary"];
-		$project->description		= $_POST["description"];
+		$project->description		= mysql_escape_string($DIRTY_POST["description"]);
 		$project->category			= $_POST["category"];
 		$project->skills			= array_map('trim',explode(",",$_POST["skills"]));
 		$project->featureImageUrl	= $featureImageUrl;
@@ -81,7 +76,7 @@ if(!empty($_POST))
 		$result = $project->saveToDatabase();
 		if($result) 
 		{ 
-			$message[] = "Account created successfully";
+			$message[] = "Project created/updated successfully";
             $_SESSION['message'] = $message;
             header('Location: dashboard.php?id='.$project->projectId);
             die();
