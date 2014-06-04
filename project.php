@@ -158,7 +158,7 @@ HTML;
 else
 {
 	echo <<<HTML
-				<div class="videoPic"><img src="images/{$project->featureImageUrl}" alt=""></div>
+				<div class="videoPic"><img src="images/project/{$project->featureImageUrl}" alt=""></div>
 HTML;
 }
 echo <<<HTML
@@ -249,7 +249,7 @@ echo <<<HTML
 							<h3>Post a Comment</h3>
 							<form accept-charset="UTF-8" action="" method="post">
 								<textarea data-fieldlength="500" id="newcomment" name="comment"></textarea><br>
-								<input type="hidden" name="private" value="false" />
+								<input type="hidden" name="private" value="0" />
 								<div class="bootstrap submit right">
 									<button type="button" id="postnewcomment" class="btn btn-success right">Submit</button>
 								</div>
@@ -307,7 +307,7 @@ echo <<<HTML
 		
 		var newCommentHtml = $( ".newcomment" ).html();
 
-		$.post( "ajax/comment.php", { user: "{$user->userId}", project: "{$project->projectId}", content: newCommentHtml } )
+		$.post( "ajax/comment.php", { user: "{$user->userId}", project: "{$project->projectId}", content: newCommentHtml, private: 0 } )
 			.done(function( data ) {
 				
 				if (data === false) {

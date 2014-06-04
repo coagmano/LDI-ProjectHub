@@ -212,5 +212,11 @@ $(function() {
         language: 'en_gb',
          buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
     });
+    $("#tags").select2({
+                      tags: [<?php echo('"'.implode('", "', getAllTags()).'"'); ?>],
+                      tokenSeparators: [",", " "],
+                      placeholder: "type your skills separated by commas",
+                      formatNoMatches: "type to search or add new skills"
+                  });
 });
 </script>

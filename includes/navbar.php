@@ -7,7 +7,7 @@
 
 	<div class="navbar">
 	  <ul class="left navUl"> 
-		<li><a href="#">LDI CareerHub</a></li> 
+		<li><a href="https://careerhub.qut.edu.au/workgroups/ldi">LDI CareerHub</a></li> 
 		<li> | </li> 
 		<li><a href="./"><span class="bootstrap"><span class="glyphicon glyphicon-home"></span></span></a></li> 
 		<li><a href="#">Discover</a></li> 

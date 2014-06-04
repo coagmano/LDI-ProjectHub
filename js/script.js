@@ -1,5 +1,5 @@
 // Tooltips
-// $('.tooltipLink').tooltip();
+ $('.tooltipLink').tooltip();
 
 // Loading
 $(".loading").click(function() {
@@ -10,3 +10,8 @@ $(".loading").click(function() {
         $btn.button('reset');
     }, 1000);
 });
+
+document.getElementById("uploadBtn").onchange = function () {
+      document.getElementById("uploadFile").value = this.value;
+      document.getElementById("uploadFile").value = this.value.replace("C:\\fakepath\\", "");
+  };

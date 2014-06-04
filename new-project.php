@@ -25,7 +25,7 @@ if(!empty($_POST))
 	{
 		$errors[] = "Looks like you forgot to enter a title! A title helps draw attention to your project.";
 	}
-    if (isset($_FILES['featureImage']))
+    if (!is_null($_FILES['featureImage']['name']) && $_FILES['featureImage']['name'] != "")
     {
         if($_FILES['featureImage']['error'] > 0){
             $errors[] = 'An error ocurred when uploading.';
@@ -34,7 +34,7 @@ if(!empty($_POST))
             $errors[] = 'Please ensure you are uploading an image.';
         }
         // Check filetype
-        if($_FILES['featureImage']['type'] != 'image/png'){
+        if(!in_array($_FILES['featureImage']['type'], array('image/jpg','image/jpeg','image/png','image/gif'))){
             $errors[] = 'Unsupported filetype uploaded.';
         }
         // Check filesize
