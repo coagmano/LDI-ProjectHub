@@ -1,4 +1,4 @@
-<?php
+ <?php
 $style = "project";
 require_once('includes/include.php');
 $project = new Project(); 
