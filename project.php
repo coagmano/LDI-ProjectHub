@@ -154,21 +154,20 @@ echo <<<HTML
 					</ul>
 				</div>
 HTML;
-if (!($project->videoUrl == ""))
+if ($project->videoType == "youtube")
 {
-	echo <<<HTML
-				<!-- Embed video here -->
-				<!-- Youtube -->
-				<div class="video" style="width: 640px; height: 360px; overflow: hidden; position: relative;"><iframe frameborder="0" scrolling="no" seamless="seamless" webkitallowfullscreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen" id="okplayer" width="640" height="360" src="{$project->videoUrl}?hd=1&amp;showinfo=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;rel=0" style="position: absolute; top: 0px; left: 0px; width: 640px; height: 360px;"></iframe></div>
-				<!-- Vimeo -->
-				<div class="video" style="width: 640px; height: 360px; overflow: hidden; position: relative;"><iframe frameborder="0" scrolling="no" seamless="seamless" webkitallowfullscreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen" id="okplayer" src="http://player.vimeo.com/video/4643502?api=1&amp;js_api=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;playbar=0&amp;player_id=okplayer&amp;loop=0&amp;autoplay=0" width="640" height="360" style="position: absolute; top: 0px; left: 0px; width: 640px; height: 360px;"></iframe></div>
-HTML;
+	echo "<!-- Youtube -->
+				<div class='embed-container'><iframe src='http://www.youtube.com/embed/{$project->videoId}' frameborder='0' allowfullscreen></iframe></div>";
+}
+else if ($project->videoType == "vimeo") 
+{
+	echo "<!-- Vimeo -->
+				<div class='embed-container'><iframe src='http://player.vimeo.com/video/{$project->videoId}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>";
 }
 else
 {
-	echo <<<HTML
-				<div class="videoPic"><img src="images/project/{$project->featureImageUrl}" alt=""></div>
-HTML;
+	echo "<!-- Project Image -->
+				<div class="videoPic"><img src="images/project/{$project->featureImageUrl}" alt=""></div>";
 }
 echo <<<HTML
 				<div class="projectContent">
