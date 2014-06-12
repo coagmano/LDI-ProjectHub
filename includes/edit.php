@@ -71,8 +71,6 @@
     </div>
   </div>
 
-<div class="hr"></div>
-
 <!-- Description -->
   <div class="form-group description">
     <label>Description</label>

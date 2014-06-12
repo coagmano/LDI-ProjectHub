@@ -66,7 +66,7 @@ if(!empty($_POST))
 	  	</div>
 
 	  <div class="save newUpdateSave right">
-	    <button type="submit" data-loading-text="Saving..." class="loading btn btn-success">Save</button>
+	    <button type="submit" data-loading-text="Posting..." class="loading btn btn-success">Post</button>
 	  </div>
 	</form>
 

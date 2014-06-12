@@ -67,7 +67,8 @@ if(!empty($_POST))
 		$project->featureImageUrl	= $featureImageUrl;
 		$project->stage			    = "Aspiration";
 		$project->createdTimestamp	= time();
-		$project->videoUrl			= $_POST["videoUrl"];
+		$project->videoType			= $_POST["videoType"];
+        $project->videoId           = $_POST["videoId"];
 		//$project->fileShareUrl	= $_POST["fileShareUrl"];
 		$project->location			= $_POST["location"];
 		$project->createdBy		    = $user;
@@ -117,7 +118,7 @@ include 'includes/navbar.php';
             </p>
         </div>
         
-        <div class="project boxLayout">
+        <div class="project boxLayout bootstrap">
             <div id="regbox">
                 <form name="register" enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 
@@ -128,12 +129,12 @@ include 'includes/navbar.php';
                 <p>
                     <label><h2>So what's the pitch?</h2></label>
                     <small>This short description will be at the top of your campaign page and should tell them what your campaign is about in 200 characters or less</small>
-                    <textarea name="summary" id="summary"></textarea>
+                    <textarea name="summary" id="summary" class="editable"></textarea>
                 </p>
                 <p>
                     <label><h2>Here's where you get to flesh out all the details:</h2></label>
                     <small>We put this here are just to help, write whatever you want</small>
-                    <textarea name="description" id="description">
+                    <textarea name="description" id="description" class="editable-fulltext">
                         <h2>A little bit of context</h2>
                         <em>[Set the scene. Zoom right out and set the scene for your audience. Many of them will already know this, but it moves their brain into the right frame to introduce what you’re doing.]</em><br>
                          <br>
@@ -176,6 +177,9 @@ include 'includes/navbar.php';
                     <label><h2>Have a video that shows off your idea?</h2></label>
                     <small>Just enter the web address to a youtube or vimeo video</small><br>
                     <input type="text" name="videoUrl" />
+                    <input type="hidden" name="videoType" value="" />
+                    <input type="hidden" name="videoId" value="" />
+                    <span class="video-type label label-success"></span>
                 </p>
                 
                 <p>
@@ -195,17 +199,7 @@ include 'includes/navbar.php';
 </div>
 <script>
  $(document).ready(function() {
-        $('#summary').editable({
-            inlineMode: false, 
-            width: 800,  
-            language: 'en_gb',
-             buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline']
-        });
-        $('#description').editable({
-            inlineMode: false, 
-            width: 800,  
-            language: 'en_gb'
-        });
+        
 
         $('.select2').select2({
                       tags:[ 
@@ -215,7 +209,17 @@ include 'includes/navbar.php';
                       tokenSeparators: [",", " "],
                       placeholder: "type your skills separated by commas",
                       formatNoMatches: "type to search or add new skills"
-                  });
+        });
+        
+        $("[name='videoUrl']").keyup(function() {
+            var url = $("[name='videoUrl']").val();
+            var video = parseVideo(url);
+            
+            $("[name='videoType']").val( video.type );
+            $("[name='videoId']").val( video.id );
+            $(".video-type").html( video.type );
+        });
+
     });
 </script>
 

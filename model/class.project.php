@@ -13,7 +13,8 @@ class Project {
 	public $stage = "";
 	public $likes = 0;
 	public $createdTimestamp = 0;
-	public $videoUrl = "";
+	public $videoType = "";
+	public $videoId = "";
 	public $fileShareUrl = "";
 	public $location = "";
 	
@@ -34,7 +35,8 @@ class Project {
 		$this->featureImageUrl 	= $row['featureImageUrl'];
 		$this->stage 			= $row['stage'];
 		$this->createdTimestamp = $row['createdTimestamp'];
-		$this->videoUrl 		= $row['videoUrl'];
+		$this->videoType 		= $row['videoType'];
+		$this->videoId 			= $row['videoId'];
 		$this->fileShareUrl 	= $row['fileShareUrl'];
 		$this->location 		= $row['location'];
 
@@ -293,7 +295,8 @@ class Project {
 				stage = "'.$this->stage.'",
 				featureImageUrl = "'.$this->featureImageUrl.'",
 				createdTimestamp = "'.$this->createdTimestamp.'",
-				videoUrl = "'.$this->videoUrl.'",
+				videoType = "'.$this->videoType.'",
+				videoId = "'.$this->videoId.'",
 				location = "'.$this->location.'",
 				createdBy_id = "'.$this->createdBy_id.'"
 		   		WHERE
@@ -314,7 +317,8 @@ class Project {
 					"'.$this->stage.'", 
 					"'.$this->featureImageUrl.'", 
 					"'.$this->createdTimestamp.'", 
-					"'.$this->videoUrl.'", 
+					"'.$this->videoType.'", 
+					"'.$this->videoId.'", 
 					"'.$this->location.'", 
 					"'.$this->createdBy->userId.'
 					")';

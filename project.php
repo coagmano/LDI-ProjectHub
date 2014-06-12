@@ -13,17 +13,16 @@ if(empty($_GET))
 	die();
 }
 
+// Spagetti code Party! 
 $isTeamMember = ($user == $project->createdBy || in_array($user, $project->teamMembers)) ? "true" : "false";
 $teamCount = $project->countTeam();
 $emptyRolesCount = $project->countEmptyRoles();
 $blogPostCount = $project->countBlogPosts();
 $commentCount = $project->countComments();
-
-// Insert spagetti code here
 $userlikesthis = likesActiveProject($user->userId, $project->projectId);
-// $hiddenMessage .= $userlikesthis."\n";
-// $hiddenMessage .= "user: $user->userId "."\n";
-// $hiddenMessage .= "project: $project->projectId "."\n";
+
+$hiddenMessage = $isTeamMember;
+
 if ($user->isLoggedIn) {
 	$liketext = ($userlikesthis) ? "Liked" : "Like this" ;
 } else {
@@ -81,9 +80,16 @@ echo <<<HTML
 					</button>
 					
 					<!-- Other buttons -->
+HTML;
+if(!$isTeamMember)
+{
+	echo <<<HTML
 					<a href="join-project.php?id={$project->projectId}"><button type="button" class="btn longBtn join">
 					I want to join
 					</button></a>
+HTML;
+}
+echo <<<HTML
 					<a href="mailto:{$project->createdBy->email}"><button type="button" class="btn longBtn ask">
 					Contact project leader
 					</button></a>
@@ -143,7 +149,7 @@ echo <<<HTML
 						<li><a href="#blog">Updates <span class="badge blogPostCount">{$blogPostCount}</span></a></li>
 						<li><a href="#comments">Comments <span class="badge commentCount">{$commentCount}</span></a></li>
 HTML;
-if ($isTeamMember) { echo "<li><a href=\"dashboard.php?id={$project->projectId}\">Dash</a></li>";}
+if (!$isTeamMember) { echo "<li><a href=\"dashboard.php?id={$project->projectId}\">Dash</a></li>";}
 echo <<<HTML
 					</ul>
 				</div>
@@ -152,7 +158,10 @@ if (!($project->videoUrl == ""))
 {
 	echo <<<HTML
 				<!-- Embed video here -->
-				<div class="videoPic"><img src="{$project->videoUrl}" alt=""></div>
+				<!-- Youtube -->
+				<div class="video" style="width: 640px; height: 360px; overflow: hidden; position: relative;"><iframe frameborder="0" scrolling="no" seamless="seamless" webkitallowfullscreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen" id="okplayer" width="640" height="360" src="{$project->videoUrl}?hd=1&amp;showinfo=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;rel=0" style="position: absolute; top: 0px; left: 0px; width: 640px; height: 360px;"></iframe></div>
+				<!-- Vimeo -->
+				<div class="video" style="width: 640px; height: 360px; overflow: hidden; position: relative;"><iframe frameborder="0" scrolling="no" seamless="seamless" webkitallowfullscreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen" id="okplayer" src="http://player.vimeo.com/video/4643502?api=1&amp;js_api=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;playbar=0&amp;player_id=okplayer&amp;loop=0&amp;autoplay=0" width="640" height="360" style="position: absolute; top: 0px; left: 0px; width: 640px; height: 360px;"></iframe></div>
 HTML;
 }
 else
@@ -320,6 +329,8 @@ echo <<<HTML
 			
 			});
 	});
+
+
 	
 </script>
 HTML;
