@@ -166,8 +166,8 @@ else if ($project->videoType == "vimeo")
 }
 else
 {
-	echo "<!-- Project Image -->
-				<div class="videoPic"><img src="images/project/{$project->featureImageUrl}" alt=""></div>";
+	echo '<!-- Project Image -->
+				<div class="videoPic"><img src="images/project/'.$project->featureImageUrl.'" alt=""></div>';
 }
 echo <<<HTML
 				<div class="projectContent">

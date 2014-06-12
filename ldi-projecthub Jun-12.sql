@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 03, 2014 at 09:24 PM
+-- Generation Time: Jun 12, 2014 at 12:38 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -32,11 +32,11 @@ CREATE TABLE IF NOT EXISTS `BlogPosts` (
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `postedTimestamp` datetime NOT NULL,
+  `postedTimestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `IDX_4BC03615166D1F9C` (`project_id`),
   KEY `IDX_4BC03615A76ED395` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `BlogPosts`
@@ -44,7 +44,10 @@ CREATE TABLE IF NOT EXISTS `BlogPosts` (
 
 INSERT INTO `BlogPosts` (`id`, `project_id`, `user_id`, `title`, `content`, `postedTimestamp`) VALUES
 (1, 2, 2, 'This is a test', 'I really wish mysql had a lorem ipsum function', '2014-05-28 01:41:08'),
-(2, 2, 7, 'Yet another test', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2014-05-28 01:41:56');
+(2, 2, 7, 'Yet another test', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2014-05-28 01:41:56'),
+(3, 51, 9, 'Test1235431', '<p><span><p><span><strong>The TL;DR (too long didn’t read) Edit</strong></span></p><p>Now this thing is long and I know a lot of you would just like to know what happened to the comic and what’s going to happen, but really don’t care about all the awkward details. I totally get that. I’ve broken this up into clearly titled chunks, so you can scan around and just glance at whatever you like, but for those of you who are in a hurry and just want the ‘<a title="Bart Allen" href="https://dcomixologyssl.sslcs.cdngc.net/i/6790/12748/f1718583cc154743b50243dc4dfe9df1.jpg?h=9902d1ead8a0ddfd01125409a9e121dd" target="_blank" class="f-link"><em>Bart Allen</em></a>’ version of what’s happened, here’s word-for-word, ‘version one’ of this blog post…</p></span><br></p>', '2014-06-03 12:57:52'),
+(4, 2, 2, 'Test', '<p><span><h2><a href="https://careerhub.qut.edu.au/workgroups/ldi/blog/welcome-to-the-leadership-development-and-innovati" class="f-link">Welcome to the Leadership, Development and Innovation Program!</a></h2><p>Published 27 May 2014 @ 10:49 AM, by Karlee Davies</p><div><p>For detailed information on the program, please visit the&nbsp;<a href="https://www.student.qut.edu.au/studying/student-life/leadership-and-development/leadership-development-and-innovation-program" class="f-link">QUT LDI Website</a>. To register for the program, complete the&nbsp;<a href="http://careerhub.qut.edu.au/Form.aspx?id=147402" class="f-link">LDI Program Registration Form.&nbsp;</a>To learn more about how to have your experiences recognised and tracked, please read the&nbsp;<a href="http://www.student.qut.edu.au/__data/assets/pdf_file/0017/361502/LDI-Accreditation-Guide.pdf" class="f-link">LDI â€“ Awards Accreditation Manual</a>.&nbsp;</p></div></span><br></p>', '2014-06-04 10:42:37'),
+(5, 2, 2, 'Workshop offerings', '<p><span><h1>2014 Workshop Offerings</h1><p><span class="f-img-wrap"><img src="http://careerhub.qut.edu.au/uploads/images/LDI_offerings.JPG" alt="LDI_offerings.JPG"></span></p></span><br></p>', '2014-06-04 11:03:35');
 
 -- --------------------------------------------------------
 
@@ -62,23 +65,26 @@ CREATE TABLE IF NOT EXISTS `Comments` (
   PRIMARY KEY (`id`),
   KEY `IDX_5BC96BF0A76ED395` (`user_id`),
   KEY `IDX_5BC96BF0166D1F9C` (`project_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `Comments`
 --
 
 INSERT INTO `Comments` (`id`, `user_id`, `project_id`, `content`, `postedTimestamp`, `private`) VALUES
-(1, 2, 2, 'I would love to park my bike on the edge of the botanic gardens!', '0000-00-00 00:00:00', 0),
-(2, 1, 2, 'Lets do this!', '0000-00-00 00:00:00', 0),
-(10, 1, 2, 'TEst TESTFred likes to test', '0000-00-00 00:00:00', 0),
-(12, 1, 2, 'I am writing a comment', '0000-00-00 00:00:00', 0),
-(13, 1, 2, 'wheeeeee', '0000-00-00 00:00:00', 0),
-(16, 9, 51, ' Can anyone give me the html code for this php image upload script. I really need it please if anyone can help me on this I will be grateful to you ', '2014-06-03 21:11:33', 0),
-(17, 9, 51, 'Can anyone give me the html code for this php image upload script. I really need it please if anyone can help me on this I will be grateful to you ', '2014-06-03 21:12:56', 0),
-(18, 9, 51, 'Can anyone give me the html code for this php image upload script. I really need it please if anyone can help me on this I will be grateful to you ', '2014-06-03 21:14:15', 1),
-(19, 9, 51, 'Waterfalls are AMAZING ', '2014-06-03 21:15:16', 1),
-(20, 9, 51, 'Textual endorphins ', '2014-06-03 21:16:02', 1);
+(1, 2, 2, 'I would love to park my bike on the edge of the botanic gardens!', '2014-05-24 22:58:47', 0),
+(2, 1, 2, 'Lets do this!', '2014-06-01 12:17:04', 0),
+(10, 1, 2, 'TEst TESTFred likes to test', '2014-05-30 13:22:38', 0),
+(12, 1, 2, 'I am writing a comment', '2014-05-19 15:10:57', 0),
+(13, 1, 2, 'wheeeeee', '2014-06-03 22:58:47', 0),
+(14, 10, 2, 'I really like this idea ', '2014-06-04 09:43:56', 0),
+(15, 10, 2, 'Words ', '2014-06-04 09:47:22', 1),
+(16, 2, 2, 'More comments! ', '2014-06-04 10:44:29', 0),
+(17, 11, 2, 'Bikes are for noobs ', '2014-06-04 10:58:58', 0),
+(18, 1, 2, 'I like bikes lots ', '2014-06-04 12:00:20', 0),
+(19, 2, 2, 'Words ', '2014-06-04 12:01:04', 1),
+(20, 1, 2, 'dsfadsfs ', '2014-06-12 17:03:33', 1),
+(21, 1, 2, 'dasasdfdas ', '2014-06-12 17:11:54', 0);
 
 -- --------------------------------------------------------
 
@@ -95,8 +101,9 @@ CREATE TABLE IF NOT EXISTS `Projects` (
   `skills` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:simple_array)',
   `featureImageUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'emptyProject.jpg',
   `stage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdTimestamp` datetime NOT NULL,
-  `videoUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `createdTimestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `videoType` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `videoId` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `fileShareUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `createdBy_id` int(11) DEFAULT NULL,
@@ -112,22 +119,22 @@ CREATE TABLE IF NOT EXISTS `Projects` (
 -- Dumping data for table `Projects`
 --
 
-INSERT INTO `Projects` (`id`, `title`, `summary`, `description`, `category`, `skills`, `featureImageUrl`, `stage`, `createdTimestamp`, `videoUrl`, `fileShareUrl`, `location`, `createdBy_id`, `published`, `featured`) VALUES
-(1, 'LDI ProjectHub', 'This very site you''re using!', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(2, 'More Bike Parking', 'We''re campaigning to convince QUT to install easier access bicycle parking!', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Social &amp; Global Change Project', '', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', 1, 1, 1),
-(3, 'Implementaion', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(8, 'Boats race for refugees', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Social Enterprise', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(9, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(18, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(19, 'LFG', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(20, 'Incubating eggs!', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(21, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(34, 'We did it, we''re mature', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(35, 'Maturation is da bomb', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(36, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', 1, 1, 0),
-(37, 'Test', 'I like biscuits', 'lets open a biscuit factoryWords', 'personal excellence', 'tag1,tag2', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', 'url', 1, 1, 0),
-(51, 'LDI Candy Store', 'You love candy right! Lets get our own&nbsp;candy store :D&nbsp;', 'A little bit of context[Set the scene. Zoom right out and set the scene for your audience. Many of them will already know this, but it moves their brain into the right frame to introduce what youâ€™re doing.]But thereâ€™s a problem[Explain what the problem is in the current context. Normally thereâ€™s something broken in the current context or thereâ€™s an opportunity â€“ whichever it is, tell people what the issue is, before you tell them how youâ€™re going to solve (or take advantage of) it.]Hereâ€™s what weâ€™re doing about it[What are you doing to solve the issue? This is where you talk about what youâ€™re going to do. Keep it simple and specific.]                        And what you hope to achieve[How will what you do change the world? Hereâ€™s where you talk about how what youâ€™re doing will make a difference.]You can join us[Every leader needs followers, encourage people to join you! Explain briefly what people can expect to put in and get out]', 'Student/Campus Community Project', '', '', 'Aspiration', '0000-00-00 00:00:00', '', '', 'GP', 1, 1, 0),
-(52, 'LDI Candy Store', 'You love candy right! Lets get our own&nbsp;candy store :D&nbsp;', 'A little bit of context[Set the scene. Zoom right out and set the scene for your audience. Many of them will already know this, but it moves their brain into the right frame to introduce what youâ€™re doing.]But thereâ€™s a problem[Explain what the problem is in the current context. Normally thereâ€™s something broken in the current context or thereâ€™s an opportunity â€“ whichever it is, tell people what the issue is, before you tell them how youâ€™re going to solve (or take advantage of) it.]Hereâ€™s what weâ€™re doing about it[What are you doing to solve the issue? This is where you talk about what youâ€™re going to do. Keep it simple and specific.]                        And what you hope to achieve[How will what you do change the world? Hereâ€™s where you talk about how what youâ€™re doing will make a difference.]You can join us[Every leader needs followers, encourage people to join you! Explain briefly what people can expect to put in and get out]', 'Business Enterprise', '', '', 'Aspiration', '0000-00-00 00:00:00', '', '', 'GP', 1, 1, 0);
+INSERT INTO `Projects` (`id`, `title`, `summary`, `description`, `category`, `skills`, `featureImageUrl`, `stage`, `createdTimestamp`, `videoType`, `videoId`, `fileShareUrl`, `location`, `createdBy_id`, `published`, `featured`) VALUES
+(1, 'LDI ProjectHub', 'This very site you''re using!', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(2, 'More Bike Parking', 'We&#39;re campaigning to convince QUT to install easier access bicycle parking!                        ', '<p>       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!<span class="f-img-wrap"><br></span>      </p>', 'Social & Global Change Project', '', 'fbdead636ad046a79cde2140588f8618b45e0e4e', 'Aspiration', '0000-00-00 00:00:00', '', '', '', '', 0, 1, 1),
+(3, 'Implementaion', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(8, 'Boats race for refugees', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Social Enterprise', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(9, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Implementation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(18, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(19, 'LFG', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(20, 'Incubating eggs!', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(21, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Incubation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(34, 'We did it, we''re mature', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(35, 'Maturation is da bomb', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', 'Personal Development Project', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(36, 'lorem ipsum', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, quas aspernatur ipsam numquam magnam minima officia nesciunt deleniti sunt impedit!', '', '', 'emptyProject.jpg', 'Maturation', '0000-00-00 00:00:00', '', '', '', '', 1, 1, 0),
+(37, 'Test', 'I like biscuits', 'lets open a biscuit factoryWords', 'personal excellence', 'tag1,tag2', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', 'url', 1, 1, 0),
+(51, 'LDI Fruit Store', '          Fruit is much healthier!        ', '<p>       <br></p><h2>A little bit of context</h2><p><em>[Set the scene. Zoom right out and set the scene for your audience. Many of them will already know this, but it moves their brain into the right frame to introduce what you’re doing.]</em></p><h2>But there’s a problem</h2><p><em>[Explain what the problem is in the current context. Normally there’s something broken in the current context or there’s an opportunity – whichever it is, tell people what the issue is, before you tell them how you’re going to solve (or take advantage of) it.]</em></p><h2>Here’s what we’re doing about it</h2><p><em>[What are you doing to solve the issue? This is where you talk about what you’re going to do. Keep it simple and specific.]</em></p><p>And what you hope to achieve</p><p><em>[How will what you do change the world? Here’s where you talk about how what you’re doing will make a difference.]</em></p><h2>You can join us</h2><p><em>[Every leader needs followers, encourage people to join you! Explain briefly what people can expect to put in and get out]</em></p><p><br></p>', 'Student/Campus Community Project', '', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', '', 0, 1, 0),
+(52, 'LDI Candy Store', 'You love candy right! Lets get our own&nbsp;candy store :D&nbsp;', 'A little bit of context[Set the scene. Zoom right out and set the scene for your audience. Many of them will already know this, but it moves their brain into the right frame to introduce what youâ€™re doing.]But thereâ€™s a problem[Explain what the problem is in the current context. Normally thereâ€™s something broken in the current context or thereâ€™s an opportunity â€“ whichever it is, tell people what the issue is, before you tell them how youâ€™re going to solve (or take advantage of) it.]Hereâ€™s what weâ€™re doing about it[What are you doing to solve the issue? This is where you talk about what youâ€™re going to do. Keep it simple and specific.]                        And what you hope to achieve[How will what you do change the world? Hereâ€™s where you talk about how what youâ€™re doing will make a difference.]You can join us[Every leader needs followers, encourage people to join you! Explain briefly what people can expect to put in and get out]', 'Business Enterprise', '', 'emptyProject.jpg', 'Aspiration', '0000-00-00 00:00:00', '', '', '', 'GP', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -152,8 +159,11 @@ INSERT INTO `project_likes` (`project_id`, `user_id`) VALUES
 (18, 1),
 (35, 1),
 (37, 1),
+(2, 2),
 (2, 7),
-(51, 9);
+(51, 9),
+(2, 10),
+(2, 11);
 
 -- --------------------------------------------------------
 
@@ -169,16 +179,14 @@ CREATE TABLE IF NOT EXISTS `project_requests` (
   `message` text COLLATE utf8_unicode_ci NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `project_requests`
 --
 
 INSERT INTO `project_requests` (`id`, `project_id`, `role_id`, `user_id`, `message`, `timestamp`) VALUES
-(1, 2, 0, 1, 'dsfsdfdsfsd', '2014-06-02 21:34:41'),
-(2, 2, 3, 1, 'Test for Role number 3', '2014-06-02 21:41:10'),
-(3, 2, 0, 1, 'test test etste', '2014-06-02 22:12:04');
+(8, 2, 0, 2, 'I don&#39;t knoe what i want todo but let me help lalalala', '2014-06-04 02:52:12');
 
 -- --------------------------------------------------------
 
@@ -231,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `project_user` (
 --
 
 INSERT INTO `project_user` (`project_id`, `user_id`, `role_id`) VALUES
+(2, 1, NULL),
 (2, 2, 1),
 (2, 7, 2),
 (51, 2, NULL);
@@ -261,17 +270,15 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tag` (`tag`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`id`, `tag`, `project_id`, `user_id`, `role_id`) VALUES
-(1, 'accounting', 51, 0, 0),
-(2, 'sales', 51, 0, 0),
-(3, 'marketing', 51, 0, 0),
-(4, 'love-of-candy', 51, 0, 0);
+(11, '', 51, 0, 0),
+(15, '', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -290,13 +297,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `profilePicUrl` varchar(225) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'images/profile/none.png',
   `active` tinyint(1) NOT NULL,
   `is_admin` tinyint(1) NOT NULL,
-  `created_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `created_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `student_number` int(8) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `email_2` (`email`),
   FULLTEXT KEY `tags` (`tags`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `users`
@@ -307,7 +314,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `blur
 (2, 'Fred', 'Stark', 'coagmano@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'From Winterfell', 'words,ldi,qut,organizing,love-of-candy', 'fred.jpg', 1, 0, '2014-06-03 05:16:53', 0),
 (7, 'Yancie', 'Ng', 'yancie@fake.com', '', '', '', 'none.png', 1, 0, '2014-05-29 01:32:48', 0),
 (8, 'Fred', 'Stark', 'test@test.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'words', '', '', 0, 0, '0000-00-00 00:00:00', 0),
-(9, 'Bobo', 'Da Clown', 'bobo@test.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'sdfsdfsdfsd', 'circus,trapeeze,baking', '0327f3c109fdc3981fd27a11df9c6b78b98123cc', 1, 0, '2014-06-03 02:50:11', 0);
+(9, 'Bobo', 'Da Clown', 'bobo@test.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'sdfsdfsdfsd', 'circus,trapeeze,baking', '0327f3c109fdc3981fd27a11df9c6b78b98123cc', 1, 0, '2014-06-03 02:50:11', 0),
+(10, 'test', 'test', 'notan@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'words&nbsp; &nbsp;', 'cooking?', 'b54d687d288c0bf7f7b685517c121de85db990db', 1, 0, '0000-00-00 00:00:00', 0),
+(11, 'Frank', 'Strot', 'noemailthanks@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Words&nbsp;&nbsp;&nbsp;&nbsp;', 'php,mysql,databases', 'c0194be41a58c93c371ec4c1ce8c3c9ecde3f495', 1, 0, '0000-00-00 00:00:00', 0),
+(12, 'Bobo', 'Da Clown', 'test@test2.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', '', 'e87541b8150025650f355596bb7ab39fc3021389', 0, 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
