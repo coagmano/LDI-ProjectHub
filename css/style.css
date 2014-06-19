@@ -58,7 +58,7 @@ button:focus {
     position:fixed;
     top:0;
 }
-.invis {
+.invis, .hidden {
 	display: none;
 }
 

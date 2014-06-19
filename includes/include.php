@@ -10,6 +10,7 @@
 	require_once($path."/model/class.comment.php");
 	require_once($path."/model/class.project.php");
 	require_once($path."/model/class.joinrequest.php");
+	require_once($path."/model/class.link.php");
 	
 
 	session_start(); //Start the session here and include this on all sessioned pages.

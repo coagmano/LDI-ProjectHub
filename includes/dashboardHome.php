@@ -17,6 +17,7 @@ if (isset($_GET['joinRequest']))
 
 $pendingRequests = $project->getJoinRequests();
 $pendingRequests = (empty($pendingRequests)) ? "" : $pendingRequests;
+$links = getLinks($project->projectId);
 ?>
 <div class="container">
     <div class="boxLayout">
@@ -27,15 +28,21 @@ $pendingRequests = (empty($pendingRequests)) ? "" : $pendingRequests;
             <!-- connected files (If there's any)-->
             <div class="bootstrap">
                 <div class="panel panel-default">
-                  <div class="panel-heading">Connected files &amp; links</div>
+                  <div class="panel-heading">Connected apps &amp; links</div>
                   <div class="panel-body">
-                    <p><a href="#"><span class="icon glyphicon glyphicon-plus"></span> Add file and links</a></p>
+                    <p><a id="add-link" href="#"><span class="icon glyphicon glyphicon-plus"></span> Add app and links</a></p>
+                    <div class="row" id="add-link-form" style="display:none;">
+                      <input class="col-md-6" type="text" name="title" placeholder="app or link name"><input class="col-md-6" type="text" name="location" placeholder="url address">
+                      <button type="submit" id="add-link-save">save</button><br>
+                      <span class="add-link-errors"></span>
+                    </div>
                   </div>
                   <ul class="links list-group">
-                    <li class="list-group-item"><a href="#" target="_new"><span class="icon glyphicon glyphicon-link"></span> Facebook Group</a></li>
-                    <li class="list-group-item"><a href="#" target="_new"><span class="icon glyphicon glyphicon-link"></span> Dropbox</a></li>
-                    <li class="list-group-item"><a href="#" target="_new"><span class="icon glyphicon glyphicon-link"></span> Google drive</a></li>
-                    <li class="list-group-item"><a href="#" target="_new"><span class="icon glyphicon glyphicon-link"></span> Github</a></li>
+                  <?php
+                  foreach ($links as $l) {
+                    echo "<li class=\"list-group-item\"><a href=\"{$l->location}\" target=\"_blank\"><span class=\"icon glyphicon glyphicon-link\"></span> {$l->title}</a></li>";
+                  }
+                  ?>
                   </ul>
                 </div>
             </div>
@@ -161,29 +168,52 @@ HTML;
 
 
 <script>
-
-    $( "#newcomment" ).editable({
-            inlineMode: false, 
-            language: 'en_gb',
-            buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline'],
-            editorClass: "newcomment",
+  $( "#add-link" ).click(function() {
+    $( "#add-link-form" ).toggle(250);
+  });
+  $( "#add-link-save" ).click(function() {
+    var newTitle = $( "input[name='title']" ).val();
+    var newLocation = $( "input[name='location']" ).val();
+    console.log(newTitle);
+    console.log(newLocation);
+    $.post( "ajax/link.php", { project: "<?php echo $project->projectId; ?>", title: newTitle, location: newLocation, action: 'create' } )
+        .done(function( data ) {
+          
+          if (data === false) {
+            $( ".add-link-errors" ).html( "Sorry, something went wrong" );
+            console.log(data);
+          } else {
+            $( ".links" ).append( data );
+          }
+          
+      
         });
-    
-    $( "#postnewcomment" ).click(function() {
-        
-        var newCommentHtml = $( ".newcomment" ).html();
 
-        $.post( "ajax/comment.php", { user: "<?php echo $user->userId; ?>", project: "<?php echo $project->projectId; ?>", content: newCommentHtml, private: 1 } )
-            .done(function( data ) {
-                
-                if (data === false) {
-                    $( ".newcomment" ).after( "Sorry, something went wrong" );
-                } else {
+  });
 
-                }
+  $( "#newcomment" ).editable({
+          inlineMode: false, 
+          language: 'en_gb',
+          buttons: ['undo', 'redo' , 'sep', 'bold', 'italic', 'underline'],
+          editorClass: "newcomment",
+      });
+  
+  $( "#postnewcomment" ).click(function() {
+      
+      var newCommentHtml = $( ".newcomment" ).html();
+
+      $.post( "ajax/comment.php", { user: "<?php echo $user->userId; ?>", project: "<?php echo $project->projectId; ?>", content: newCommentHtml, private: 1 } )
+          .done(function( data ) {
+              
+              if (data === false) {
+                  $( ".newcomment" ).after( "Sorry, something went wrong" );
+                  console.log(data);
+              } else {
                 $( ".post" ).after( data );
-            
-            });
-    });
+              }
+              
+          
+          });
+  });
     
 </script>

@@ -27,18 +27,21 @@ class Project {
 
 	public function constructFromRow(array $row)
 	{
+		foreach ($row as $key => $value) {
+			$this->$key = $value;
+		}
 		$this->projectId 		= $row['id'];
-		$this->title 			= $row['title'];
-		$this->summary 			= $row['summary'];
-		$this->description 		= $row['description'];
-		$this->category 		= $row['category'];
-		$this->featureImageUrl 	= $row['featureImageUrl'];
-		$this->stage 			= $row['stage'];
-		$this->createdTimestamp = $row['createdTimestamp'];
-		$this->videoType 		= $row['videoType'];
-		$this->videoId 			= $row['videoId'];
-		$this->fileShareUrl 	= $row['fileShareUrl'];
-		$this->location 		= $row['location'];
+		// $this->title 			= $row['title'];
+		// $this->summary 			= $row['summary'];
+		// $this->description 		= $row['description'];
+		// $this->category 			= $row['category'];
+		// $this->featureImageUrl 	= $row['featureImageUrl'];
+		// $this->stage 			= $row['stage'];
+		// $this->createdTimestamp 	= $row['createdTimestamp'];
+		// $this->videoType 		= $row['videoType'];
+		// $this->videoId 			= $row['videoId'];
+		// $this->fileShareUrl 		= $row['fileShareUrl'];
+		// $this->location 			= $row['location'];
 
 		$this->skills 			= $this->getSkills();
 		$this->likes 			= $this->countLikes();

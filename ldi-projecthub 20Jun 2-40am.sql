@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2014 at 12:38 PM
+-- Generation Time: Jun 20, 2014 at 02:40 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -164,6 +164,27 @@ INSERT INTO `project_likes` (`project_id`, `user_id`) VALUES
 (51, 9),
 (2, 10),
 (2, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_links`
+--
+
+CREATE TABLE IF NOT EXISTS `project_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `project_links`
+--
+
+INSERT INTO `project_links` (`id`, `project_id`, `title`, `location`) VALUES
+(1, 2, 'Bootstrap', 'http://getbootstrap.com/javascript/');
 
 -- --------------------------------------------------------
 

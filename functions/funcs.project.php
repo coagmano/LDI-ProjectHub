@@ -79,6 +79,23 @@ function removeLike($projectId, $userId)
 	}
 }
 
+function getLinks($projectId)
+{
+	$p = mysql_escape_string(sanitise($projectId));
+	$links = array();
+
+	$sql = "SELECT * FROM project_links
+			WHERE project_id = $p";
+	$result = mysql_query($sql) or die(mysql_error());
+	while ($row = mysql_fetch_assoc($result)) 
+	{
+		$l = new Link();
+		$l->constructFromRow($row);
+		$links[] = $l;
+	}
+	return $links;
+}
+
 /********************************
  * Start project display block 	*
  ********************************/
